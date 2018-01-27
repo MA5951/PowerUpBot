@@ -15,6 +15,7 @@ package org.usfirst.frc.team5951.robot;
  */
 public class RobotMap {
 	
+
 	//Motors
 	public static final int LIFT_MOTOR_PORT = 0;
 	
@@ -24,5 +25,20 @@ public class RobotMap {
 	public static final int SQUISH_CLOSE = 2;
 	public static final int PUSH_OPEN = 3;
 	public static final int PUSH_CLOSE = 4;
+
+	//OI
+	public static final int DRIVER_STICK = 0;
+	public static final int OPERATOR_STICK = 1;
+	
+	//Chassis
+	public static final int CHASSIS_RIGHT_LEADER = 1; 
+	public static final int CHASSIS_RIGHT_FOLLOWER_1 = 2;
+	public static final int CHASSIS_RIGHT_FOLLOWER_2 = 3;
+	public static final int CHASSIS_LEFT_LEADER = 4;
+	public static final int CHASSIS_LEFT_FOLLOWER_1 = 5;
+	public static final int CHASSIS_LEFT_FOLLOWER_2 = 6;
+	
+	//LEDs
+	public static final int LED_RELAY = 1;
 	
 }

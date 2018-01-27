@@ -8,6 +8,7 @@
 package org.usfirst.frc.team5951.robot;
 
 import org.usfirst.frc.team5951.robot.subsystems.Caliber;
+import org.usfirst.frc.team5951.robot.subsystems.Chassis;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -62,6 +63,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+
+		Chassis.getInstance().setMultiplyer((byte) 1);
 	}
 
 	/**
