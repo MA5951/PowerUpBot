@@ -33,7 +33,7 @@ public class Caliber extends Subsystem {
 	//Create 2 DoubleSolenoids
 	private DoubleSolenoid squish, push;
 	
-	// sets speed values	
+	//Sets speed values	
 	public static final int MAX_SPEED = 1;
 	public static final int MIN_SPEED = -1;
 	public static final int NO_SPEED = 0;
