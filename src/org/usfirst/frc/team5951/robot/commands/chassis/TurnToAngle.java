@@ -5,7 +5,7 @@ import org.usfirst.frc.team5951.robot.subsystems.Chassis;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * 
  */
 public class TurnToAngle extends Command {
 
@@ -33,7 +33,7 @@ public class TurnToAngle extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return (Math.abs(this.getDistanceError()) < 2);
+        return Math.abs(this.getDistanceError()) < 2;
     }
 
     // Called once after isFinished returns true
