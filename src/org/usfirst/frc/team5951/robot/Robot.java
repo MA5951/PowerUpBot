@@ -13,6 +13,7 @@ import org.usfirst.frc.team5951.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -23,8 +24,9 @@ import edu.wpi.first.wpilibj.command.Scheduler;
  */
 public class Robot extends TimedRobot {
 	public static final Shooter SHOOTER = new Shooter();
-	public static OI m_oi;
-	public static Caliber caliber;
+	public static final Caliber CALIBER = new Caliber();
+	public static final OI OI = new OI();
+	public static final SmartDashboard DASHBOARD = new SmartDashboard();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -32,8 +34,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-		m_oi = new OI();
-		caliber = new Caliber();
+			
 
 	}
 
@@ -86,6 +87,12 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		DASHBOARD.putBoolean("Left IR sensor: ", CALIBER.leftIR());
+		DASHBOARD.putBoolean("Right IR sensor: ", CALIBER.rightIR());
+		DASHBOARD.putNumber("Gyro: ", Chassis.getInstance().getYaw());
+		DASHBOARD.putNumber("Left Distance: ", Chassis.getInstance().getLeftDistance());
+		DASHBOARD.putNumber("Right Distance: ", Chassis.getInstance().getRightDistance());
+		
 	}
 
 	/**

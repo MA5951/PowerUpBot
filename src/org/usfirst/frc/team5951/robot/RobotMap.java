@@ -15,15 +15,17 @@ package org.usfirst.frc.team5951.robot;
  */
 public class RobotMap {
 
-	//Motors
+	//Caliber
 	public static final int LIFT_MOTOR_PORT = 0;
 	
-	//Pneomatics
 	public static final int PCM_PORT = 0;
 	public static final int SQUISH_OPEN = 1;
 	public static final int SQUISH_CLOSE = 2;
 	public static final int PUSH_OPEN = 3;
 	public static final int PUSH_CLOSE = 4;
+	
+	public static final int LEFT_IR = 0;
+	public static final int RIGHT_IR = 1;
 
 	//OI
 	public static final int DRIVER_STICK = 0;

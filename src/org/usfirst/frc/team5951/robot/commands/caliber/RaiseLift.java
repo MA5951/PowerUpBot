@@ -13,7 +13,7 @@ public class RaiseLift extends Command {
 	public static Caliber caliber;
 
     public RaiseLift() {
-    	caliber = Robot.caliber;
+    	caliber = Robot.CALIBER;
     	requires (caliber);
     }
 

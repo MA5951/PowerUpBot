@@ -15,7 +15,7 @@ public class ClosePushCube extends InstantCommand {
 
 		//In the constructor- sets the Caliber object equal to the Caliber object that is created in the Robot class.
 	    public ClosePushCube() {
-	    	caliber = Robot.caliber;
+	    	caliber = Robot.CALIBER;
 	    }
 	    
 	    //In the Initialize method- runs the method caliberPushClose of the caliber one time

@@ -1,14 +1,14 @@
-package org.usfirst.frc.team5951.robot.commands;
+package org.usfirst.frc.team5951.robot.commands.shooter;
 
 import org.usfirst.frc.team5951.robot.Robot;
 import org.usfirst.frc.team5951.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ShotHigh extends Command {
+public class ShotLow extends Command {
 	private Shooter shooter;
 
-	public ShotHigh() {
+	public ShotLow() {
 		shooter = Robot.SHOOTER;
 		requires(shooter);
 	}
@@ -17,7 +17,7 @@ public class ShotHigh extends Command {
 	}
 
 	protected void execute() {
-		shooter.shotHigh();
+		shooter.shot();
 	}
 
 	protected boolean isFinished() {

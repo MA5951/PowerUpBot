@@ -15,7 +15,7 @@ public class CatchCube extends InstantCommand {
 
 	//In the constructor- sets the Caliber object equal to the Caliber object that is created in the Robot class.
     public CatchCube() {
-    	caliber = Robot.caliber;
+    	caliber = Robot.CALIBER;
     }
     
     //In the Initialize method- runs the method caliberCatch of the caliber one time

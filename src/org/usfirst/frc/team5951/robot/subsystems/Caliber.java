@@ -21,6 +21,7 @@ import org.usfirst.frc.team5951.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -38,11 +39,17 @@ public class Caliber extends Subsystem {
 	public static final int MIN_SPEED = -1;
 	public static final int NO_SPEED = 0;
 	
+	public DigitalInput leftIR;
+	public DigitalInput rightIR;
+	
 	//Sets the TalonSRX and the 2DoubleSolenoids and puts their ports
 	public Caliber() {
 		liftMotor = new TalonSRX (RobotMap.LIFT_MOTOR_PORT);
 		squish = new DoubleSolenoid(RobotMap.PCM_PORT, RobotMap.SQUISH_OPEN, RobotMap.SQUISH_CLOSE);
-		push = new DoubleSolenoid(RobotMap.PCM_PORT, RobotMap.PUSH_OPEN, RobotMap.PUSH_CLOSE);		
+		push = new DoubleSolenoid(RobotMap.PCM_PORT, RobotMap.PUSH_OPEN, RobotMap.PUSH_CLOSE);	
+		
+		leftIR = new DigitalInput(RobotMap.LEFT_IR);
+		rightIR = new DigitalInput(RobotMap.RIGHT_IR);
 	}
 	
 	//Raises the caliber lift with MAX_SPEED and in the PercentOutput control mode
@@ -78,6 +85,18 @@ public class Caliber extends Subsystem {
 	//Closes the squish/catch cylinder
 	public void caliberRelease() {
 		squish.set(Value.kReverse);
+	}
+	//Returns the left IR value
+	public boolean leftIR() {
+		return leftIR.get();
+	}
+	//Returns the right IR value
+	public boolean rightIR() {
+		return rightIR.get();
+	}	
+	//Returns true if the left IR value or the right IR value is true
+	public boolean isCubeIn() {
+		return leftIR.get() || rightIR.get();
 	}
 	
 	@Override

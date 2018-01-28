@@ -16,7 +16,7 @@ public class LowerLift extends Command {
 
 	//In the constructor- sets the Caliber object equal to the Caliber object that is created and requires the Caliber subsystem
     public LowerLift() {
-    	caliber = Robot.caliber;
+    	caliber = Robot.CALIBER;
     	requires (caliber);
     }
 

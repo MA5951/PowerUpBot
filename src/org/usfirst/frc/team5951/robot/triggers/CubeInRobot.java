@@ -1,5 +1,7 @@
 package org.usfirst.frc.team5951.robot.triggers;
 
+import org.usfirst.frc.team5951.robot.Robot;
+
 import edu.wpi.first.wpilibj.buttons.Trigger;
 
 /**
@@ -8,6 +10,6 @@ import edu.wpi.first.wpilibj.buttons.Trigger;
 public class CubeInRobot extends Trigger {
 
     public boolean get() {
-        return true;
+        return Robot.CALIBER.isCubeIn();
     }
 }
