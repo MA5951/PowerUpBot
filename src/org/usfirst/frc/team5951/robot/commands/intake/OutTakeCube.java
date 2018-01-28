@@ -16,8 +16,8 @@ public class OutTakeCube extends Command {
 	public static IntakeSubSystem intake;
 
 	public OutTakeCube() {
-		intake = Robot.intake;
-		requires(Robot.intake);
+		intake = Robot.INTAKE;
+		requires(Robot.INTAKE);
 
 	}
 

@@ -24,7 +24,7 @@ public class ArcadeDriveDZ extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	this.chassis.arcadeDriveDZ(OI.DRIVER_STICK.getY(), OI.DRIVER_STICK.getX());
+    	this.chassis.arcadeDriveDZ(OI.OPERATOR_STICK.getY(), OI.OPERATOR_STICK.getX());
     }
 
     // Make this return true when this Command no longer needs to run execute()

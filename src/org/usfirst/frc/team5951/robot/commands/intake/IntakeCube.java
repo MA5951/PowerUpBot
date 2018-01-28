@@ -14,8 +14,8 @@ public class IntakeCube extends Command {
 	// this command intakes a cube into the robot
 
 	public IntakeCube() {
-		intake = Robot.intake;
-		requires(Robot.intake);
+		intake = Robot.INTAKE;
+		requires(Robot.INTAKE);
 	}
 
 	@Override

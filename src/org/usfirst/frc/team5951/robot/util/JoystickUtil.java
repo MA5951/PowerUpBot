@@ -6,7 +6,7 @@ public class JoystickUtil {
 	 * 
 	 * @author Yair Ziv
 	 */
-	final static class XBOX {
+	public final static class XBOX {
 		// Buttons
 		public static final int A = 1;
 		public static final int B = 2;
