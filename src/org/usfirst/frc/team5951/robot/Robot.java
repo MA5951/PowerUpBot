@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team5951.robot;
 
+import org.usfirst.frc.team5951.robot.commands.intake.IntakeCube;
 import org.usfirst.frc.team5951.robot.subsystems.Caliber;
 import org.usfirst.frc.team5951.robot.subsystems.Chassis;
 import org.usfirst.frc.team5951.robot.subsystems.Shooter;
@@ -25,6 +26,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends TimedRobot {
 	public static final Shooter SHOOTER = new Shooter();
 	public static final Caliber CALIBER = new Caliber();
+	public static final IntakeCube INTAKE = new IntakeCube();
 	public static final OI OI = new OI();
 	public static final SmartDashboard DASHBOARD = new SmartDashboard();
 
