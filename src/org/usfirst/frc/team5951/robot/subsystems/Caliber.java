@@ -28,7 +28,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Caliber extends Subsystem {
 	
 	//Create TalonSRK
-	private TalonSRX liftMotor; 
+	private TalonSRX liftMotor;  
 	
 	//Create 2 DoubleSolenoids
 	private DoubleSolenoid squish, push;
