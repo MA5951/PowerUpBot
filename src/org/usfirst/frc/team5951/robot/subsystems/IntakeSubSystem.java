@@ -22,7 +22,11 @@ public class IntakeSubSystem extends Subsystem {
 	private TalonSRX RightMotor;
 	private DoubleSolenoid LeftSolenoid;
 	private DoubleSolenoid RightSolenoid;
+	
+	
 
+	
+	
 	public IntakeSubSystem() {
 		LeftMotor = new TalonSRX(RobotMap.TALON_SRX_INTAKE_MOTOR_PORT);
 		RightMotor = new TalonSRX(RobotMap.TALON_SRX_INTAKE_MOTOR_PORT_1);
