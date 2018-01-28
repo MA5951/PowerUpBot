@@ -9,6 +9,7 @@ package org.usfirst.frc.team5951.robot;
 
 import org.usfirst.frc.team5951.robot.subsystems.Caliber;
 import org.usfirst.frc.team5951.robot.subsystems.Chassis;
+import org.usfirst.frc.team5951.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -21,6 +22,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
  * project.
  */
 public class Robot extends TimedRobot {
+	public static final Shooter SHOOTER = new Shooter();
 	public static OI m_oi;
 	public static Caliber caliber;
 
@@ -32,7 +34,7 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		m_oi = new OI();
 		caliber = new Caliber();
-		
+
 	}
 
 	/**
@@ -63,7 +65,6 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-
 		Chassis.getInstance().setMultiplyer((byte) 1);
 	}
 

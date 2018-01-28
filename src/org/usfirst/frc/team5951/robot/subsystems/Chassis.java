@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * TODO Find roborio orientation
+ * 
  */
 public class Chassis extends Subsystem {
 
@@ -101,7 +102,6 @@ public class Chassis extends Subsystem {
 	 * @param rotateValue
 	 *            - X axis of joystick
 	 */
-	@Deprecated
 	public void arcadeDriveDZ(double moveValue, double rotateValue) {
 		double[] output = ChassisMath.calculatePowerDZ(moveValue, rotateValue, DEAD_ZONE);
 

@@ -14,7 +14,6 @@ package org.usfirst.frc.team5951.robot;
  * floating around.
  */
 public class RobotMap {
-	
 
 	//Motors
 	public static final int LIFT_MOTOR_PORT = 0;
@@ -40,5 +39,11 @@ public class RobotMap {
 	
 	//LEDs
 	public static final int LED_RELAY = 1;
-	
+
+	//shooter
+	public static final int k_SHOTER_HIGH_A_TALON=1;
+	public static final int k_SHOOTER_HIGH_B_TALON=2;
+	public static final int k_SHOOTER_LOW_A_TALON=3;
+	public static final int k_SHOOTER_LOW_B_TALON=4;
+	public static final int k_SHOOTER_HIGH_A_TALON=1;
 }

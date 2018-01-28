@@ -23,6 +23,7 @@ public class ChassisSide {
 		this.motors = motors;
 		for (int i = 1; i < motors.length; i++) {
 			this.motors[i].set(ControlMode.Follower, this.motors[0].getDeviceID());
+			this.motors[i].set(ControlMode.Follower, motors[0].getDeviceID());
 		}
 	}
 	
