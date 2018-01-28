@@ -35,10 +35,12 @@ public class Caliber extends Subsystem {
 	private DoubleSolenoid squish, push;
 	
 	//Sets speed values	
+	//TODO: rename MAX MIN speed
 	public static final int MAX_SPEED = 1;
 	public static final int MIN_SPEED = -1;
 	public static final int NO_SPEED = 0;
 	
+	//TODO: move up
 	public DigitalInput leftIR;
 	public DigitalInput rightIR;
 	
@@ -63,11 +65,13 @@ public class Caliber extends Subsystem {
 	}
 	
 	//Stops the caliber lift with NO_SPEED and in the PercentOutput control mode
+	//TODO: make into two function - one is no power, second mvoes TALON into brake mode
 	public void liftLock() {
 		liftMotor.set(ControlMode.PercentOutput, NO_SPEED);
 	}
 	
 	//Opens the push cylinder
+	//TODO: change to push and retract
 	public void caliberPushOpen() {
 		push.set(Value.kForward);		
 	}

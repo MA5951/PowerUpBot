@@ -24,7 +24,6 @@ import org.usfirst.frc.team5951.robot.util.JoystickUtil;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.filters.LinearDigitalFilter;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -32,9 +31,9 @@ import edu.wpi.first.wpilibj.filters.LinearDigitalFilter;
  */
 public class OI {
 	//using only one joystick for test
-	//public static final Joystick DRIVER_STICK = new Joystick(RobotMap.DRIVER_STICK);
+	public static final Joystick DRIVER_STICK = new Joystick(RobotMap.DRIVER_STICK);
 	public static final XboxController OPERATOR_STICK = new XboxController(RobotMap.OPERATOR_STICK);
-
+	//TODO: remove for testing
 	public static final CubeInRobot CUBE_IN_ROBOT_TRIGGER = new CubeInRobot();
 	
 	public JoystickButton a = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.A);
@@ -45,6 +44,7 @@ public class OI {
 	public JoystickButton lb = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.LB);
 	public JoystickButton rb = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.RB);
 	
+	//TODO: make this work...
 	public JoystickButton povUP = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.POV_UP);
 	public JoystickButton povDown = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.POV_DOWN);
 	public JoystickButton povRight = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.POV_RIGHT);
@@ -53,9 +53,11 @@ public class OI {
 
 	public OI() {
 		
-		//Caliber
+		//Caliber 
+		//TODO: remove for testing
 		CUBE_IN_ROBOT_TRIGGER.whenActive(new FlashLEDs());
 		
+		//TODO: while pressed instead of when pressed where necessary
 		a.whenPressed(new OpenPushCube());
 		b.whenPressed(new ReleaseCube());
 		x.whenPressed(new ClosePushCube());

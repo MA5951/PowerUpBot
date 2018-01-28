@@ -125,6 +125,7 @@ public class Chassis extends Subsystem {
 	}
 
 	public void resetEncoders() {
+		//TODO: add right side
 		this.leadLeftMotor.setSelectedSensorPosition(0, 0, 0);
 	}
 

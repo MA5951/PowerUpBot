@@ -12,10 +12,11 @@ package org.usfirst.frc.team5951.robot;
  * to a variable name. This provides flexibility changing wiring, makes checking
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
- * @author sahar balass
+ * @author FRC 5951 programming
+ *  
  */
 public class RobotMap {
-
+	//TODO: fix the port until Tue (30/1/18)
 	//Caliber
 	public static final int LIFT_MOTOR_PORT = 0;
 	
@@ -43,17 +44,18 @@ public class RobotMap {
 	//LEDs
 	public static final int LED_RELAY = 1;
 
+	
+	//TODO: remove k
 	//shooter
-	public static final int k_SHOTER_HIGH_A_TALON=1;
+	public static final int k_SHOOTER_HIGH_A_TALON=1;
 	public static final int k_SHOOTER_HIGH_B_TALON=2;
 	public static final int k_SHOOTER_LOW_A_TALON=3;
 	public static final int k_SHOOTER_LOW_B_TALON=4;
-	public static final int k_SHOOTER_HIGH_A_TALON=1;
 
 	public static final int TALON_SRX_INTAKE_MOTOR_PORT = 0;
 	public static final int TALON_SRX_INTAKE_MOTOR_PORT_1 = 1;
-	public static final int INTAKE_PISTON_LEFT_REVERSE = 2;
 	public static final int INTAKE_PISTON_LEFT_FORWORD= 3;
+	public static final int INTAKE_PISTON_LEFT_REVERSE = 2;
 	public static final int INTAKE_PISTON_RIGHT_FORWORD = 2;
 	public static final int INTAKE_PISTON_RIGHT_REVERSE= 3;
 }

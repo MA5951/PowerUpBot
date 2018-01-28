@@ -56,6 +56,7 @@ public class ChassisMath {
 	 * @param deadzone
 	 * @return Power to each side of the chassis
 	 */
+	@Deprecated
 	public static double[] calculatePowerDZ(double moveValue, double rotateValue, double deadzone) {
 		double output[] = new double[2];
 		

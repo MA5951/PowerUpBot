@@ -12,6 +12,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  * ClosePushCube command
  * ReleaseCube command
  */
+
+//TODO: change name 
+//TODO: wait less time 
 public class CaliberReset extends CommandGroup {
 
     public CaliberReset() {

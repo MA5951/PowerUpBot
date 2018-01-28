@@ -11,6 +11,7 @@ public class Constants {
 	
 	public static final double ROBOT_LENGTH = UnitConverter.convert(971.1, Unit.MILIMETER, Unit.METER);
 	
+	//TODO: remove unneeded constants
 	public static final double RETROREFLECTIVE_HEIGHT = UnitConverter.convert(15.3, Unit.INCH, Unit.METER);
 	public static final double RETROREFLECTIVE_WIDTH = UnitConverter.convert(2, Unit.INCH, Unit.METER);
 
