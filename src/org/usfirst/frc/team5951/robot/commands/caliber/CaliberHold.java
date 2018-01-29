@@ -17,7 +17,8 @@ public class CaliberHold extends CommandGroup {
 
     public CaliberHold() {
     	addSequential(new ClosePushCube());
-        Timer.delay(1);
+        //TODO: change to wait command (ask Yair)
+    	Timer.delay(1);
         addSequential(new CatchCube());
   
     }

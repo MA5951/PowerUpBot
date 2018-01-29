@@ -9,7 +9,7 @@ public class ShotLow extends Command {
 	private Shooter shooter;
 
 	public ShotLow() {
-		shooter = Robot.SHOOTER;
+//		shooter = Robot.SHOOTER;
 		requires(shooter);
 	}
 

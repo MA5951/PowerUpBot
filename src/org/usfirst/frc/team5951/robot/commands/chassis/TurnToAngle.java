@@ -23,7 +23,7 @@ public class TurnToAngle extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	this.chassis.resetGyro();
-    	this.chassis.setMultiplyer((byte) 1);
+    	this.chassis.setMultiplyer(1);
     }
 
     // Called repeatedly when this Command is scheduled to run

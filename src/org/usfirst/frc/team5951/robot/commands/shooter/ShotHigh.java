@@ -9,7 +9,7 @@ public class ShotHigh extends Command {
 	private Shooter shooter;
 
 	public ShotHigh() {
-		shooter = Robot.SHOOTER;
+//		shooter = Robot.SHOOTER;
 		requires(shooter);
 	}
 

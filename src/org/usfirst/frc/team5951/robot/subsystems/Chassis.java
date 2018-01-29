@@ -27,7 +27,7 @@ public class Chassis extends Subsystem {
 	private AHRS navX;
 
 	// Global variables
-	private byte multiplier = 1;
+	private int multiplier = 1;
 
 	public static final double DEAD_ZONE = 0.05;
 
@@ -173,7 +173,7 @@ public class Chassis extends Subsystem {
 	/**
 	 * Sets the multiplier
 	 */
-	public void setMultiplyer(byte multiplyer) {
+	public void setMultiplyer(int multiplyer) {
 		this.multiplier = multiplyer;
 	}
 	

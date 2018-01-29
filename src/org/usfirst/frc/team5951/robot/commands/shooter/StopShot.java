@@ -9,7 +9,7 @@ public class StopShot extends Command {
 	private Shooter shooter;
 
 	public StopShot() {
-		shooter = Robot.SHOOTER;
+//		shooter = Robot.SHOOTER;
 		requires(shooter);
 	}
 

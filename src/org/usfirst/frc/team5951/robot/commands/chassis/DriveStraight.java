@@ -22,7 +22,7 @@ public class DriveStraight extends Command {
     protected void initialize() {
     	this.chassis.resetEncoders();
     	this.chassis.resetGyro();
-    	this.chassis.setMultiplyer((byte) 1);
+    	this.chassis.setMultiplyer(1);
     }
 
     // Called repeatedly when this Command is scheduled to run

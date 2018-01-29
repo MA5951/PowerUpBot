@@ -25,7 +25,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends TimedRobot {
 
-//	public static final Shooter SHOOTER = new Shooter();
+	// public static final Shooter SHOOTER = new Shooter();
 	public static final Caliber CALIBER = new Caliber();
 	public static final OI OI = new OI();
 	public static final IntakeSubSystem INTAKE = new IntakeSubSystem();
@@ -67,9 +67,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		Chassis.getInstance().setMultiplyer((byte) 1); 
-		//TODO: remove byte!
-		
+		Chassis.getInstance().setMultiplyer(1);
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		 * switch(autoSelected) { case "My Auto": autonomousCommand = new
@@ -103,7 +101,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Gyro: ", Chassis.getInstance().getYaw());
 		SmartDashboard.putNumber("Left Distance: ", Chassis.getInstance().getLeftDistance());
 		SmartDashboard.putNumber("Right Distance: ", Chassis.getInstance().getRightDistance());
-		//TODO: add caliber encoder
+		// TODO: add caliber encoder
 	}
 
 	/**

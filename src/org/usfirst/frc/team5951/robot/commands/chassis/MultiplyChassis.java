@@ -10,9 +10,9 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 public class MultiplyChassis extends InstantCommand {
 
 	private Chassis chassis;
-	private byte multiplyValue;
+	private int multiplyValue;
 	
-    public MultiplyChassis(byte multiplyValue) {
+    public MultiplyChassis(int multiplyValue) {
     	this.chassis = Chassis.getInstance();
     	this.multiplyValue = multiplyValue;
     }
