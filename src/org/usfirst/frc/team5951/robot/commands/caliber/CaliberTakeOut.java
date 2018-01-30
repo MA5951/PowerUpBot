@@ -1,7 +1,7 @@
 package org.usfirst.frc.team5951.robot.commands.caliber;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.TimedCommand;
 
 /**
  * This Command Group is taking out the cube with the pushing cylinder after the Catching 
@@ -17,8 +17,8 @@ public class CaliberTakeOut extends CommandGroup {
 
     public CaliberTakeOut() {
         addSequential(new ReleaseCube());
-        Timer.delay(1);
-        addSequential(new OpenPushCube());
+        addSequential(new TimedCommand(1));
+        addSequential(new PushCube());
 
     }
 }

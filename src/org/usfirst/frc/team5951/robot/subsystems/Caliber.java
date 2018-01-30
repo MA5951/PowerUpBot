@@ -19,6 +19,7 @@ import org.usfirst.frc.team5951.robot.RobotMap;
  **/
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -34,15 +35,17 @@ public class Caliber extends Subsystem {
 	//Create 2 DoubleSolenoids
 	private DoubleSolenoid squish, push;
 	
-	//Sets speed values	
-	//TODO: rename MAX MIN speed
-	public static final int MAX_SPEED = 1;
-	public static final int MIN_SPEED = -1;
-	public static final int NO_SPEED = 0;
-	
 	//TODO: move up
 	public DigitalInput leftIR;
 	public DigitalInput rightIR;
+	
+	//Sets speed values	
+	//TODO: rename MAX MIN speed
+	public static final int FORWARD_SPEED = 1;
+	public static final int BACKWARD_SPEED = -1;
+	public static final int NO_SPEED = 0;
+	
+	
 	
 	//Sets the TalonSRX and the 2DoubleSolenoids and puts their ports
 	public Caliber() {
@@ -56,28 +59,32 @@ public class Caliber extends Subsystem {
 	
 	//Raises the caliber lift with MAX_SPEED and in the PercentOutput control mode
 	public void liftRaise() {
-		liftMotor.set(ControlMode.PercentOutput, MAX_SPEED);
+		liftMotor.set(ControlMode.PercentOutput, FORWARD_SPEED);
 	}
 	
 	//Lowers the caliber lift with MIN_SPEED and in the PercentOutput control mode
 	public void liftLower() {
-		liftMotor.set(ControlMode.PercentOutput, MIN_SPEED);
+		liftMotor.set(ControlMode.PercentOutput, BACKWARD_SPEED);
 	}
 	
 	//Stops the caliber lift with NO_SPEED and in the PercentOutput control mode
 	//TODO: make into two function - one is no power, second mvoes TALON into brake mode
 	public void liftLock() {
 		liftMotor.set(ControlMode.PercentOutput, NO_SPEED);
+		liftMotor.setNeutralMode(NeutralMode.Brake);
+	}
+	public void liftNoPower() {
+		liftMotor.set(ControlMode.PercentOutput, NO_SPEED);
 	}
 	
 	//Opens the push cylinder
 	//TODO: change to push and retract
-	public void caliberPushOpen() {
+	public void caliberPush() {
 		push.set(Value.kForward);		
 	}
 	
 	//Closes the push cylinder
-	public void caliberPushClose() {
+	public void caliberRetract() {
 		push.set(Value.kReverse);		
 	}
 	

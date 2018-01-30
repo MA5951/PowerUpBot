@@ -6,20 +6,21 @@ import org.usfirst.frc.team5951.robot.subsystems.Caliber;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 
 /**
- * This Instant Command closes the cylinder which is located in the back of the caliber
+ * This Instant Command opens the cylinder which is located in the back of the caliber
  */
-public class ClosePushCube extends InstantCommand {
+public class PushCube extends InstantCommand {
 	
 	//Creates a new object of the Caliber subsystem
 		public static Caliber caliber;
 
 		//In the constructor- sets the Caliber object equal to the Caliber object that is created in the Robot class.
-	    public ClosePushCube() {
+	    public PushCube() {
 	    	caliber = Robot.CALIBER;
 	    }
 	    
-	    //In the Initialize method- runs the method caliberPushClose of the caliber one time
-	    protected void initialize() {
-	    	caliber.caliberPushClose();
-	    }
+	    //In the Initialize method- runs the method caliberPushOpen of the caliber one time
+    protected void initialize() {
+    	caliber.caliberPush();
+    }
+
 }

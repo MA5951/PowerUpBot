@@ -8,11 +8,11 @@
 package org.usfirst.frc.team5951.robot;
 
 import org.usfirst.frc.team5951.robot.commands.caliber.CatchCube;
-import org.usfirst.frc.team5951.robot.commands.caliber.ClosePushCube;
 import org.usfirst.frc.team5951.robot.commands.caliber.LowerLift;
-import org.usfirst.frc.team5951.robot.commands.caliber.OpenPushCube;
+import org.usfirst.frc.team5951.robot.commands.caliber.PushCube;
 import org.usfirst.frc.team5951.robot.commands.caliber.RaiseLift;
 import org.usfirst.frc.team5951.robot.commands.caliber.ReleaseCube;
+import org.usfirst.frc.team5951.robot.commands.caliber.RetractCube;
 import org.usfirst.frc.team5951.robot.commands.intake.CloseIntake;
 import org.usfirst.frc.team5951.robot.commands.intake.IntakeCube;
 import org.usfirst.frc.team5951.robot.commands.intake.OpenIntake;
@@ -58,9 +58,9 @@ public class OI {
 		CUBE_IN_ROBOT_TRIGGER.whenActive(new FlashLEDs());
 		
 		//TODO: while pressed instead of when pressed where necessary
-		a.whenPressed(new OpenPushCube());
+		a.whenPressed(new PushCube());
 		b.whenPressed(new ReleaseCube());
-		x.whenPressed(new ClosePushCube());
+		x.whenPressed(new RetractCube());
 		y.whenPressed(new CatchCube());
 		povUP.whenPressed(new RaiseLift());
 		povDown.whenPressed(new LowerLift());

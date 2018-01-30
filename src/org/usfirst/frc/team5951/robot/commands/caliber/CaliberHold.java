@@ -1,7 +1,7 @@
 package org.usfirst.frc.team5951.robot.commands.caliber;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.TimedCommand;
 
 /**
  * This Command Group is making sure that the pushing cylinder is closed when the driver
@@ -16,9 +16,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CaliberHold extends CommandGroup {
 
     public CaliberHold() {
-    	addSequential(new ClosePushCube());
+    	addSequential(new ReleaseCube());
         //TODO: change to wait command (ask Yair)
-    	Timer.delay(1);
+    	addSequential(new TimedCommand(1));
         addSequential(new CatchCube());
   
     }

@@ -1,7 +1,7 @@
 package org.usfirst.frc.team5951.robot.commands.caliber;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.TimedCommand;
 
 /**
  * This Command Group is resets the pneomatics of the caliber.
@@ -18,8 +18,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CaliberReset extends CommandGroup {
 
     public CaliberReset() {
-         addParallel(new ClosePushCube());
-         Timer.delay(1);
+         addParallel(new ReleaseCube());
+         addSequential(new TimedCommand(0.5));
          addParallel(new ReleaseCube());
     }
 }
