@@ -34,31 +34,41 @@ public class IntakeSubSystem extends Subsystem {
 				RobotMap.INTAKE_PISTON_RIGHT_REVERSE);
 	}
 
-	public void takeCubeInside() {
+	/**
+	 * Rolls the intake to insert a cube
+	 */
+	public void insertCube() {
 		LeftMotor.set(ControlMode.PercentOutput, Intake_Motor);
 		RightMotor.set(ControlMode.PercentOutput, Intake_Motor);
-
 	}
 
-	public void shootCube() {
-
+	/**
+	 * Rolls the intake to release the cube
+	 */
+	public void releaseCube() {
 		LeftMotor.set(ControlMode.PercentOutput, Out_Take_Motor);
 		RightMotor.set(ControlMode.PercentOutput, Out_Take_Motor);
-
 	}
 
+	/**
+	 * Stops the rollers
+	 */
 	public void stopCube() {
-
 		LeftMotor.set(ControlMode.PercentOutput, Stop_Motor);
 		RightMotor.set(ControlMode.PercentOutput, Stop_Motor);
-
 	}
 
+	/**
+	 * Closes the intake pistons
+	 */
 	public void closeIntake() {
 		LeftSolenoid.set(Value.kReverse);
 		RightSolenoid.set(Value.kReverse);
 	}
 
+	/**
+	 * Opens the intake pistons
+	 */
 	public void openIntake() {
 		LeftSolenoid.set(Value.kForward);
 		RightSolenoid.set(Value.kForward);

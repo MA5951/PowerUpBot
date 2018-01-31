@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 public class PushCube extends InstantCommand {
 	
 	//Creates a new object of the Caliber subsystem
-		public static Caliber caliber;
+		public Caliber caliber;
 
 		//In the constructor- sets the Caliber object equal to the Caliber object that is created in the Robot class.
 	    public PushCube() {

@@ -44,9 +44,9 @@ public class Caliber extends Subsystem {
 	
 	//Sets speed values	
 	//TODO: rename MAX MIN speed
-	public static final int FORWARD_SPEED = 1;
-	public static final int BACKWARD_SPEED = -1;
-	public static final int NO_SPEED = 0;
+	public static final double FORWARD_SPEED = 0.8;
+	public static final double BACKWARD_SPEED = -0.1;
+	public static final double NO_SPEED = 0;
 	
 	//Sets position values
 	public static final int GROUNDPOSITION = 0;
@@ -107,7 +107,7 @@ public class Caliber extends Subsystem {
 	}
 	
 	//Opens the squish/catch cylinder
-	public void caliberCatch() {
+	public void squishCube() {
 		squish.set(Value.kForward);
 	}
 	
@@ -117,28 +117,34 @@ public class Caliber extends Subsystem {
 	}
 	//Returns the left IR value
 	public boolean leftIR() {
-		return leftIR.get();
+		return !leftIR.get();
 	}
 	//Returns the right IR value
 	public boolean rightIR() {
-		return rightIR.get();
+		return !rightIR.get();
 	}	
+	
 	//Returns true if the left IR value or the right IR value is true
+	//Returns the opposite because the sensor outputs true if there is no object.
 	public boolean isCubeIn() {
-		return leftIR.get() || rightIR.get();
+		return !leftIR.get() || !rightIR.get();
 	}
 	
-	
+	/**
+	 * Gets the caliber to the ground intake position
+	 */
 	public void groundPosition() {
 		liftMotor.set(ControlMode.Position, GROUNDPOSITION / ENCODER_DPP);
 	}
 	
+	/**
+	 * Gets the caliber to the switch shoot position
+	 */
 	public void switchPosition() {
 		liftMotor.set(ControlMode.Position, SWITCHPOSITION / ENCODER_DPP);		
 	}
 	
 	@Override
 	protected void initDefaultCommand() {
-		
 	}
 }

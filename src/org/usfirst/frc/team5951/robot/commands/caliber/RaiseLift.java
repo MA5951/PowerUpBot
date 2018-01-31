@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class RaiseLift extends Command {
 	
-	public static Caliber caliber;
+	public Caliber caliber;
 
     public RaiseLift() {
     	caliber = Robot.CALIBER;
@@ -20,7 +20,7 @@ public class RaiseLift extends Command {
     // Called just before this Command runs the first time- sends zero power to the lift motor
     // using- liftLock method of Caliber subsystem
     protected void initialize() {
-    	caliber.liftLock();
+    	caliber.liftNoPower();
     }
 
     // Called repeatedly when this Command is scheduled to run- sends positive power to the lift motor

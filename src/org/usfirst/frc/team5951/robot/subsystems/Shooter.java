@@ -1,15 +1,12 @@
 
 package org.usfirst.frc.team5951.robot.subsystems;
 
-import org.usfirst.frc.team5951.robot.Robot;
 import org.usfirst.frc.team5951.robot.RobotMap;
 import org.usfirst.frc.team5951.robot.commands.shooter.StopShot;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.drive.RobotDriveBase.MotorType;
 public class Shooter extends Subsystem {
 	private TalonSRX highMotorA;
 	private TalonSRX highMotorB;

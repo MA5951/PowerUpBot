@@ -7,16 +7,6 @@
 
 package org.usfirst.frc.team5951.robot;
 
-import org.usfirst.frc.team5951.robot.commands.caliber.CatchCube;
-import org.usfirst.frc.team5951.robot.commands.caliber.LowerLift;
-import org.usfirst.frc.team5951.robot.commands.caliber.PushCube;
-import org.usfirst.frc.team5951.robot.commands.caliber.RaiseLift;
-import org.usfirst.frc.team5951.robot.commands.caliber.ReleaseCube;
-import org.usfirst.frc.team5951.robot.commands.caliber.RetractCube;
-import org.usfirst.frc.team5951.robot.commands.intake.CloseIntake;
-import org.usfirst.frc.team5951.robot.commands.intake.IntakeCube;
-import org.usfirst.frc.team5951.robot.commands.intake.OpenIntake;
-import org.usfirst.frc.team5951.robot.commands.intake.OutTakeCube;
 import org.usfirst.frc.team5951.robot.commands.leds.FlashLEDs;
 import org.usfirst.frc.team5951.robot.triggers.CubeInRobot;
 import org.usfirst.frc.team5951.robot.util.JoystickUtil;
@@ -36,19 +26,19 @@ public class OI {
 	//TODO: remove for testing
 	public static final CubeInRobot CUBE_IN_ROBOT_TRIGGER = new CubeInRobot();
 	
-	public JoystickButton a = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.A);
-	public JoystickButton b = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.B);
-	public JoystickButton y = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.Y);
-	public JoystickButton x = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.X);
-	
-	public JoystickButton lb = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.LB);
-	public JoystickButton rb = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.RB);
-	
+	public static JoystickButton RESET_CALIBER = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.A);
+	public static JoystickButton b = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.B);
+	public static JoystickButton y = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.Y);
+	public static JoystickButton x = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.X);
+	        
+	public static JoystickButton lb = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.LB);
+	public static JoystickButton rb = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.RB);
+	        
 	//TODO: make this work...
-	public JoystickButton povUP = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.POV_UP);
-	public JoystickButton povDown = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.POV_DOWN);
-	public JoystickButton povRight = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.POV_RIGHT);
-	public JoystickButton povLeft = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.POV_LEFT);
+	public static JoystickButton povUP = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.POV_UP);
+	public static JoystickButton povDown = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.POV_DOWN);
+	public static JoystickButton povRight = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.POV_RIGHT);
+	public static JoystickButton povLeft = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.POV_LEFT);
 	
 
 	public OI() {
@@ -56,20 +46,6 @@ public class OI {
 		//Caliber 
 		//TODO: remove for testing
 		CUBE_IN_ROBOT_TRIGGER.whenActive(new FlashLEDs());
-		
-		//TODO: while pressed instead of when pressed where necessary
-		a.whenPressed(new PushCube());
-		b.whenPressed(new ReleaseCube());
-		x.whenPressed(new RetractCube());
-		y.whenPressed(new CatchCube());
-		povUP.whenPressed(new RaiseLift());
-		povDown.whenPressed(new LowerLift());
-		
-		//Intake
-		lb.whenPressed(new CloseIntake());
-		rb.whenPressed(new OpenIntake());
-		povRight.whenPressed(new OutTakeCube());
-		povLeft.whenPressed(new IntakeCube());
 		
 	}
 }

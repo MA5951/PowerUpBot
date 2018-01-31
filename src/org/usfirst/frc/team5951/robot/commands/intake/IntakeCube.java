@@ -9,7 +9,7 @@ import org.usfirst.frc.team5951.robot.subsystems.IntakeSubSystem;
 
 public class IntakeCube extends Command {
 
-	public static IntakeSubSystem intake;
+	public IntakeSubSystem intake;
 
 	// this command intakes a cube into the robot
 
@@ -26,7 +26,7 @@ public class IntakeCube extends Command {
 	// called from subsytem to take the cube in the intake
 	@Override
 	protected void execute() {
-		intake.takeCubeInside();
+		intake.insertCube();
 	}
 
 	@Override

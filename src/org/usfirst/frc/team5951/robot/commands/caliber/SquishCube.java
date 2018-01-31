@@ -7,20 +7,21 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 
 /**
  * This Instant Command opens the cylinders which are located in the sides of the caliber
+ * TODO: What does this do?
  */
-public class CatchCube extends InstantCommand {
+public class SquishCube extends InstantCommand {
 	
 	//Creates a new object of the Caliber subsystem
-	public static Caliber caliber;
+	public Caliber caliber;
 
 	//In the constructor- sets the Caliber object equal to the Caliber object that is created in the Robot class.
-    public CatchCube() {
+    public SquishCube() {
     	caliber = Robot.CALIBER;
     }
     
     //In the Initialize method- runs the method caliberCatch of the caliber one time
     protected void initialize() {
-    	caliber.caliberCatch();
+    	caliber.squishCube();
     }
 
 }

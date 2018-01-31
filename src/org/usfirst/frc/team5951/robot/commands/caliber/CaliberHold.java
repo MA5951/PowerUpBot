@@ -18,7 +18,7 @@ public class CaliberHold extends CommandGroup {
     public CaliberHold() {
     	addSequential(new ReleaseCube());
     	addSequential(new TimedCommand(1));
-        addSequential(new CatchCube());
+        addSequential(new SquishCube());
   
     }
 }

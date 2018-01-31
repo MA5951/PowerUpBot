@@ -13,12 +13,11 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class OutTakeCube extends Command {
 
-	public static IntakeSubSystem intake;
+	public IntakeSubSystem intake;
 
 	public OutTakeCube() {
 		intake = Robot.INTAKE;
 		requires(Robot.INTAKE);
-
 	}
 
 	/**
@@ -31,7 +30,7 @@ public class OutTakeCube extends Command {
 	 *  this void calls the shoot command from the subsystem.
 	 */
 	protected void execute() {
-		intake.shootCube();
+		intake.releaseCube();
 	}
 
 	/**

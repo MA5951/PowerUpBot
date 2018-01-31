@@ -15,9 +15,9 @@ import edu.wpi.first.wpilibj.command.TimedCommand;
 
 //TODO: change name 
 //TODO: wait less time 
-public class CaliberReset extends CommandGroup {
+public class CaliberResetGroup extends CommandGroup {
 
-    public CaliberReset() {
+    public CaliberResetGroup() {
          addParallel(new ReleaseCube());
          addSequential(new TimedCommand(0.5));
          addParallel(new RetractCube());
