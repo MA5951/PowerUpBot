@@ -1,7 +1,7 @@
 package org.usfirst.frc.team5951.robot.commands.intake;
 
 import org.usfirst.frc.team5951.robot.Robot;
-import org.usfirst.frc.team5951.robot.subsystems.IntakeSubSystem;
+import org.usfirst.frc.team5951.robot.subsystems.Intake;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class OutTakeCube extends Command {
 
-	public IntakeSubSystem intake;
+	public Intake intake;
 
 	public OutTakeCube() {
 		intake = Robot.INTAKE;

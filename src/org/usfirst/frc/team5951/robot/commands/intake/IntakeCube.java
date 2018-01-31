@@ -5,11 +5,11 @@ package org.usfirst.frc.team5951.robot.commands.intake;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team5951.robot.Robot;
-import org.usfirst.frc.team5951.robot.subsystems.IntakeSubSystem;
+import org.usfirst.frc.team5951.robot.subsystems.Intake;
 
 public class IntakeCube extends Command {
 
-	public IntakeSubSystem intake;
+	public Intake intake;
 
 	// this command intakes a cube into the robot
 

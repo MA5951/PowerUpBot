@@ -29,38 +29,37 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Caliber extends Subsystem {
-	
+
 	//Create TalonSRK
 	private WPI_TalonSRX liftMotor; 
-	
-	
+
 	//Create 2 DoubleSolenoids
 	private DoubleSolenoid squish, push;
-	
+
 	//TODO: move up
 	//Create 2 digital inputs for IR sensors
 	public DigitalInput leftIR;
 	public DigitalInput rightIR;
-	
+
 	//Sets speed values	
 	//TODO: rename MAX MIN speed
 	public static final double FORWARD_SPEED = 0.8;
 	public static final double BACKWARD_SPEED = -0.1;
 	public static final double NO_SPEED = 0;
-	
+
 	//Sets position values
 	public static final int GROUNDPOSITION = 0;
 	public static final int SWITCHPOSITION = 20;
-	
+
 	//Set PID values
 	public static final double KP = 0.05;
 	public static final double KI = 0;
 	public static final double KD = 0;
-	
+
 	//Set pulses
 	public static final double ENCODER_DPP = 500;
-	
-	
+
+
 	//Sets the TalonSRX, the IR sensors and the 2DoubleSolenoids and puts their ports
 	public Caliber() {
 		liftMotor = new WPI_TalonSRX (RobotMap.LIFT_MOTOR_PORT);
@@ -81,44 +80,47 @@ public class Caliber extends Subsystem {
 	public void liftRaise() {
 		liftMotor.set(ControlMode.PercentOutput, FORWARD_SPEED);
 	}
-	
+
 	//Lowers the caliber lift with MIN_SPEED and in the PercentOutput control mode
 	public void liftLower() {
 		liftMotor.set(ControlMode.PercentOutput, BACKWARD_SPEED);
 	}
-	
+
 	//Stops the caliber lift with NO_SPEED and in the PercentOutput control mode
 	public void liftLock() {
 		liftMotor.set(ControlMode.PercentOutput, NO_SPEED);
 		liftMotor.setNeutralMode(NeutralMode.Brake);
 	}
+
 	public void liftNoPower() {
 		liftMotor.set(ControlMode.PercentOutput, NO_SPEED);
 	}
-	
+
 	//Opens the push cylinder
 	public void caliberPush() {
 		push.set(Value.kForward);		
 	}
-	
+
 	//Closes the push cylinder
 	public void caliberRetract() {
 		push.set(Value.kReverse);		
 	}
-	
+
 	//Opens the squish/catch cylinder
 	public void squishCube() {
 		squish.set(Value.kForward);
 	}
-	
+
 	//Closes the squish/catch cylinder
 	public void caliberRelease() {
 		squish.set(Value.kReverse);
 	}
+
 	//Returns the left IR value
 	public boolean leftIR() {
 		return !leftIR.get();
 	}
+
 	//Returns the right IR value
 	public boolean rightIR() {
 		return !rightIR.get();

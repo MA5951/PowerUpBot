@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  * @author sahar balass
  */
-public class IntakeSubSystem extends Subsystem {
+public class Intake extends Subsystem {
 
 	// TODO: rename constant in speed/ out speed + formatting needs to be ALL CAPS
 	public static final int Intake_Motor = -1;
@@ -24,7 +24,7 @@ public class IntakeSubSystem extends Subsystem {
 	private DoubleSolenoid LeftSolenoid;
 	private DoubleSolenoid RightSolenoid;
 
-	public IntakeSubSystem() {
+	public Intake() {
 		// TODO: rename constants of ports into 1 and 2 (or left and right)
 		LeftMotor = new TalonSRX(RobotMap.TALON_SRX_INTAKE_MOTOR_PORT);
 		RightMotor = new TalonSRX(RobotMap.TALON_SRX_INTAKE_MOTOR_PORT_1);

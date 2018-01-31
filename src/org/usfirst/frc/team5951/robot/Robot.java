@@ -9,7 +9,7 @@ package org.usfirst.frc.team5951.robot;
 
 import org.usfirst.frc.team5951.robot.subsystems.Caliber;
 import org.usfirst.frc.team5951.robot.subsystems.Chassis;
-import org.usfirst.frc.team5951.robot.subsystems.IntakeSubSystem;
+import org.usfirst.frc.team5951.robot.subsystems.Intake;
 import org.usfirst.frc.team5951.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -28,7 +28,7 @@ public class Robot extends TimedRobot {
 	// public static final Shooter SHOOTER = new Shooter();
 	public static final Caliber CALIBER = new Caliber();
 	public static final OI OI = new OI();
-	public static final IntakeSubSystem INTAKE = new IntakeSubSystem();
+	public static final Intake INTAKE = new Intake();
 
 	/**
 	 * This function is run when the robot is first started up and should be used

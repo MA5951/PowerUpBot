@@ -1,7 +1,7 @@
 package org.usfirst.frc.team5951.robot.commands.intake;
 
 import org.usfirst.frc.team5951.robot.Robot;
-import org.usfirst.frc.team5951.robot.subsystems.IntakeSubSystem;
+import org.usfirst.frc.team5951.robot.subsystems.Intake;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 
@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
  */
 public class OpenIntake extends InstantCommand {
 
-	public static IntakeSubSystem intake;
+	public static Intake intake;
 
 	public OpenIntake() {
 		intake = Robot.INTAKE;
