@@ -6,7 +6,7 @@ import org.usfirst.frc.team5951.robot.util.ChassisMath;
 import org.usfirst.frc.team5951.robot.util.ChassisSide;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
@@ -20,7 +20,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Chassis extends Subsystem {
 
 	// Component declarations
-	private WPI_TalonSRX leadRightMotor, leadLeftMotor;
+	private WPI_TalonSRX leadRightMotor, rightFollower1, rightFollower2,
+						leadLeftMotor, leftFollower1, leftFollower2;				
 
 	private ChassisSide leftChassisSide, rightChassisSide;
 
@@ -44,16 +45,26 @@ public class Chassis extends Subsystem {
 	private static Chassis m_chassis;
 
 	public Chassis() {
+		//Lead motors init
 		this.leadRightMotor = new WPI_TalonSRX(RobotMap.CHASSIS_RIGHT_LEADER);
-
 		this.leadLeftMotor = new WPI_TalonSRX(RobotMap.CHASSIS_LEFT_LEADER);
+		
+		//Followers init
+		this.leftFollower1 = new WPI_TalonSRX(RobotMap.CHASSIS_LEFT_FOLLOWER_1);
+		this.leftFollower2 = new WPI_TalonSRX(RobotMap.CHASSIS_LEFT_FOLLOWER_2);
+		
+		this.rightFollower1 = new WPI_TalonSRX(RobotMap.CHASSIS_RIGHT_FOLLOWER_1);
+		this.rightFollower2 = new WPI_TalonSRX(RobotMap.CHASSIS_RIGHT_FOLLOWER_2);
 
 		// Case 3 motor drivetrain
-		this.leftChassisSide = new ChassisSide(leadLeftMotor, new TalonSRX(RobotMap.CHASSIS_LEFT_FOLLOWER_1),
-				new TalonSRX(RobotMap.CHASSIS_LEFT_FOLLOWER_2));
+		this.leftChassisSide = new ChassisSide(leadLeftMotor, leftFollower1,
+				leftFollower2);
 
-		this.rightChassisSide = new ChassisSide(leadRightMotor, new TalonSRX(RobotMap.CHASSIS_RIGHT_FOLLOWER_1),
-				new TalonSRX(RobotMap.CHASSIS_RIGHT_FOLLOWER_2));
+		this.rightChassisSide = new ChassisSide(leadRightMotor, rightFollower1,
+				rightFollower2);
+		
+		this.leadLeftMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+		this.leadRightMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
 
 		// Case 2 motor drivetrain
 		/*
@@ -102,6 +113,7 @@ public class Chassis extends Subsystem {
 	 * @param rotateValue
 	 *            - X axis of joystick
 	 */
+	@Deprecated
 	public void arcadeDriveDZ(double moveValue, double rotateValue) {
 		double[] output = ChassisMath.calculatePowerDZ(moveValue, rotateValue, DEAD_ZONE);
 

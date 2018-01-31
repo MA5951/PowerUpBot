@@ -15,9 +15,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Intake extends Subsystem {
 
 	// TODO: rename constant in speed/ out speed + formatting needs to be ALL CAPS
-	public static final int Intake_Motor = -1;
-	public static final int Out_Take_Motor = 1;
-	public static final int Stop_Motor = 0;
+	public static final int INTAKE_MOTOR = 1;
+	public static final int RELEASE_SPEED = -1;
+	public static final int STOP_SPEED = 0;
 
 	private TalonSRX LeftMotor;
 	private TalonSRX RightMotor;
@@ -38,24 +38,24 @@ public class Intake extends Subsystem {
 	 * Rolls the intake to insert a cube
 	 */
 	public void insertCube() {
-		LeftMotor.set(ControlMode.PercentOutput, Intake_Motor);
-		RightMotor.set(ControlMode.PercentOutput, Intake_Motor);
+		LeftMotor.set(ControlMode.PercentOutput, INTAKE_MOTOR);
+		RightMotor.set(ControlMode.PercentOutput, INTAKE_MOTOR);
 	}
 
 	/**
 	 * Rolls the intake to release the cube
 	 */
 	public void releaseCube() {
-		LeftMotor.set(ControlMode.PercentOutput, Out_Take_Motor);
-		RightMotor.set(ControlMode.PercentOutput, Out_Take_Motor);
+		LeftMotor.set(ControlMode.PercentOutput, RELEASE_SPEED);
+		RightMotor.set(ControlMode.PercentOutput, RELEASE_SPEED);
 	}
 
 	/**
 	 * Stops the rollers
 	 */
 	public void stopCube() {
-		LeftMotor.set(ControlMode.PercentOutput, Stop_Motor);
-		RightMotor.set(ControlMode.PercentOutput, Stop_Motor);
+		LeftMotor.set(ControlMode.PercentOutput, STOP_SPEED);
+		RightMotor.set(ControlMode.PercentOutput, STOP_SPEED);
 	}
 
 	/**
