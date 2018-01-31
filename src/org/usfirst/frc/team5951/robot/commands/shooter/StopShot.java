@@ -21,7 +21,6 @@ public class StopShot extends Command {
 	}
 
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
