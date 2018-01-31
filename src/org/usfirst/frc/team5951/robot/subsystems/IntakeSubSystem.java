@@ -14,9 +14,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class IntakeSubSystem extends Subsystem {
 
-	// TODO: rename constant in speed/ out speed + formatting needs to be ALL CAPS
-	public static final int Intake_Motor = -1;
-	public static final int Out_Take_Motor = 1;
+	public static final int SPEED_IN = -1;
+	public static final int SPEED_OUT = 1;
 	public static final int Stop_Motor = 0;
 
 	private TalonSRX LeftMotor;
@@ -26,8 +25,8 @@ public class IntakeSubSystem extends Subsystem {
 
 	public IntakeSubSystem() {
 		// TODO: rename constants of ports into 1 and 2 (or left and right)
-		LeftMotor = new TalonSRX(RobotMap.TALON_SRX_INTAKE_MOTOR_PORT);
-		RightMotor = new TalonSRX(RobotMap.TALON_SRX_INTAKE_MOTOR_PORT_1);
+		LeftMotor = new TalonSRX(RobotMap.TALON_SRX_INTAKE_MOTOR_PORT_1);
+		RightMotor = new TalonSRX(RobotMap.TALON_SRX_INTAKE_MOTOR_PORT_2);
 		LeftSolenoid = new DoubleSolenoid(RobotMap.PCM_PORT, RobotMap.INTAKE_PISTON_LEFT_REVERSE,
 				RobotMap.INTAKE_PISTON_LEFT_FORWORD);
 		RightSolenoid = new DoubleSolenoid(RobotMap.PCM_PORT, RobotMap.INTAKE_PISTON_RIGHT_FORWORD,
@@ -35,15 +34,15 @@ public class IntakeSubSystem extends Subsystem {
 	}
 
 	public void takeCubeInside() {
-		LeftMotor.set(ControlMode.PercentOutput, Intake_Motor);
-		RightMotor.set(ControlMode.PercentOutput, Intake_Motor);
+		LeftMotor.set(ControlMode.PercentOutput, SPEED_IN);
+		RightMotor.set(ControlMode.PercentOutput, SPEED_IN);
 
 	}
 
 	public void shootCube() {
 
-		LeftMotor.set(ControlMode.PercentOutput, Out_Take_Motor);
-		RightMotor.set(ControlMode.PercentOutput, Out_Take_Motor);
+		LeftMotor.set(ControlMode.PercentOutput, SPEED_OUT);
+		RightMotor.set(ControlMode.PercentOutput, SPEED_OUT);
 
 	}
 

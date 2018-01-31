@@ -52,8 +52,8 @@ public class RobotMap {
 	public static final int k_SHOOTER_LOW_A_TALON=3;
 	public static final int k_SHOOTER_LOW_B_TALON=4;
 
-	public static final int TALON_SRX_INTAKE_MOTOR_PORT = 0;
-	public static final int TALON_SRX_INTAKE_MOTOR_PORT_1 = 1;
+	public static final int TALON_SRX_INTAKE_MOTOR_PORT_1 = 0;
+	public static final int TALON_SRX_INTAKE_MOTOR_PORT_2 = 1;
 	public static final int INTAKE_PISTON_LEFT_FORWORD= 3;
 	public static final int INTAKE_PISTON_LEFT_REVERSE = 2;
 	public static final int INTAKE_PISTON_RIGHT_FORWORD = 2;
