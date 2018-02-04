@@ -7,8 +7,20 @@
 
 package org.usfirst.frc.team5951.robot;
 
+import org.usfirst.frc.team5951.robot.commands.caliber.CaliberResetGroup;
+import org.usfirst.frc.team5951.robot.commands.caliber.CaliberShootGroup;
+import org.usfirst.frc.team5951.robot.commands.caliber.LowerCaliber;
+import org.usfirst.frc.team5951.robot.commands.caliber.RaiseCaliber;
+import org.usfirst.frc.team5951.robot.commands.caliber.SwitchPosition;
+import org.usfirst.frc.team5951.robot.commands.caliber.TogglePush;
+import org.usfirst.frc.team5951.robot.commands.caliber.ToggleSquish;
+import org.usfirst.frc.team5951.robot.commands.intake.IntakeCube;
+import org.usfirst.frc.team5951.robot.commands.intake.OutTakeCube;
+import org.usfirst.frc.team5951.robot.commands.intake.ToggleIntake;
 import org.usfirst.frc.team5951.robot.commands.leds.FlashLEDs;
 import org.usfirst.frc.team5951.robot.triggers.CubeInRobot;
+import org.usfirst.frc.team5951.robot.triggers.POVDown;
+import org.usfirst.frc.team5951.robot.triggers.POVUp;
 import org.usfirst.frc.team5951.robot.util.JoystickUtil;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -23,29 +35,35 @@ public class OI {
 	//using only one joystick for test
 	public static final Joystick DRIVER_STICK = new Joystick(RobotMap.DRIVER_STICK);
 	public static final XboxController OPERATOR_STICK = new XboxController(RobotMap.OPERATOR_STICK);
-	//TODO: remove for testing
+	
 	public static final CubeInRobot CUBE_IN_ROBOT_TRIGGER = new CubeInRobot();
+	public static final POVUp SWITCH_POSITION = new POVUp();
+	public static final POVDown GROUND_POSITION = new POVDown();
 	
-	public static JoystickButton RESET_CALIBER = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.A);
-	public static JoystickButton b = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.B);
-	public static JoystickButton y = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.Y);
-	public static JoystickButton x = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.X);
-	        
-	public static JoystickButton lb = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.LB);
-	public static JoystickButton rb = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.RB);
-	        
-	//TODO: make this work...
-	public static JoystickButton povUP = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.POV_UP);
-	public static JoystickButton povDown = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.POV_DOWN);
-	public static JoystickButton povRight = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.POV_RIGHT);
-	public static JoystickButton povLeft = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.POV_LEFT);
+	public static final JoystickButton TOGGLE_INTAKE = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.START);
+	public static final JoystickButton INSERT_CUBE_INTAKE = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.LB);
+	public static final JoystickButton EJECT_CUBE_INTAKE = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.RB);
 	
+	public static final JoystickButton TOGGLE_PUSH_CALIBER = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.Y);
+	public static final JoystickButton TOGGLE_SQUISH_CALIBER = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.X);
+	public static final JoystickButton SHOOT_CALIBER = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.A);
+	public static final JoystickButton RESET_CALIBER = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.B);
 
+	
 	public OI() {
 		
 		//Caliber 
 		//TODO: remove for testing
 		CUBE_IN_ROBOT_TRIGGER.whenActive(new FlashLEDs());
-		
+		TOGGLE_INTAKE.toggleWhenPressed(new ToggleIntake());
+		INSERT_CUBE_INTAKE.whileHeld(new IntakeCube());
+		EJECT_CUBE_INTAKE.whileHeld(new OutTakeCube());
+		TOGGLE_PUSH_CALIBER.whenPressed(new TogglePush());
+		TOGGLE_SQUISH_CALIBER.whenPressed(new ToggleSquish());
+		SHOOT_CALIBER.whenPressed(new CaliberShootGroup());
+		RESET_CALIBER.whenPressed(new CaliberResetGroup());
+
+		SWITCH_POSITION.whenActive(new RaiseCaliber());
+		GROUND_POSITION.whenActive(new LowerCaliber());
 	}
 }

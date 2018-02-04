@@ -21,7 +21,7 @@ public class SquishCube extends InstantCommand {
 
     //In the Initialize method- runs the method caliberCatch of the caliber one time
     protected void initialize() {
-    	caliber.squishCube();
+    	caliber.caliberCatch();
     }
 
 }

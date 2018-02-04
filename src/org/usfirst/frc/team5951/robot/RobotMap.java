@@ -12,50 +12,51 @@ package org.usfirst.frc.team5951.robot;
  * to a variable name. This provides flexibility changing wiring, makes checking
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
+ * 
  * @author FRC 5951 programming
- *  
+ * 
  */
 public class RobotMap {
-	//TODO: fix the port until Tue (30/1/18)
-	//Caliber
-	public static final int LIFT_MOTOR_PORT = 0;
 	
-	public static final int PCM_PORT = 0;
-	public static final int SQUISH_OPEN = 1;
-	public static final int SQUISH_CLOSE = 2;
-	public static final int PUSH_OPEN = 3;
-	public static final int PUSH_CLOSE = 4;
-	
-	public static final int LEFT_IR = 0;
-	public static final int RIGHT_IR = 1;
-
-	//OI
+	// OI
 	public static final int DRIVER_STICK = 0;
 	public static final int OPERATOR_STICK = 1;
 	
-	//Chassis
-	public static final int CHASSIS_RIGHT_LEADER = 1; 
-	public static final int CHASSIS_RIGHT_FOLLOWER_1 = 2;
-	public static final int CHASSIS_RIGHT_FOLLOWER_2 = 3;
-	public static final int CHASSIS_LEFT_LEADER = 4;
-	public static final int CHASSIS_LEFT_FOLLOWER_1 = 5;
-	public static final int CHASSIS_LEFT_FOLLOWER_2 = 6;
 	
-	//LEDs
-	public static final int LED_RELAY = 1;
+	// Caliber
+	public static final int LIFT_MOTOR_PORT = 9;
 
-	
-	//TODO: remove k
-	//shooter
-	public static final int k_SHOOTER_HIGH_A_TALON=1;
-	public static final int k_SHOOTER_HIGH_B_TALON=2;
-	public static final int k_SHOOTER_LOW_A_TALON=3;
-	public static final int k_SHOOTER_LOW_B_TALON=4;
+	// Chassis
+	public static final int CHASSIS_RIGHT_LEADER = 5;
+	public static final int CHASSIS_RIGHT_FOLLOWER_1 = 6;
+	public static final int CHASSIS_RIGHT_FOLLOWER_2 = 7;
+	public static final int CHASSIS_LEFT_LEADER = 2;
+	public static final int CHASSIS_LEFT_FOLLOWER_1 = 3;
+	public static final int CHASSIS_LEFT_FOLLOWER_2 = 4;
 
-	public static final int TALON_SRX_INTAKE_MOTOR_PORT = 0;
-	public static final int TALON_SRX_INTAKE_MOTOR_PORT_1 = 1;
-	public static final int INTAKE_PISTON_LEFT_FORWORD= 3;
-	public static final int INTAKE_PISTON_LEFT_REVERSE = 2;
-	public static final int INTAKE_PISTON_RIGHT_FORWORD = 2;
-	public static final int INTAKE_PISTON_RIGHT_REVERSE= 3;
+	// shooter
+	public static final int SHOOTER_HIGH_A_TALON = 10;
+	public static final int SHOOTER_HIGH_B_TALON = 11;
+	public static final int SHOOTER_LOW_A_TALON = 12;
+	public static final int SHOOTER_LOW_B_TALON = 13;
+
+	public static final int INTAKE_LEFT_MOTOR = 1;
+	public static final int INTAKE_RIGHT_MOTOR = 8;
+
+	public static final int PCM_PORT = 0;
+	public static final int SQUISH_OPEN = 5;
+	public static final int SQUISH_CLOSE = 4;
+	public static final int PUSH_OPEN = 2;
+	public static final int PUSH_CLOSE = 0;
+
+	public static final int INTAKE_PISTON_LEFT_FORWORD = 3;
+	public static final int INTAKE_PISTON_LEFT_REVERSE = 1;
+	public static final int INTAKE_PISTON_RIGHT_FORWORD = 7;
+	public static final int INTAKE_PISTON_RIGHT_REVERSE = 6;
+
+	public static final int LEFT_IR = 1;
+	public static final int RIGHT_IR = 2;
+
+	// LEDs
+	public static final int LED_RELAY = 0;
 }

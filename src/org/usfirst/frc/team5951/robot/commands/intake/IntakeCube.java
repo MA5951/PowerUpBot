@@ -3,9 +3,10 @@
  */
 package org.usfirst.frc.team5951.robot.commands.intake;
 
-import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team5951.robot.Robot;
 import org.usfirst.frc.team5951.robot.subsystems.Intake;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 public class IntakeCube extends Command {
 

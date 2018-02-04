@@ -55,6 +55,13 @@ public class Chassis extends Subsystem {
 		
 		this.rightFollower1 = new WPI_TalonSRX(RobotMap.CHASSIS_RIGHT_FOLLOWER_1);
 		this.rightFollower2 = new WPI_TalonSRX(RobotMap.CHASSIS_RIGHT_FOLLOWER_2);
+		
+		this.leadRightMotor.setInverted(false);
+		this.rightFollower1.setInverted(true);
+		this.rightFollower2.setInverted(false);
+		this.leadLeftMotor.setInverted(false);
+		this.leftFollower1.setInverted(false);
+		this.leftFollower2.setInverted(false);
 
 		// Case 3 motor drivetrain
 		this.leftChassisSide = new ChassisSide(leadLeftMotor, leftFollower1,
@@ -65,13 +72,6 @@ public class Chassis extends Subsystem {
 		
 		this.leadLeftMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
 		this.leadRightMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
-
-		// Case 2 motor drivetrain
-		/*
-		this.leftChassisSide = new ChassisSide(leadLeftMotor, new TalonSRX(RobotMap.CHASSIS_LEFT_FOLLOWER_1));
-
-		this.rightChassisSide = new ChassisSide(leadRightMotor, new TalonSRX(RobotMap.CHASSIS_RIGHT_FOLLOWER_1));
-		*/
 
 		this.navX = new AHRS(Port.kMXP);
 	}

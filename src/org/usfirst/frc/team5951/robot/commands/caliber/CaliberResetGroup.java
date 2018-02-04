@@ -19,7 +19,7 @@ public class CaliberResetGroup extends CommandGroup {
 
     public CaliberResetGroup() {
          addParallel(new ReleaseCube());
-         addSequential(new TimedCommand(0.5));
+         addSequential(new TimedCommand(0.1));
          addParallel(new RetractCube());
     }
 }

@@ -13,10 +13,10 @@ import edu.wpi.first.wpilibj.command.TimedCommand;
  * ClosePushCube command
  * CatchCube command
  */
-public class CaliberHold extends CommandGroup {
+public class CaliberHoldGroup extends CommandGroup {
 
-    public CaliberHold() {
-    	addSequential(new ReleaseCube());
+    public CaliberHoldGroup() {
+    	addSequential(new RetractCube());
     	addSequential(new TimedCommand(1));
         addSequential(new SquishCube());
   

@@ -16,10 +16,10 @@ public class Shooter extends Subsystem {
 	//TODO: change shot to shoot
 	public Shooter() {
 		//TODO set one motor high and low as reverse
-		this.highMotorA= new TalonSRX(RobotMap.k_SHOOTER_HIGH_A_TALON);
-		this.highMotorB= new TalonSRX(RobotMap.k_SHOOTER_HIGH_B_TALON);
-		this.lowMotorA= new TalonSRX(RobotMap.k_SHOOTER_LOW_A_TALON);
-		this.lowMotorB= new TalonSRX(RobotMap.k_SHOOTER_LOW_B_TALON);
+		this.highMotorA= new TalonSRX(RobotMap.SHOOTER_HIGH_A_TALON);
+		this.highMotorB= new TalonSRX(RobotMap.SHOOTER_HIGH_B_TALON);
+		this.lowMotorA= new TalonSRX(RobotMap.SHOOTER_LOW_A_TALON);
+		this.lowMotorB= new TalonSRX(RobotMap.SHOOTER_LOW_B_TALON);
 		
 	}
 	/**

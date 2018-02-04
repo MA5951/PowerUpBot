@@ -13,11 +13,11 @@ import edu.wpi.first.wpilibj.command.TimedCommand;
  * ReleaseCube command
  * OpenPushCube command
  */
-public class ShootCubeGroup extends CommandGroup {
+public class CaliberShootGroup extends CommandGroup {
 
-    public ShootCubeGroup() {
+    public CaliberShootGroup() {
         addSequential(new ReleaseCube());
-        addSequential(new TimedCommand(1));
+        addSequential(new TimedCommand(0.1));
         addSequential(new PushCube());
 
     }
