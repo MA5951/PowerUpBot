@@ -55,8 +55,8 @@ public class Caliber extends Subsystem {
 	public static int currentPosition = 0;
 
 	// Set PID values
-	public static final double KP = 1;
-	public static final double KI = 0.00;
+	public static final double KP = 2.5;
+	public static final double KI = 0;
 	public static final double KD = 0;
 
 	// Set pulses
