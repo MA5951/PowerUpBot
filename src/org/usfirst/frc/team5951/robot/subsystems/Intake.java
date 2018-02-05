@@ -18,6 +18,7 @@ public class Intake extends Subsystem {
 	public static final int INTAKE_MOTOR = 1;
 	public static final int RELEASE_SPEED = -1;
 	public static final int STOP_SPEED = 0;
+	public static final int HIGH_VOLTAGE = 10;
 
 	private WPI_TalonSRX leftMotor;
 	private WPI_TalonSRX rightMotor;
@@ -85,6 +86,18 @@ public class Intake extends Subsystem {
 
 	public void doNothing() {
 
+	}
+	
+	public boolean getVoltage() {
+		leftMotor.getMotorOutputVoltage();
+		rightMotor.getMotorOutputVoltage();
+		return leftMotor.getMotorOutputVoltage() >= HIGH_VOLTAGE || rightMotor.getMotorOutputVoltage() >= HIGH_VOLTAGE;
+
+	}
+	
+	public void turnCube() {
+	     leftMotor.set(ControlMode.PercentOutput, INTAKE_MOTOR);
+	     rightMotor.set(ControlMode.PercentOutput,RELEASE_SPEED);
 	}
 
 	@Override

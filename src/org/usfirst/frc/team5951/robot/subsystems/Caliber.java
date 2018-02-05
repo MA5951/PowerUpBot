@@ -1,5 +1,6 @@
 package org.usfirst.frc.team5951.robot.subsystems;
 
+import org.usfirst.frc.team5951.robot.OI;
 import org.usfirst.frc.team5951.robot.RobotMap;
 
 /**
@@ -26,6 +27,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Caliber extends Subsystem {
@@ -183,6 +185,12 @@ public class Caliber extends Subsystem {
 
 	}
 
+	public void rumbleControllerCaliber(double rumble){
+		OI.OPERATOR_STICK.setRumble(RumbleType.kLeftRumble, rumble);
+		OI.OPERATOR_STICK.setRumble(RumbleType.kRightRumble, rumble);
+
+		
+	}
 	@Override
 	protected void initDefaultCommand() {
 	}

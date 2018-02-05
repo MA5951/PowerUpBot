@@ -8,17 +8,26 @@
 package org.usfirst.frc.team5951.robot;
 
 import org.usfirst.frc.team5951.robot.commands.caliber.CaliberResetGroup;
+import org.usfirst.frc.team5951.robot.commands.caliber.CaliberRumble;
 import org.usfirst.frc.team5951.robot.commands.caliber.CaliberShootGroup;
 import org.usfirst.frc.team5951.robot.commands.caliber.LowerCaliber;
 import org.usfirst.frc.team5951.robot.commands.caliber.RaiseCaliber;
 import org.usfirst.frc.team5951.robot.commands.caliber.SwitchPosition;
 import org.usfirst.frc.team5951.robot.commands.caliber.TogglePush;
 import org.usfirst.frc.team5951.robot.commands.caliber.ToggleSquish;
+import org.usfirst.frc.team5951.robot.commands.combined.CubeIn;
+import org.usfirst.frc.team5951.robot.commands.intake.CloseIntakeGroup;
 import org.usfirst.frc.team5951.robot.commands.intake.IntakeCube;
 import org.usfirst.frc.team5951.robot.commands.intake.OutTakeCube;
 import org.usfirst.frc.team5951.robot.commands.intake.ToggleIntake;
+import org.usfirst.frc.team5951.robot.commands.intake.TurnCube;
 import org.usfirst.frc.team5951.robot.commands.leds.FlashLEDs;
+import org.usfirst.frc.team5951.robot.triggers.CaliberPositionBackSwitch;
+import org.usfirst.frc.team5951.robot.triggers.CaliberPositionGround;
+import org.usfirst.frc.team5951.robot.triggers.CaliberPositionSwitch;
+import org.usfirst.frc.team5951.robot.triggers.CaliberUp;
 import org.usfirst.frc.team5951.robot.triggers.CubeInRobot;
+import org.usfirst.frc.team5951.robot.triggers.CubeStuck;
 import org.usfirst.frc.team5951.robot.triggers.POVDown;
 import org.usfirst.frc.team5951.robot.triggers.POVUp;
 import org.usfirst.frc.team5951.robot.util.JoystickUtil;
@@ -40,6 +49,14 @@ public class OI {
 	public static final POVUp SWITCH_POSITION = new POVUp();
 	public static final POVDown GROUND_POSITION = new POVDown();
 	
+	public static final CaliberUp CLOSE_INTAKE_WHEN_UP = new CaliberUp();
+	public static final CaliberPositionGround RUMBLE_LOW = new CaliberPositionGround();
+	public static final CaliberPositionSwitch RUMBLE_MIDDLE = new CaliberPositionSwitch();
+	public static final CaliberPositionBackSwitch RUMBLE_HIGH = new CaliberPositionBackSwitch();
+	public static final CubeStuck TURN_CUBE = new CubeStuck();
+
+	
+	
 	public static final JoystickButton TOGGLE_INTAKE = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.START);
 	public static final JoystickButton INSERT_CUBE_INTAKE = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.LB);
 	public static final JoystickButton EJECT_CUBE_INTAKE = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.RB);
@@ -54,7 +71,6 @@ public class OI {
 		
 		//Caliber 
 		//TODO: remove for testing
-		CUBE_IN_ROBOT_TRIGGER.whenActive(new FlashLEDs());
 		TOGGLE_INTAKE.toggleWhenPressed(new ToggleIntake());
 		INSERT_CUBE_INTAKE.whileHeld(new IntakeCube());
 		EJECT_CUBE_INTAKE.whileHeld(new OutTakeCube());
@@ -65,5 +81,14 @@ public class OI {
 
 		SWITCH_POSITION.whenActive(new RaiseCaliber());
 		GROUND_POSITION.whenActive(new LowerCaliber());
+		
+		CLOSE_INTAKE_WHEN_UP.whenActive(new CloseIntakeGroup());
+		RUMBLE_LOW.whenActive(new CaliberRumble(0.3));
+		RUMBLE_MIDDLE.whenActive(new CaliberRumble(0.6));
+		RUMBLE_HIGH.whenActive(new CaliberRumble(1));
+		TURN_CUBE.whenActive(new TurnCube());
+		CUBE_IN_ROBOT_TRIGGER.whenActive(new CubeIn());
+
+		
 	}
 }
