@@ -88,7 +88,7 @@ public class Intake extends Subsystem {
 
 	}
 	
-	public boolean getVoltage() {
+	public boolean isCubeStuck() {
 		leftMotor.getMotorOutputVoltage();
 		rightMotor.getMotorOutputVoltage();
 		return leftMotor.getMotorOutputVoltage() >= HIGH_VOLTAGE || rightMotor.getMotorOutputVoltage() >= HIGH_VOLTAGE;

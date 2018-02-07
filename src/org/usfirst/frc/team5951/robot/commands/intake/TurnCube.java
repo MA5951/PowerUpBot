@@ -1,42 +1,32 @@
 package org.usfirst.frc.team5951.robot.commands.intake;
 
-import org.usfirst.frc.team5951.robot.Robot;
-import org.usfirst.frc.team5951.robot.subsystems.Intake;
+import edu.wpi.first.wpilibj.command.TimedCommand;
 
-import edu.wpi.first.wpilibj.command.Command;
+/**
+ *
+ */
+public class TurnCube extends TimedCommand {
 
-public class TurnCube extends Command {
+    public TurnCube(double timeout) {
+        super(timeout);
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    }
 
-	public Intake intake;
-	
-	@Override
-	protected void initialize() {
-		// TODO Auto-generated method stub
-		intake =  Robot.INTAKE;
-		requires(intake);
-	}
+    // Called just before this Command runs the first time
+    protected void initialize() {
+    }
 
-	@Override
-	protected void execute() {
-		// TODO Auto-generated method stub
-		intake.turnCube();
-	}
+    // Called repeatedly when this Command is scheduled to run
+    protected void execute() {
+    }
 
-	@Override
-	protected void end() {
-		// TODO Auto-generated method stub
-	}
+    // Called once after timeout
+    protected void end() {
+    }
 
-	@Override
-	protected void interrupted() {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	protected boolean isFinished() {
-		
-		return false;
-	}
-	
-
+    // Called when another command which requires one or more of the same
+    // subsystems is scheduled to run
+    protected void interrupted() {
+    }
 }

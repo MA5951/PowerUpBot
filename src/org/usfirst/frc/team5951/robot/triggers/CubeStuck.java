@@ -8,8 +8,7 @@ public class CubeStuck extends Trigger {
 
 	@Override
 	public boolean get() {
-	 
-		return Robot.INTAKE.getVoltage ();
+		return Robot.INTAKE.isCubeStuck();
 	}
 
 }

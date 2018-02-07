@@ -12,7 +12,6 @@ import org.usfirst.frc.team5951.robot.commands.caliber.CaliberRumble;
 import org.usfirst.frc.team5951.robot.commands.caliber.CaliberShootGroup;
 import org.usfirst.frc.team5951.robot.commands.caliber.LowerCaliber;
 import org.usfirst.frc.team5951.robot.commands.caliber.RaiseCaliber;
-import org.usfirst.frc.team5951.robot.commands.caliber.SwitchPosition;
 import org.usfirst.frc.team5951.robot.commands.caliber.TogglePush;
 import org.usfirst.frc.team5951.robot.commands.caliber.ToggleSquish;
 import org.usfirst.frc.team5951.robot.commands.combined.CubeIn;
@@ -21,7 +20,6 @@ import org.usfirst.frc.team5951.robot.commands.intake.IntakeCube;
 import org.usfirst.frc.team5951.robot.commands.intake.OutTakeCube;
 import org.usfirst.frc.team5951.robot.commands.intake.ToggleIntake;
 import org.usfirst.frc.team5951.robot.commands.intake.TurnCube;
-import org.usfirst.frc.team5951.robot.commands.leds.FlashLEDs;
 import org.usfirst.frc.team5951.robot.triggers.CaliberPositionBackSwitch;
 import org.usfirst.frc.team5951.robot.triggers.CaliberPositionGround;
 import org.usfirst.frc.team5951.robot.triggers.CaliberPositionSwitch;
@@ -53,7 +51,7 @@ public class OI {
 	public static final CaliberPositionGround RUMBLE_LOW = new CaliberPositionGround();
 	public static final CaliberPositionSwitch RUMBLE_MIDDLE = new CaliberPositionSwitch();
 	public static final CaliberPositionBackSwitch RUMBLE_HIGH = new CaliberPositionBackSwitch();
-	public static final CubeStuck TURN_CUBE = new CubeStuck();
+//	public static final CubeStuck TURN_CUBE = new CubeStuck();
 
 	
 	
@@ -83,10 +81,10 @@ public class OI {
 		GROUND_POSITION.whenActive(new LowerCaliber());
 		
 		CLOSE_INTAKE_WHEN_UP.whenActive(new CloseIntakeGroup());
-		RUMBLE_LOW.whenActive(new CaliberRumble(0.3));
-		RUMBLE_MIDDLE.whenActive(new CaliberRumble(0.6));
-		RUMBLE_HIGH.whenActive(new CaliberRumble(1));
-		TURN_CUBE.whenActive(new TurnCube());
+		RUMBLE_LOW.whenActive(new CaliberRumble(1, 0.3));
+		RUMBLE_MIDDLE.whenActive(new CaliberRumble(1, 0.6));
+		RUMBLE_HIGH.whenActive(new CaliberRumble(1, 1));
+//		TURN_CUBE.whenActive(new TurnCube());
 		CUBE_IN_ROBOT_TRIGGER.whenActive(new CubeIn());
 
 		
