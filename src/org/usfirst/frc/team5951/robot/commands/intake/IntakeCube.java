@@ -3,9 +3,11 @@
  */
 package org.usfirst.frc.team5951.robot.commands.intake;
 
+import org.usfirst.frc.team5951.robot.OI;
 import org.usfirst.frc.team5951.robot.Robot;
 import org.usfirst.frc.team5951.robot.subsystems.Intake;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class IntakeCube extends Command {
@@ -32,7 +34,7 @@ public class IntakeCube extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return !OI.OPERATOR_STICK.getBumper(Hand.kLeft);
 	}
 
 	// stops the motors

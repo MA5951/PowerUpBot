@@ -34,7 +34,6 @@ public class RobotMap {
 	public static final int CHASSIS_LEFT_FOLLOWER_1 = 3;
 	public static final int CHASSIS_LEFT_FOLLOWER_2 = 4;
 
-	// shooter
 	public static final int SHOOTER_HIGH_A_TALON = 10;
 	public static final int SHOOTER_HIGH_B_TALON = 11;
 	public static final int SHOOTER_LOW_A_TALON = 12;
@@ -45,17 +44,22 @@ public class RobotMap {
 
 	public static final int PCM_PORT = 0;
 	public static final int SQUISH_OPEN = 5;
-	public static final int SQUISH_CLOSE = 4;
-	public static final int PUSH_OPEN = 2;
-	public static final int PUSH_CLOSE = 0;
+	public static final int SQUISH_CLOSE = 7;
+	public static final int PUSH_OPEN = 4;
+	public static final int PUSH_CLOSE = 6;
 
-	public static final int INTAKE_PISTON_LEFT_FORWORD = 3;
+	public static final int INTAKE_PISTON_LEFT_FORWORD = 2;
 	public static final int INTAKE_PISTON_LEFT_REVERSE = 1;
-	public static final int INTAKE_PISTON_RIGHT_FORWORD = 7;
-	public static final int INTAKE_PISTON_RIGHT_REVERSE = 6;
+	public static final int INTAKE_PISTON_RIGHT_FORWORD = 3;
+	public static final int INTAKE_PISTON_RIGHT_REVERSE = 0;
 
-	public static final int LEFT_IR = 1;
-	public static final int RIGHT_IR = 2;
+	public static final int LEFT_IR = 5;
+	public static final int RIGHT_IR = 4;
+	
+	public static final int LEFT_CHASSIS_ENCODER_A = 0;
+	public static final int LEFT_CHASSIS_ENCODER_B = 0;
+	public static final int RIGHT_CHASSIS_ENCODER_A = 0;
+	public static final int RIGHT_CHASSIS_ENCODER_B = 0;
 
 	// LEDs
 	public static final int LED_RELAY = 0;

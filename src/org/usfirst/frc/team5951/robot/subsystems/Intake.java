@@ -18,6 +18,7 @@ public class Intake extends Subsystem {
 	public static final int INTAKE_MOTOR = 1;
 	public static final int RELEASE_SPEED = -1;
 	public static final int STOP_SPEED = 0;
+	public static final double CUBE_STUCK_CURRENT = 10;
 
 	private WPI_TalonSRX leftMotor;
 	private WPI_TalonSRX rightMotor;
@@ -52,6 +53,11 @@ public class Intake extends Subsystem {
 		leftMotor.set(ControlMode.PercentOutput, RELEASE_SPEED);
 		rightMotor.set(ControlMode.PercentOutput, RELEASE_SPEED);
 	}
+	
+	public void turnCube() {
+		leftMotor.set(ControlMode.PercentOutput, RELEASE_SPEED);
+		rightMotor.set(ControlMode.PercentOutput, -RELEASE_SPEED);
+	}
 
 	/**
 	 * Stops the rollers
@@ -82,9 +88,10 @@ public class Intake extends Subsystem {
 	public void openIntakeRight() {
 		rightSolenoid.set(Value.kReverse);
 	}
-
-	public void doNothing() {
-
+	
+	public boolean isCubeStuck() {
+		return this.leftMotor.getOutputCurrent() >= CUBE_STUCK_CURRENT ||
+				this.rightMotor.getOutputCurrent() >= CUBE_STUCK_CURRENT;
 	}
 
 	@Override

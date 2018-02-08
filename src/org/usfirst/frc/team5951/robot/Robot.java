@@ -97,10 +97,10 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 		SmartDashboard.putBoolean("Left IR sensor: ", CALIBER.leftIR());
 		SmartDashboard.putBoolean("Right IR sensor: ", CALIBER.rightIR());
+		SmartDashboard.putNumber("Caliber position: ", CALIBER.getPosition());
 		SmartDashboard.putNumber("Gyro: ", Chassis.getInstance().getYaw());
-		SmartDashboard.putNumber("Left Distance: ", Chassis.getInstance().getLeftDistance());
-		SmartDashboard.putNumber("Right Distance: ", Chassis.getInstance().getRightDistance());
-		// TODO: add caliber encoder
+//		SmartDashboard.putNumber("Left Distance: ", Chassis.getInstance().getLeftDistance());
+//		SmartDashboard.putNumber("Right Distance: ", Chassis.getInstance().getRightDistance());
 	}
 
 	/**

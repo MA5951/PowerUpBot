@@ -14,6 +14,11 @@ public class Constants {
 	//TODO: remove unneeded constants
 	public static final double RETROREFLECTIVE_HEIGHT = UnitConverter.convert(15.3, Unit.INCH, Unit.METER);
 	public static final double RETROREFLECTIVE_WIDTH = UnitConverter.convert(2, Unit.INCH, Unit.METER);
+	
+	public static final double GROUND_POSITION_RUMBLE = 0.3;
+	public static final double SWITCH_POSITION_RUMBLE = 0.6;
+	public static final double BACK_POSITION_RUMBLE = 1;
+	public static final double RUMBLE_TIMEOUT = 0.5;
 
 	/**
 	 * Distances between parts of the field

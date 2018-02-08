@@ -1,3 +1,4 @@
+
 package org.usfirst.frc.team5951.robot.commands.intake;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -5,16 +6,16 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ToggleIntake extends Command {
+public class ToggleIntakePistons extends Command {
 
-    public ToggleIntake() {
+    public ToggleIntakePistons() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	new OpenIntake().start();
+    	new OpenIntakeGroup().start();
     }
 
     // Called repeatedly when this Command is scheduled to run

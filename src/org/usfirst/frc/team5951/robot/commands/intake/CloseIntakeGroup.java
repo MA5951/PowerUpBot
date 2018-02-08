@@ -9,9 +9,9 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class CloseIntakeGroup extends CommandGroup {
 
     public CloseIntakeGroup() {
-        addSequential(new CloseRightIntake());
-        addSequential(new WaitCommand(0.5));
         addSequential(new CloseLeftIntake());
+        addSequential(new WaitCommand(0.5));
+        addSequential(new CloseRightIntake());
         
 
         

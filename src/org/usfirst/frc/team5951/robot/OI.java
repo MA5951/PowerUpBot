@@ -7,18 +7,19 @@
 
 package org.usfirst.frc.team5951.robot;
 
-import org.usfirst.frc.team5951.robot.commands.caliber.CaliberResetGroup;
-import org.usfirst.frc.team5951.robot.commands.caliber.CaliberShootGroup;
 import org.usfirst.frc.team5951.robot.commands.caliber.LowerCaliber;
 import org.usfirst.frc.team5951.robot.commands.caliber.RaiseCaliber;
-import org.usfirst.frc.team5951.robot.commands.caliber.SwitchPosition;
 import org.usfirst.frc.team5951.robot.commands.caliber.TogglePush;
 import org.usfirst.frc.team5951.robot.commands.caliber.ToggleSquish;
+import org.usfirst.frc.team5951.robot.commands.caliber.groups.CaliberResetGroup;
+import org.usfirst.frc.team5951.robot.commands.caliber.groups.CaliberShootGroup;
 import org.usfirst.frc.team5951.robot.commands.intake.IntakeCube;
 import org.usfirst.frc.team5951.robot.commands.intake.OutTakeCube;
-import org.usfirst.frc.team5951.robot.commands.intake.ToggleIntake;
+import org.usfirst.frc.team5951.robot.commands.intake.ToggleIntakePistons;
+import org.usfirst.frc.team5951.robot.commands.intake.TurnCube;
 import org.usfirst.frc.team5951.robot.commands.leds.FlashLEDs;
 import org.usfirst.frc.team5951.robot.triggers.CubeInRobot;
+import org.usfirst.frc.team5951.robot.triggers.CubeStuckTrigger;
 import org.usfirst.frc.team5951.robot.triggers.POVDown;
 import org.usfirst.frc.team5951.robot.triggers.POVUp;
 import org.usfirst.frc.team5951.robot.util.JoystickUtil;
@@ -37,10 +38,11 @@ public class OI {
 	public static final XboxController OPERATOR_STICK = new XboxController(RobotMap.OPERATOR_STICK);
 	
 	public static final CubeInRobot CUBE_IN_ROBOT_TRIGGER = new CubeInRobot();
-	public static final POVUp SWITCH_POSITION = new POVUp();
-	public static final POVDown GROUND_POSITION = new POVDown();
+	public static final POVUp RAISE_CALIBER = new POVUp();
+	public static final POVDown LOWER_CALIBER = new POVDown();
+	public static final CubeStuckTrigger CUBE_STUCK = new CubeStuckTrigger();
 	
-	public static final JoystickButton TOGGLE_INTAKE = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.START);
+	public static final JoystickButton TOGGLE_INTAKE_PISTONS = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.START);
 	public static final JoystickButton INSERT_CUBE_INTAKE = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.LB);
 	public static final JoystickButton EJECT_CUBE_INTAKE = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.RB);
 	
@@ -55,7 +57,8 @@ public class OI {
 		//Caliber 
 		//TODO: remove for testing
 		CUBE_IN_ROBOT_TRIGGER.whenActive(new FlashLEDs());
-		TOGGLE_INTAKE.toggleWhenPressed(new ToggleIntake());
+		CUBE_STUCK.whenActive(new TurnCube(0.3));
+		TOGGLE_INTAKE_PISTONS.toggleWhenPressed(new ToggleIntakePistons());
 		INSERT_CUBE_INTAKE.whileHeld(new IntakeCube());
 		EJECT_CUBE_INTAKE.whileHeld(new OutTakeCube());
 		TOGGLE_PUSH_CALIBER.whenPressed(new TogglePush());
@@ -63,7 +66,7 @@ public class OI {
 		SHOOT_CALIBER.whenPressed(new CaliberShootGroup());
 		RESET_CALIBER.whenPressed(new CaliberResetGroup());
 
-		SWITCH_POSITION.whenActive(new RaiseCaliber());
-		GROUND_POSITION.whenActive(new LowerCaliber());
+		RAISE_CALIBER.whenActive(new RaiseCaliber());
+		LOWER_CALIBER.whenActive(new LowerCaliber());
 	}
 }

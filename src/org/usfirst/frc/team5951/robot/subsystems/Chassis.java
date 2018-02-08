@@ -6,10 +6,10 @@ import org.usfirst.frc.team5951.robot.util.ChassisMath;
 import org.usfirst.frc.team5951.robot.util.ChassisSide;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -24,6 +24,8 @@ public class Chassis extends Subsystem {
 						leadLeftMotor, leftFollower1, leftFollower2;				
 
 	private ChassisSide leftChassisSide, rightChassisSide;
+	
+	private Encoder leftEncoder, rightEncoder;
 
 	private AHRS navX;
 
@@ -56,22 +58,27 @@ public class Chassis extends Subsystem {
 		this.rightFollower1 = new WPI_TalonSRX(RobotMap.CHASSIS_RIGHT_FOLLOWER_1);
 		this.rightFollower2 = new WPI_TalonSRX(RobotMap.CHASSIS_RIGHT_FOLLOWER_2);
 		
-		this.leadRightMotor.setInverted(false);
+		this.leadRightMotor.setInverted(true);
 		this.rightFollower1.setInverted(true);
-		this.rightFollower2.setInverted(false);
+		this.rightFollower2.setInverted(true);
 		this.leadLeftMotor.setInverted(false);
 		this.leftFollower1.setInverted(false);
 		this.leftFollower2.setInverted(false);
+		
+//		this.leftEncoder = new Encoder(RobotMap.LEFT_CHASSIS_ENCODER_A, 
+//									   RobotMap.LEFT_CHASSIS_ENCODER_B, 
+//									   false);
+//		
+//		this.rightEncoder = new Encoder(RobotMap.RIGHT_CHASSIS_ENCODER_A,
+//										RobotMap.RIGHT_CHASSIS_ENCODER_B,
+//										false);
 
 		// Case 3 motor drivetrain
 		this.leftChassisSide = new ChassisSide(leadLeftMotor, leftFollower1,
 				leftFollower2);
 
 		this.rightChassisSide = new ChassisSide(leadRightMotor, rightFollower1,
-				rightFollower2);
-		
-		this.leadLeftMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
-		this.leadRightMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+				rightFollower2);		
 
 		this.navX = new AHRS(Port.kMXP);
 	}
@@ -138,7 +145,7 @@ public class Chassis extends Subsystem {
 
 	public void resetEncoders() {
 		//TODO: add right side
-		this.leadLeftMotor.setSelectedSensorPosition(0, 0, 0);
+		this.leftEncoder.reset();
 	}
 
 	/**
@@ -163,14 +170,14 @@ public class Chassis extends Subsystem {
 	 * Left chassis distance
 	 */
 	public double getLeftDistance() {
-		return this.leadLeftMotor.getSelectedSensorPosition(0) * ENCODER_PULSE_PER_METER;
+		return this.leftEncoder.getDistance();
 	}
 
 	/**
 	 * Right chassis distance
 	 */
 	public double getRightDistance() {
-		return this.leadRightMotor.getSelectedSensorPosition(0) * ENCODER_PULSE_PER_METER;
+		return this.rightEncoder.getDistance();
 	}
 
 	/**

@@ -22,7 +22,8 @@ public class ChassisSide {
 	public ChassisSide(TalonSRX... motors) {
 		this.motors = motors;
 		for (int i = 1; i < motors.length; i++) {
-			this.motors[i].set(ControlMode.Follower, this.motors[0].getDeviceID());
+//			this.motors[i].set(ControlMode.Follower, this.motors[0].getDeviceID());
+			this.motors[i].follow(this.motors[0]);
 		}
 	}
 	

@@ -48,10 +48,16 @@ public class Caliber extends Subsystem {
 	public static final double NO_SPEED = 0;
 
 	// Sets position values
-	public static final int GROUND_POSITION = 270;
-	public static final int SWITCH_POSITION = 950;
-	public static final int BACK_POSITION = 1300;
-	
+	// Practice robot
+	// public static final int GROUND_POSITION = 270;
+	// public static final int SWITCH_POSITION = 950;
+	// public static final int BACK_POSITION = 1300;
+	// Competition robot
+	public static final int GROUND_POSITION = 1056
+			;
+	public static final int SWITCH_POSITION = 1736;
+	public static final int BACK_POSITION = 2086;
+
 	public static int currentPosition = 0;
 
 	// Set PID values
@@ -155,7 +161,7 @@ public class Caliber extends Subsystem {
 		liftMotor.set(ControlMode.Position, SWITCH_POSITION);
 		currentPosition = 1;
 	}
-	
+
 	public void backPosition() {
 		liftMotor.set(ControlMode.Position, BACK_POSITION);
 		currentPosition = 2;
@@ -169,7 +175,7 @@ public class Caliber extends Subsystem {
 		}
 
 	}
-	
+
 	public double getPosition() {
 		return liftMotor.getSensorCollection().getPulseWidthPosition();
 	}
