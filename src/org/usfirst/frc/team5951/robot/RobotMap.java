@@ -54,12 +54,12 @@ public class RobotMap {
 	public static final int INTAKE_PISTON_RIGHT_REVERSE = 0;
 
 	public static final int LEFT_IR = 5;
-	public static final int RIGHT_IR = 4;
+	public static final int RIGHT_IR = 6;
 	
-	public static final int LEFT_CHASSIS_ENCODER_A = 0;
-	public static final int LEFT_CHASSIS_ENCODER_B = 0;
+	public static final int LEFT_CHASSIS_ENCODER_A = 2;
+	public static final int LEFT_CHASSIS_ENCODER_B = 3;
 	public static final int RIGHT_CHASSIS_ENCODER_A = 0;
-	public static final int RIGHT_CHASSIS_ENCODER_B = 0;
+	public static final int RIGHT_CHASSIS_ENCODER_B = 1;
 
 	// LEDs
 	public static final int LED_RELAY = 0;

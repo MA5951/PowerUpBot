@@ -13,6 +13,7 @@ public class LEDsOff extends InstantCommand {
 	
     public LEDsOff() {
     	this.leds = LEDs.getInstance();
+    	requires(this.leds);
     }
 
     // Called once when the command executes

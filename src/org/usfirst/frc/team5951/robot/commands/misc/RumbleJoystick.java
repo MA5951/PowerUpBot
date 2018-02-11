@@ -29,14 +29,14 @@ public class RumbleJoystick extends TimedCommand {
 
     // Called once after timeout
     protected void end() {
-    	OI.OPERATOR_STICK.setRumble(RumbleType.kLeftRumble, rumble);
-    	OI.OPERATOR_STICK.setRumble(RumbleType.kRightRumble, rumble);    	
+    	OI.OPERATOR_STICK.setRumble(RumbleType.kLeftRumble, 0);
+    	OI.OPERATOR_STICK.setRumble(RumbleType.kRightRumble, 0);    	
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	OI.OPERATOR_STICK.setRumble(RumbleType.kLeftRumble, rumble);
-    	OI.OPERATOR_STICK.setRumble(RumbleType.kRightRumble, rumble);
+    	OI.OPERATOR_STICK.setRumble(RumbleType.kLeftRumble, 0);
+    	OI.OPERATOR_STICK.setRumble(RumbleType.kRightRumble, 0);
     }
 }

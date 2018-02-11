@@ -4,6 +4,7 @@ import org.usfirst.frc.team5951.robot.RobotMap;
 import org.usfirst.frc.team5951.robot.commands.chassis.ArcadeDrive;
 import org.usfirst.frc.team5951.robot.util.ChassisMath;
 import org.usfirst.frc.team5951.robot.util.ChassisSide;
+import org.usfirst.frc.team5951.robot.util.Constants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -34,8 +35,6 @@ public class Chassis extends Subsystem {
 
 	public static final double DEAD_ZONE = 0.05;
 
-	public static final double ENCODER_PULSE_PER_METER = 1248;
-
 	// PID Values
 	// Turn PID
 	public static final double ROTATE_KP = 0.05;
@@ -65,13 +64,17 @@ public class Chassis extends Subsystem {
 		this.leftFollower1.setInverted(false);
 		this.leftFollower2.setInverted(false);
 		
-//		this.leftEncoder = new Encoder(RobotMap.LEFT_CHASSIS_ENCODER_A, 
-//									   RobotMap.LEFT_CHASSIS_ENCODER_B, 
-//									   false);
-//		
-//		this.rightEncoder = new Encoder(RobotMap.RIGHT_CHASSIS_ENCODER_A,
-//										RobotMap.RIGHT_CHASSIS_ENCODER_B,
-//										false);
+		this.leftEncoder = new Encoder(RobotMap.LEFT_CHASSIS_ENCODER_A, 
+									   RobotMap.LEFT_CHASSIS_ENCODER_B);
+		
+		this.rightEncoder = new Encoder(RobotMap.RIGHT_CHASSIS_ENCODER_A,
+										RobotMap.RIGHT_CHASSIS_ENCODER_B);
+		
+		this.leftEncoder.setReverseDirection(true);
+		this.rightEncoder.setReverseDirection(true);
+
+		this.leftEncoder.setDistancePerPulse(1.0 / Constants.ENCODER_DISTANCE_PER_METER);
+		this.rightEncoder.setDistancePerPulse(1.0 / Constants.ENCODER_DISTANCE_PER_METER);
 
 		// Case 3 motor drivetrain
 		this.leftChassisSide = new ChassisSide(leadLeftMotor, leftFollower1,
@@ -144,8 +147,8 @@ public class Chassis extends Subsystem {
 	}
 
 	public void resetEncoders() {
-		//TODO: add right side
 		this.leftEncoder.reset();
+		this.rightEncoder.reset();
 	}
 
 	/**
@@ -180,6 +183,20 @@ public class Chassis extends Subsystem {
 		return this.rightEncoder.getDistance();
 	}
 
+	/**
+	 * @return Raw right encoder value (unscaled).
+	 */
+	public double getRightEncoderRaw() {
+		return this.rightEncoder.getRaw();
+	}
+	
+	/**
+	 * @return Raw left encoder value (unscaled).
+	 */
+	public double getLeftEncoderRaw() {
+		return this.rightEncoder.getRaw();
+	}
+	
 	/**
 	 * Average distance of the encoders
 	 * 

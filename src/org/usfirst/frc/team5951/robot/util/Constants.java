@@ -15,6 +15,11 @@ public class Constants {
 	public static final double RETROREFLECTIVE_HEIGHT = UnitConverter.convert(15.3, Unit.INCH, Unit.METER);
 	public static final double RETROREFLECTIVE_WIDTH = UnitConverter.convert(2, Unit.INCH, Unit.METER);
 	
+	public static final double CHASSIS_WHEEL_DIAMETER = UnitConverter.convert(6, Unit.INCH, Unit.METER);
+	public static final double CHASSIS_WHEEL_CIRCUMFERENCE = CHASSIS_WHEEL_DIAMETER * Math.PI;
+	public static final double ENCODER_PPR = 4096;
+	public static final double ENCODER_DISTANCE_PER_METER = ENCODER_PPR / CHASSIS_WHEEL_CIRCUMFERENCE;
+	
 	public static final double GROUND_POSITION_RUMBLE = 0.3;
 	public static final double SWITCH_POSITION_RUMBLE = 0.6;
 	public static final double BACK_POSITION_RUMBLE = 1;

@@ -8,16 +8,16 @@
 package org.usfirst.frc.team5951.robot;
 
 import org.usfirst.frc.team5951.robot.commands.caliber.LowerCaliber;
-import org.usfirst.frc.team5951.robot.commands.caliber.RaiseCaliber;
 import org.usfirst.frc.team5951.robot.commands.caliber.TogglePush;
 import org.usfirst.frc.team5951.robot.commands.caliber.ToggleSquish;
 import org.usfirst.frc.team5951.robot.commands.caliber.groups.CaliberResetGroup;
 import org.usfirst.frc.team5951.robot.commands.caliber.groups.CaliberShootGroup;
+import org.usfirst.frc.team5951.robot.commands.caliber.groups.RaiseCaliberGroup;
 import org.usfirst.frc.team5951.robot.commands.intake.IntakeCube;
 import org.usfirst.frc.team5951.robot.commands.intake.OutTakeCube;
 import org.usfirst.frc.team5951.robot.commands.intake.ToggleIntakePistons;
-import org.usfirst.frc.team5951.robot.commands.intake.TurnCube;
-import org.usfirst.frc.team5951.robot.commands.leds.FlashLEDs;
+import org.usfirst.frc.team5951.robot.commands.leds.FlashLEDsCube;
+import org.usfirst.frc.team5951.robot.commands.leds.LEDsOff;
 import org.usfirst.frc.team5951.robot.triggers.CubeInRobot;
 import org.usfirst.frc.team5951.robot.triggers.CubeStuckTrigger;
 import org.usfirst.frc.team5951.robot.triggers.POVDown;
@@ -56,8 +56,9 @@ public class OI {
 		
 		//Caliber 
 		//TODO: remove for testing
-		CUBE_IN_ROBOT_TRIGGER.whenActive(new FlashLEDs());
-		CUBE_STUCK.whenActive(new TurnCube(0.3));
+		CUBE_IN_ROBOT_TRIGGER.whenActive(new FlashLEDsCube());
+		CUBE_IN_ROBOT_TRIGGER.whenInactive(new LEDsOff());
+//		CUBE_STUCK.whenActive(new TurnCube(0.3));
 		TOGGLE_INTAKE_PISTONS.toggleWhenPressed(new ToggleIntakePistons());
 		INSERT_CUBE_INTAKE.whileHeld(new IntakeCube());
 		EJECT_CUBE_INTAKE.whileHeld(new OutTakeCube());
@@ -66,7 +67,7 @@ public class OI {
 		SHOOT_CALIBER.whenPressed(new CaliberShootGroup());
 		RESET_CALIBER.whenPressed(new CaliberResetGroup());
 
-		RAISE_CALIBER.whenActive(new RaiseCaliber());
+		RAISE_CALIBER.whenActive(new RaiseCaliberGroup());
 		LOWER_CALIBER.whenActive(new LowerCaliber());
 	}
 }

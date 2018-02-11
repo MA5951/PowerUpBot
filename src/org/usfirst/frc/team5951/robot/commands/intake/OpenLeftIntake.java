@@ -8,18 +8,17 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 /**
  *
  */
-public class OpenIntake extends InstantCommand {
+public class OpenLeftIntake extends InstantCommand {
 
 	public Intake intake;
 
-	public OpenIntake() {
+	public OpenLeftIntake() {
 		this.intake = Robot.INTAKE;
 	}
 
 	// Called once when the command executes
 	protected void initialize() {
 		this.intake.openIntakeLeft();
-		this.intake.openIntakeRight();
 	}
 
 }

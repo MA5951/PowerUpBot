@@ -33,7 +33,7 @@ public class LEDs extends Subsystem {
 	 * Turns the LEDs on
 	 */
 	public void ledsOn() {
-		this.spikeRelay.set(Value.kOn);
+		this.spikeRelay.set(Value.kForward);
 	}
 
 	/**

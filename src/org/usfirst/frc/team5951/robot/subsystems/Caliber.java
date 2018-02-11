@@ -53,10 +53,10 @@ public class Caliber extends Subsystem {
 	// public static final int SWITCH_POSITION = 950;
 	// public static final int BACK_POSITION = 1300;
 	// Competition robot
-	public static final int GROUND_POSITION = 1056
-			;
+	public static final int GROUND_POSITION = 1060;
 	public static final int SWITCH_POSITION = 1736;
-	public static final int BACK_POSITION = 2086;
+	public static final int LITTLE_OVER_SWITCH_POSITION = 1800;
+	public static final int BACK_POSITION = 2100;
 
 	public static int currentPosition = 0;
 
@@ -79,7 +79,7 @@ public class Caliber extends Subsystem {
 		liftMotor.config_kI(0, KI, 0);
 		liftMotor.config_kD(0, KD, 0);
 		liftMotor.configPeakOutputForward(1, 0);
-		liftMotor.configPeakOutputReverse(-0.7, 0);
+		liftMotor.configPeakOutputReverse(-0.4, 0);
 
 		liftMotor.setInverted(true);
 		liftMotor.setSensorPhase(true);
@@ -162,6 +162,14 @@ public class Caliber extends Subsystem {
 		currentPosition = 1;
 	}
 
+	public void littleOverSwitchPosition() {
+		liftMotor.set(ControlMode.Position, LITTLE_OVER_SWITCH_POSITION);
+		currentPosition = 1;
+	}
+	
+	/**
+	 * Gets the caliber to the back shooting position
+	 */
 	public void backPosition() {
 		liftMotor.set(ControlMode.Position, BACK_POSITION);
 		currentPosition = 2;
