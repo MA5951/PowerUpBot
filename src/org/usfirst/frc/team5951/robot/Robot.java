@@ -27,7 +27,6 @@ public class Robot extends TimedRobot {
 	public static final Caliber CALIBER = new Caliber();
 	public static final Intake INTAKE = new Intake();
 	
-	
 	public static final OI OI = new OI();
 	/**
 	 * This function is run when the robot is first started up and should be used
@@ -66,7 +65,6 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		Chassis.getInstance().setMultiplyer(1);
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		 * switch(autoSelected) { case "My Auto": autonomousCommand = new
@@ -95,12 +93,14 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		SmartDashboard.putBoolean("Left IR sensor: ", CALIBER.leftIR());
-		SmartDashboard.putBoolean("Right IR sensor: ", CALIBER.rightIR());
+		SmartDashboard.putNumber("Gyro value: ", Chassis.getInstance().getYaw());
+		SmartDashboard.putNumber("Left chassis encoder: ", Chassis.getInstance().getLeftDistance());
+		SmartDashboard.putNumber("Right chassis encoder: ", Chassis.getInstance().getRightDistance());
 		SmartDashboard.putNumber("Caliber position: ", CALIBER.getPosition());
-		SmartDashboard.putNumber("Gyro: ", Chassis.getInstance().getYaw());
-		SmartDashboard.putNumber("Left Distance Raw: ", Chassis.getInstance().getLeftEncoderRaw());
-		SmartDashboard.putNumber("Right Distance Raw: ", Chassis.getInstance().getRightEncoderRaw());
+		
+		if(OI.OPERATOR_STICK.getBButton()) {
+			Chassis.getInstance().resetEncoders();
+		}
 	}
 
 	/**

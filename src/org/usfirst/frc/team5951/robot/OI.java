@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team5951.robot;
 
+import org.usfirst.frc.team5951.robot.commands.auton.TestAuton;
 import org.usfirst.frc.team5951.robot.commands.caliber.LowerCaliber;
 import org.usfirst.frc.team5951.robot.commands.caliber.TogglePush;
 import org.usfirst.frc.team5951.robot.commands.caliber.ToggleSquish;
@@ -50,6 +51,8 @@ public class OI {
 	public static final JoystickButton TOGGLE_SQUISH_CALIBER = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.X);
 	public static final JoystickButton SHOOT_CALIBER = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.A);
 	public static final JoystickButton RESET_CALIBER = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.B);
+	
+	public static final JoystickButton DRIVE_1 = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.BACK);
 
 	
 	public OI() {
@@ -69,5 +72,7 @@ public class OI {
 
 		RAISE_CALIBER.whenActive(new RaiseCaliberGroup());
 		LOWER_CALIBER.whenActive(new LowerCaliber());
+		
+		DRIVE_1.whenPressed(new TestAuton());
 	}
 }

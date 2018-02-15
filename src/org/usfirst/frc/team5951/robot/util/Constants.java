@@ -8,17 +8,19 @@ import org.usfirst.frc.team5951.robot.util.UnitConverter.Unit;
  * @author Yair Ziv
  */
 public class Constants {
-	
+
 	public static final double ROBOT_LENGTH = UnitConverter.convert(971.1, Unit.MILIMETER, Unit.METER);
-	
+
 	//TODO: remove unneeded constants
 	public static final double RETROREFLECTIVE_HEIGHT = UnitConverter.convert(15.3, Unit.INCH, Unit.METER);
 	public static final double RETROREFLECTIVE_WIDTH = UnitConverter.convert(2, Unit.INCH, Unit.METER);
-	
+
 	public static final double CHASSIS_WHEEL_DIAMETER = UnitConverter.convert(6, Unit.INCH, Unit.METER);
 	public static final double CHASSIS_WHEEL_CIRCUMFERENCE = CHASSIS_WHEEL_DIAMETER * Math.PI;
-	public static final double ENCODER_PPR = 4096;
-	public static final double ENCODER_DISTANCE_PER_METER = ENCODER_PPR / CHASSIS_WHEEL_CIRCUMFERENCE;
+	public static final double ENCODER_PPR = 360;
+//	public static final double ENCODER_DISTANCE_PER_METER = ENCODER_PPR / CHASSIS_WHEEL_CIRCUMFERENCE;
+	public static final double LEFT_CHASSIS_ENCODER_PPM = 554.375;
+	public static final double RIGHT_CHASSIS_ENCODER_PPM = 729.2;
 	
 	public static final double GROUND_POSITION_RUMBLE = 0.3;
 	public static final double SWITCH_POSITION_RUMBLE = 0.6;

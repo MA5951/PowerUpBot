@@ -57,7 +57,7 @@ public class Shooter extends Subsystem {
 		lowMotorB.set(lowMotorB.getControlMode(), 1);
 	}
 	protected void initDefaultCommand() {
-		setDefaultCommand(new StopShot());
+//		setDefaultCommand(new StopShot());
 		
 	}
 	

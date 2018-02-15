@@ -11,7 +11,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.SerialPort.Port;
+import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -21,11 +21,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Chassis extends Subsystem {
 
 	// Component declarations
-	private WPI_TalonSRX leadRightMotor, rightFollower1, rightFollower2,
-						leadLeftMotor, leftFollower1, leftFollower2;				
+	private WPI_TalonSRX leadRightMotor, rightFollower1, leadLeftMotor, leftFollower1;
 
 	private ChassisSide leftChassisSide, rightChassisSide;
-	
+
 	private Encoder leftEncoder, rightEncoder;
 
 	private AHRS navX;
@@ -37,65 +36,64 @@ public class Chassis extends Subsystem {
 
 	// PID Values
 	// Turn PID
-	public static final double ROTATE_KP = 0.05;
+	public static final double ROTATE_KP = 0.01;
+
+	public static final double ROTATE_KI = 0.00013;
+
+	public static final double DRIVE_ROTATE_KP = 0.08;
 
 	// Drive PID
-	public static final double DRIVE_KP = 0.05;
+	public static final double DRIVE_KP = 0.75;
 
 	// Chassis object for reference
 	private static Chassis m_chassis;
 
 	public Chassis() {
-		//Lead motors init
+		// Lead motors init
 		this.leadRightMotor = new WPI_TalonSRX(RobotMap.CHASSIS_RIGHT_LEADER);
 		this.leadLeftMotor = new WPI_TalonSRX(RobotMap.CHASSIS_LEFT_LEADER);
-		
-		//Followers init
-		this.leftFollower1 = new WPI_TalonSRX(RobotMap.CHASSIS_LEFT_FOLLOWER_1);
-		this.leftFollower2 = new WPI_TalonSRX(RobotMap.CHASSIS_LEFT_FOLLOWER_2);
-		
-		this.rightFollower1 = new WPI_TalonSRX(RobotMap.CHASSIS_RIGHT_FOLLOWER_1);
-		this.rightFollower2 = new WPI_TalonSRX(RobotMap.CHASSIS_RIGHT_FOLLOWER_2);
-		
-		this.leadRightMotor.setInverted(true);
-		this.rightFollower1.setInverted(true);
-		this.rightFollower2.setInverted(true);
-		this.leadLeftMotor.setInverted(false);
-		this.leftFollower1.setInverted(false);
-		this.leftFollower2.setInverted(false);
-		
-		this.leftEncoder = new Encoder(RobotMap.LEFT_CHASSIS_ENCODER_A, 
-									   RobotMap.LEFT_CHASSIS_ENCODER_B);
-		
-		this.rightEncoder = new Encoder(RobotMap.RIGHT_CHASSIS_ENCODER_A,
-										RobotMap.RIGHT_CHASSIS_ENCODER_B);
-		
-		this.leftEncoder.setReverseDirection(true);
-		this.rightEncoder.setReverseDirection(true);
 
-		this.leftEncoder.setDistancePerPulse(1.0 / Constants.ENCODER_DISTANCE_PER_METER);
-		this.rightEncoder.setDistancePerPulse(1.0 / Constants.ENCODER_DISTANCE_PER_METER);
+		// Followers init
+		this.leftFollower1 = new WPI_TalonSRX(RobotMap.CHASSIS_LEFT_FOLLOWER_1);
+		this.rightFollower1 = new WPI_TalonSRX(RobotMap.CHASSIS_RIGHT_FOLLOWER_1);
+
+		this.leadRightMotor.setInverted(false);
+		this.rightFollower1.setInverted(false);
+		this.leadLeftMotor.setInverted(false);
+		this.leftFollower1.setInverted(true);
+
+		this.leftEncoder = new Encoder(RobotMap.LEFT_CHASSIS_ENCODER_A, RobotMap.LEFT_CHASSIS_ENCODER_B);
+
+		this.rightEncoder = new Encoder(RobotMap.RIGHT_CHASSIS_ENCODER_A, RobotMap.RIGHT_CHASSIS_ENCODER_B);
+
+		this.leftEncoder.setReverseDirection(true);
+		this.rightEncoder.setReverseDirection(false);
+
+		this.leftEncoder.setDistancePerPulse(1.0 / Constants.LEFT_CHASSIS_ENCODER_PPM);
+		this.rightEncoder.setDistancePerPulse(1.0 / Constants.RIGHT_CHASSIS_ENCODER_PPM);
 
 		// Case 3 motor drivetrain
-		this.leftChassisSide = new ChassisSide(leadLeftMotor, leftFollower1,
-				leftFollower2);
+		this.leftChassisSide = new ChassisSide(leadLeftMotor, leftFollower1);
 
-		this.rightChassisSide = new ChassisSide(leadRightMotor, rightFollower1,
-				rightFollower2);		
+		this.rightChassisSide = new ChassisSide(leadRightMotor, rightFollower1);
 
 		this.navX = new AHRS(Port.kMXP);
 	}
 
-	/**
-	 * Returns the same instance of chassis every time for no chance of 2 chassis at
-	 * the same time
-	 */
+//	/**
+//	 * Returns the same instance of chassis every time for no chance of 2 chassis at
+//	 * the same time
+//	 */
 	public static Chassis getInstance() {
 		if (m_chassis == null) {
 			m_chassis = new Chassis();
 		}
 
 		return m_chassis;
+	}
+	
+	public double getUpdateRate() {
+		return this.navX.getActualUpdateRate();
 	}
 
 	/**
@@ -110,8 +108,8 @@ public class Chassis extends Subsystem {
 	public void arcadeDrive(double moveValue, double rotateValue) {
 		double[] output = ChassisMath.calculatePower(moveValue, rotateValue);
 
-		this.leftChassisSide.set(ControlMode.PercentOutput, output[0] * this.multiplier);
-		this.rightChassisSide.set(ControlMode.PercentOutput, output[1] * this.multiplier);
+		this.leftChassisSide.set(ControlMode.PercentOutput, output[1] * this.multiplier);
+		this.rightChassisSide.set(ControlMode.PercentOutput, output[0] * this.multiplier);
 	}
 
 	/**
@@ -131,6 +129,11 @@ public class Chassis extends Subsystem {
 		this.rightChassisSide.set(ControlMode.PercentOutput, output[1] * this.multiplier);
 	}
 
+	public void tankDrive(double powerLeft, double powerRight) {
+		this.leftChassisSide.set(ControlMode.PercentOutput, powerLeft);
+		this.rightChassisSide.set(ControlMode.PercentOutput, powerRight);
+	}
+	
 	/**
 	 * Stops the chassis, sets the outputs to (0,0)
 	 */
@@ -143,7 +146,7 @@ public class Chassis extends Subsystem {
 	 * Resets the yaw gyro position
 	 */
 	public void resetGyro() {
-		this.navX.zeroYaw();
+		this.navX.reset();
 	}
 
 	public void resetEncoders() {
@@ -189,14 +192,14 @@ public class Chassis extends Subsystem {
 	public double getRightEncoderRaw() {
 		return this.rightEncoder.getRaw();
 	}
-	
+
 	/**
 	 * @return Raw left encoder value (unscaled).
 	 */
 	public double getLeftEncoderRaw() {
-		return this.rightEncoder.getRaw();
+		return this.leftEncoder.getRaw();
 	}
-	
+
 	/**
 	 * Average distance of the encoders
 	 * 
@@ -212,7 +215,7 @@ public class Chassis extends Subsystem {
 	public void setMultiplyer(int multiplyer) {
 		this.multiplier = multiplyer;
 	}
-	
+
 	/**
 	 * Inverts the chassis, forward is reverse, left is right
 	 */

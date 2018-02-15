@@ -24,15 +24,13 @@ public class RobotMap {
 	
 	
 	// Caliber
-	public static final int LIFT_MOTOR_PORT = 9;
+	public static final int LIFT_MOTOR_PORT = 3;
 
 	// Chassis
-	public static final int CHASSIS_RIGHT_LEADER = 5;
-	public static final int CHASSIS_RIGHT_FOLLOWER_1 = 6;
-	public static final int CHASSIS_RIGHT_FOLLOWER_2 = 7;
-	public static final int CHASSIS_LEFT_LEADER = 2;
-	public static final int CHASSIS_LEFT_FOLLOWER_1 = 3;
-	public static final int CHASSIS_LEFT_FOLLOWER_2 = 4;
+	public static final int CHASSIS_RIGHT_LEADER = 2;
+	public static final int CHASSIS_RIGHT_FOLLOWER_1 = 4;
+	public static final int CHASSIS_LEFT_LEADER = 5;
+	public static final int CHASSIS_LEFT_FOLLOWER_1 = 6;
 
 	public static final int SHOOTER_HIGH_A_TALON = 10;
 	public static final int SHOOTER_HIGH_B_TALON = 11;
@@ -56,10 +54,10 @@ public class RobotMap {
 	public static final int LEFT_IR = 5;
 	public static final int RIGHT_IR = 6;
 	
-	public static final int LEFT_CHASSIS_ENCODER_A = 2;
-	public static final int LEFT_CHASSIS_ENCODER_B = 3;
-	public static final int RIGHT_CHASSIS_ENCODER_A = 0;
-	public static final int RIGHT_CHASSIS_ENCODER_B = 1;
+	public static final int LEFT_CHASSIS_ENCODER_A = 0;
+	public static final int LEFT_CHASSIS_ENCODER_B = 1;
+	public static final int RIGHT_CHASSIS_ENCODER_A = 8;
+	public static final int RIGHT_CHASSIS_ENCODER_B = 9;
 
 	// LEDs
 	public static final int LED_RELAY = 0;

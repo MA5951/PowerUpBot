@@ -53,10 +53,10 @@ public class Caliber extends Subsystem {
 	// public static final int SWITCH_POSITION = 950;
 	// public static final int BACK_POSITION = 1300;
 	// Competition robot
-	public static final int GROUND_POSITION = 1060;
-	public static final int SWITCH_POSITION = 1736;
-	public static final int LITTLE_OVER_SWITCH_POSITION = 1800;
-	public static final int BACK_POSITION = 2100;
+	public static final int GROUND_POSITION = 1790;
+	public static final int SWITCH_POSITION = 2500;
+	public static final int LITTLE_OVER_SWITCH_POSITION = 2550;
+	public static final int BACK_POSITION = 2900;
 
 	public static int currentPosition = 0;
 
@@ -173,6 +173,10 @@ public class Caliber extends Subsystem {
 	public void backPosition() {
 		liftMotor.set(ControlMode.Position, BACK_POSITION);
 		currentPosition = 2;
+	}
+	
+	public void stopCaliber() {
+		liftMotor.set(ControlMode.PercentOutput, 0);
 	}
 
 	public void togglePush() {
