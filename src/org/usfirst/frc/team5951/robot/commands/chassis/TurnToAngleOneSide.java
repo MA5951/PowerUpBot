@@ -18,20 +18,23 @@ public class TurnToAngleOneSide extends Command {
 	public TurnToAngleOneSide(double rotateAngle) {
 		this.chassis = Chassis.getInstance();
 		requires(this.chassis);
-
 		this.rotateAngle = rotateAngle;
+
+		
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		this.chassis.resetGyro();
+		
+		
 		this.chassis.setMultiplyer(1);
 		this.i_accum = 0;
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if (getAngleError() > 0) {
+		if (rotateAngle > 0) {
 			this.chassis.setLeftPower(-getAngleError() * Chassis.ROTATE_ONE_KP + i_accum * Chassis.ROTATE_KI);
 		} else {
 			this.chassis.setRightPower(getAngleError() * Chassis.ROTATE_ONE_KP + i_accum * Chassis.ROTATE_KI);

@@ -32,16 +32,12 @@ public class IntakeCube extends Command {
 		intake.closeIntakeLeft();
 		intake.closeIntakeRight();
 		intake.insertCube();
-		if(intake.getLeftCurrent() > 16) {
-			insideCounter++;
-		} else {
-			insideCounter = 0;
-		}
+		
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return insideCounter > 7;
+		return false;
 	}
 
 	// stops the motors
