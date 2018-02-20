@@ -31,15 +31,16 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Caliber extends Subsystem {
 
 	// Create TalonSRK
-	private WPI_TalonSRX liftMotor;
+	private WPI_TalonSRX mainLiftMotor;
+	private WPI_TalonSRX secondaryLiftMotor;
 
 	// Create 2 DoubleSolenoids
 	private DoubleSolenoid squish, push;
 
 	// TODO: move up
 	// Create 2 digital inputs for IR sensors
-	public DigitalInput leftIR;
-	public DigitalInput rightIR;
+	private DigitalInput leftIR;
+	private DigitalInput rightIR;
 
 	// Sets speed values
 	// TODO: rename MAX MIN speed
@@ -53,17 +54,20 @@ public class Caliber extends Subsystem {
 	// public static final int SWITCH_POSITION = 950;
 	// public static final int BACK_POSITION = 1300;
 	// Competition robot
-	public static final int GROUND_POSITION = 1790;
-	public static final int SWITCH_POSITION = 2500;
-	public static final int LITTLE_OVER_SWITCH_POSITION = 2550;
-	public static final int BACK_POSITION = 2900;
+	public static final int GROUND_POSITION = 1765;
+	public static final int SWITCH_POSITION = 1200;
+	public static final int LITTLE_OVER_SWITCH_POSITION = 1170;
+	public static final int BACK_POSITION = 750;
 
 	public static int currentPosition = 0;
 
 	// Set PID values
-	public static final double KP = 2.5;
-	public static final double KI = 0;
-	public static final double KD = 0;
+	public static final double KP_TO_FORWARD = 2.15;
+	public static final double KP_BACKWARD_TO_SWITCH = 1.5;
+	public static final double KP_SWITCH_TO_BACKWARD = 1;
+	public static final double KI_TO_FORWARD = 0.001;
+	public static final double KI_TO_BACKWARD = 0;
+	public static final double KD = 1;
 
 	// Set pulses
 	public static final double ENCODER_DPP = 500;
@@ -71,47 +75,52 @@ public class Caliber extends Subsystem {
 	// Sets the TalonSRX, the IR sensors and the 2DoubleSolenoids and puts their
 	// ports
 	public Caliber() {
-		liftMotor = new WPI_TalonSRX(RobotMap.LIFT_MOTOR_PORT);
-		squish = new DoubleSolenoid(RobotMap.PCM_PORT, RobotMap.SQUISH_OPEN, RobotMap.SQUISH_CLOSE);
+		mainLiftMotor = new WPI_TalonSRX(RobotMap.LIFT_MOTOR_MAIN_PORT);
+		secondaryLiftMotor = new WPI_TalonSRX(RobotMap.LIFT_MOTOR_SECONDARY_PORT);
 
-		liftMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
-		liftMotor.config_kP(0, KP, 0);
-		liftMotor.config_kI(0, KI, 0);
-		liftMotor.config_kD(0, KD, 0);
-		liftMotor.configPeakOutputForward(1, 0);
-		liftMotor.configPeakOutputReverse(-0.4, 0);
+		squish = new DoubleSolenoid(RobotMap.PCM_SECONDARY_PORT, RobotMap.SQUISH_OPEN, RobotMap.SQUISH_CLOSE);
 
-		liftMotor.setInverted(true);
-		liftMotor.setSensorPhase(true);
+		mainLiftMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
+		mainLiftMotor.config_kP(0, KP_TO_FORWARD, 0);
+		mainLiftMotor.config_kI(0, KI_TO_FORWARD, 0);
+		mainLiftMotor.config_kD(0, KD, 0);
+		mainLiftMotor.configPeakOutputForward(0.2, 0);
+		mainLiftMotor.configPeakOutputReverse(-1, 0);
+
+		mainLiftMotor.setInverted(false);
+		secondaryLiftMotor.setInverted(true);
 		// Set pulses
-		push = new DoubleSolenoid(RobotMap.PCM_PORT, RobotMap.PUSH_OPEN, RobotMap.PUSH_CLOSE);
+		push = new DoubleSolenoid(RobotMap.PCM_PRIMARY_PORT, RobotMap.PUSH_OPEN, RobotMap.PUSH_CLOSE);
 
 		leftIR = new DigitalInput(RobotMap.LEFT_IR);
 		rightIR = new DigitalInput(RobotMap.RIGHT_IR);
+
+		secondaryLiftMotor.follow(mainLiftMotor);
 	}
 
 	// Raises the caliber lift with MAX_SPEED and in the PercentOutput control mode
 	public void liftRaise() {
-		liftMotor.set(ControlMode.PercentOutput, FORWARD_SPEED);
+		mainLiftMotor.set(ControlMode.PercentOutput, FORWARD_SPEED);
 	}
 
 	// Lowers the caliber lift with MIN_SPEED and in the PercentOutput control mode
 	public void liftLower() {
-		liftMotor.set(ControlMode.PercentOutput, BACKWARD_SPEED);
+		mainLiftMotor.set(ControlMode.PercentOutput, BACKWARD_SPEED);
 	}
 
 	// Stops the caliber lift with NO_SPEED and in the PercentOutput control mode
 	public void liftLock() {
-		liftMotor.set(ControlMode.PercentOutput, NO_SPEED);
-		liftMotor.setNeutralMode(NeutralMode.Brake);
+		mainLiftMotor.set(ControlMode.PercentOutput, NO_SPEED);
+		mainLiftMotor.setNeutralMode(NeutralMode.Brake);
 	}
 
 	public void liftNoPower() {
-		liftMotor.set(ControlMode.PercentOutput, NO_SPEED);
+		mainLiftMotor.set(ControlMode.PercentOutput, NO_SPEED);
 	}
 
 	// Opens the push cylinder
 	public void caliberPush() {
+		squish.set(Value.kReverse);
 		push.set(Value.kForward);
 	}
 
@@ -122,7 +131,9 @@ public class Caliber extends Subsystem {
 
 	// Opens the squish/catch cylinder
 	public void caliberCatch() {
-		squish.set(Value.kForward);
+		if (push.get() != Value.kForward) {
+			squish.set(Value.kForward);
+		}
 	}
 
 	// Closes the squish/catch cylinder
@@ -150,33 +161,48 @@ public class Caliber extends Subsystem {
 	 * Gets the caliber to the ground intake position
 	 */
 	public void groundPosition() {
-		liftMotor.set(ControlMode.PercentOutput, -0.1);
+		mainLiftMotor.config_kP(0, KP_TO_FORWARD, 0);
+		mainLiftMotor.config_kI(0, KI_TO_BACKWARD, 0);
+		mainLiftMotor.set(ControlMode.PercentOutput, 0.09);
 		currentPosition = 0;
 	}
 
 	/**
 	 * Gets the caliber to the switch shoot position
 	 */
-	public void switchPosition() {
-		liftMotor.set(ControlMode.Position, SWITCH_POSITION);
+	public void groundToSwitchPosition() {
+		mainLiftMotor.config_kP(0, KP_TO_FORWARD, 0);
+		mainLiftMotor.config_kI(0, KI_TO_FORWARD, 0);
+		mainLiftMotor.set(ControlMode.Position, SWITCH_POSITION);
+		currentPosition = 1;
+	}
+
+	public void backwardToSwitchPosition() {
+		mainLiftMotor.config_kP(0, KP_BACKWARD_TO_SWITCH, 0);
+		mainLiftMotor.config_kI(0, KI_TO_BACKWARD, 0);
+		mainLiftMotor.set(ControlMode.Position, SWITCH_POSITION);
 		currentPosition = 1;
 	}
 
 	public void littleOverSwitchPosition() {
-		liftMotor.set(ControlMode.Position, LITTLE_OVER_SWITCH_POSITION);
+		mainLiftMotor.config_kP(0, KP_TO_FORWARD, 0);
+		mainLiftMotor.config_kI(0, KI_TO_BACKWARD, 0);
+		mainLiftMotor.set(ControlMode.Position, LITTLE_OVER_SWITCH_POSITION);
 		currentPosition = 1;
 	}
-	
+
 	/**
 	 * Gets the caliber to the back shooting position
 	 */
 	public void backPosition() {
-		liftMotor.set(ControlMode.Position, BACK_POSITION);
+		mainLiftMotor.config_kP(0, KP_SWITCH_TO_BACKWARD, 0);
+		mainLiftMotor.config_kI(0, KI_TO_BACKWARD, 0);
+		mainLiftMotor.set(ControlMode.Position, BACK_POSITION);
 		currentPosition = 2;
 	}
-	
+
 	public void stopCaliber() {
-		liftMotor.set(ControlMode.PercentOutput, 0);
+		mainLiftMotor.set(ControlMode.PercentOutput, 0);
 	}
 
 	public void togglePush() {
@@ -189,7 +215,7 @@ public class Caliber extends Subsystem {
 	}
 
 	public double getPosition() {
-		return liftMotor.getSensorCollection().getPulseWidthPosition();
+		return mainLiftMotor.getSensorCollection().getPulseWidthPosition();
 	}
 
 	public void toggleSqiush() {
@@ -205,8 +231,8 @@ public class Caliber extends Subsystem {
 	protected void initDefaultCommand() {
 	}
 
-	public double getCurrent() {
+	public double getOutput() {
 		// TODO Auto-generated method stub
-		return liftMotor.getOutputCurrent();
+		return mainLiftMotor.getMotorOutputPercent();
 	}
 }

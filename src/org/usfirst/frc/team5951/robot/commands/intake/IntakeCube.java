@@ -3,43 +3,51 @@
  */
 package org.usfirst.frc.team5951.robot.commands.intake;
 
-import org.usfirst.frc.team5951.robot.OI;
 import org.usfirst.frc.team5951.robot.Robot;
 import org.usfirst.frc.team5951.robot.subsystems.Intake;
 
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class IntakeCube extends Command {
 
 	public Intake intake;
-
-	// this command intakes a cube into the robot
+	
+	public double insideCounter;
 
 	public IntakeCube() {
 		intake = Robot.INTAKE;
 		requires(Robot.INTAKE);
+		insideCounter = 0;
 	}
 
 	@Override
 	protected void initialize() {
-
+		Robot.CALIBER.caliberRelease();
+		insideCounter = 0;
 	}
 
 	// called from subsytem to take the cube in the intake
 	@Override
 	protected void execute() {
+		intake.closeIntakeLeft();
+		intake.closeIntakeRight();
 		intake.insertCube();
+		if(intake.getLeftCurrent() > 16) {
+			insideCounter++;
+		} else {
+			insideCounter = 0;
+		}
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return !OI.OPERATOR_STICK.getBumper(Hand.kLeft);
+		return insideCounter > 7;
 	}
 
 	// stops the motors
 	@Override
 	protected void end() {
+//		Robot.CALIBER.caliberRetract();
 		intake.stopCube();
 	}
 
@@ -47,5 +55,7 @@ public class IntakeCube extends Command {
 	@Override
 	protected void interrupted() {
 		intake.stopCube();
+		intake.openIntakeLeft();
+		intake.openIntakeRight();
 	}
 }

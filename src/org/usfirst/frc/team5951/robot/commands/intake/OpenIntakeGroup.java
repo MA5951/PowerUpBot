@@ -10,7 +10,7 @@ public class OpenIntakeGroup extends CommandGroup {
 
     public OpenIntakeGroup() {
     	addSequential(new OpenRightIntake());
-    	addSequential(new WaitCommand(0.3));
+    	addSequential(new WaitCommand(0.5));
     	addSequential(new OpenLeftIntake());
     }
 }

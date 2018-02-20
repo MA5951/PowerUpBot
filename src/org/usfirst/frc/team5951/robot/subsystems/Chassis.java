@@ -36,14 +36,16 @@ public class Chassis extends Subsystem {
 
 	// PID Values
 	// Turn PID
-	public static final double ROTATE_KP = 0.01;
+	public static final double ROTATE_KP = 0.1;
+	
+	public static final double ROTATE_ONE_KP = 0.6;
 
 	public static final double ROTATE_KI = 0.00013;
 
-	public static final double DRIVE_ROTATE_KP = 0.08;
+	public static final double DRIVE_ROTATE_KP = 0.12;
 
 	// Drive PID
-	public static final double DRIVE_KP = 0.75;
+	public static final double DRIVE_KP = 0.85;
 
 	// Chassis object for reference
 	private static Chassis m_chassis;
@@ -134,6 +136,14 @@ public class Chassis extends Subsystem {
 		this.rightChassisSide.set(ControlMode.PercentOutput, powerRight);
 	}
 	
+	public void setLeftPower(double power) {
+		this.leftChassisSide.set(ControlMode.PercentOutput, power);
+	}
+	
+	public void setRightPower(double power) {
+		this.rightChassisSide.set(ControlMode.PercentOutput, power);
+	}
+	
 	/**
 	 * Stops the chassis, sets the outputs to (0,0)
 	 */
@@ -146,7 +156,8 @@ public class Chassis extends Subsystem {
 	 * Resets the yaw gyro position
 	 */
 	public void resetGyro() {
-		this.navX.reset();
+		//this.navX.reset();
+		this.navX.zeroYaw();
 	}
 
 	public void resetEncoders() {
@@ -223,6 +234,11 @@ public class Chassis extends Subsystem {
 		this.multiplier *= -1;
 	}
 
+	public double getAmper() {
+		return leadLeftMotor.getOutputCurrent();
+		
+	}
+	
 	/**
 	 * When no command is running on the chassis, use the {@link ArcadeDrive}
 	 * command

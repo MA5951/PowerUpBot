@@ -2,7 +2,6 @@
 package org.usfirst.frc.team5951.robot.subsystems;
 
 import org.usfirst.frc.team5951.robot.RobotMap;
-import org.usfirst.frc.team5951.robot.commands.shooter.StopShot;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 

@@ -19,14 +19,12 @@ public class DriveStraightTimed extends TimedCommand {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	this.chassis.resetEncoders();
-    	this.chassis.resetGyro();
-    	this.chassis.setMultiplyer(1);
+    	chassis.resetGyro();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	this.chassis.arcadeDrive(0.3, getRotationError() * Chassis.ROTATE_KP);
+    	this.chassis.arcadeDrive(-0.5, getRotationError() * Chassis.ROTATE_KP);
     }
 
     // Called once after isFinished returns true

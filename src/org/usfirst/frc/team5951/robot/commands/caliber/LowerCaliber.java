@@ -22,16 +22,20 @@ public class LowerCaliber extends InstantCommand {
 
 	// Called once when the command executes
 	protected void initialize() {
-		if (Caliber.currentPosition == 2) {
-			caliber.switchPosition();
-			new RumbleJoystick(Constants.RUMBLE_TIMEOUT, Constants.SWITCH_POSITION_RUMBLE).start();
-		} else {
-			if (caliber.isCubeIn()) {
-				new LowerToGroundCubeGroup().start();
-				new RumbleJoystick(Constants.RUMBLE_TIMEOUT, Constants.GROUND_POSITION_RUMBLE).start();
+		Robot.INTAKE.openIntakeLeft();
+		Robot.INTAKE.openIntakeRight();
+		if (Caliber.currentPosition != 0) {
+			if (Caliber.currentPosition == 2) {
+				caliber.backwardToSwitchPosition();
+				new RumbleJoystick(Constants.RUMBLE_TIMEOUT, Constants.SWITCH_POSITION_RUMBLE).start();
 			} else {
-				new LowerToGroundNoCubeGroup().start();
-				new RumbleJoystick(Constants.RUMBLE_TIMEOUT, Constants.GROUND_POSITION_RUMBLE).start();
+				if (caliber.isCubeIn()) {
+					new LowerToGroundCubeGroup().start();
+					new RumbleJoystick(Constants.RUMBLE_TIMEOUT, Constants.GROUND_POSITION_RUMBLE).start();
+				} else {
+					new LowerToGroundNoCubeGroup().start();
+					new RumbleJoystick(Constants.RUMBLE_TIMEOUT, Constants.GROUND_POSITION_RUMBLE).start();
+				}
 			}
 		}
 	}

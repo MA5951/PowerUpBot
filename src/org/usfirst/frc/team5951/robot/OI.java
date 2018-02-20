@@ -7,15 +7,18 @@
 
 package org.usfirst.frc.team5951.robot;
 
-import org.usfirst.frc.team5951.robot.commands.auton.TestAuton;
-import org.usfirst.frc.team5951.robot.commands.caliber.LowerCaliber;
+import org.usfirst.frc.team5951.robot.commands.auton.LeftSwitchRightAngle;
+import org.usfirst.frc.team5951.robot.commands.auton.MiddleToLeftAuton;
+import org.usfirst.frc.team5951.robot.commands.auton.MiddleToLeftTwoCubeAuto;
+import org.usfirst.frc.team5951.robot.commands.auton.MiddleToRightTwoCubeAuto;
 import org.usfirst.frc.team5951.robot.commands.caliber.TogglePush;
 import org.usfirst.frc.team5951.robot.commands.caliber.ToggleSquish;
-import org.usfirst.frc.team5951.robot.commands.caliber.groups.CaliberResetGroup;
 import org.usfirst.frc.team5951.robot.commands.caliber.groups.CaliberShootGroup;
+import org.usfirst.frc.team5951.robot.commands.caliber.groups.LowerCaliberGroup;
 import org.usfirst.frc.team5951.robot.commands.caliber.groups.RaiseCaliberGroup;
 import org.usfirst.frc.team5951.robot.commands.intake.IntakeCube;
 import org.usfirst.frc.team5951.robot.commands.intake.OutTakeCube;
+import org.usfirst.frc.team5951.robot.commands.intake.ShakeIntakePistons;
 import org.usfirst.frc.team5951.robot.commands.intake.ToggleIntakePistons;
 import org.usfirst.frc.team5951.robot.commands.leds.FlashLEDsCube;
 import org.usfirst.frc.team5951.robot.commands.leds.LEDsOff;
@@ -50,7 +53,7 @@ public class OI {
 	public static final JoystickButton TOGGLE_PUSH_CALIBER = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.Y);
 	public static final JoystickButton TOGGLE_SQUISH_CALIBER = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.X);
 	public static final JoystickButton SHOOT_CALIBER = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.A);
-	public static final JoystickButton RESET_CALIBER = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.B);
+	public static final JoystickButton SHAKE_PISTONS = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.B);
 	
 	public static final JoystickButton DRIVE_1 = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.BACK);
 
@@ -61,18 +64,18 @@ public class OI {
 		//TODO: remove for testing
 		CUBE_IN_ROBOT_TRIGGER.whenActive(new FlashLEDsCube());
 		CUBE_IN_ROBOT_TRIGGER.whenInactive(new LEDsOff());
-//		CUBE_STUCK.whenActive(new TurnCube(0.3));
 		TOGGLE_INTAKE_PISTONS.toggleWhenPressed(new ToggleIntakePistons());
 		INSERT_CUBE_INTAKE.whileHeld(new IntakeCube());
 		EJECT_CUBE_INTAKE.whileHeld(new OutTakeCube());
 		TOGGLE_PUSH_CALIBER.whenPressed(new TogglePush());
 		TOGGLE_SQUISH_CALIBER.whenPressed(new ToggleSquish());
 		SHOOT_CALIBER.whenPressed(new CaliberShootGroup());
-		RESET_CALIBER.whenPressed(new CaliberResetGroup());
+		SHAKE_PISTONS.whenPressed(new ShakeIntakePistons());
 
 		RAISE_CALIBER.whenActive(new RaiseCaliberGroup());
-		LOWER_CALIBER.whenActive(new LowerCaliber());
-		
-		DRIVE_1.whenPressed(new TestAuton());
+		LOWER_CALIBER.whenActive(new LowerCaliberGroup());
+
+		DRIVE_1.whenPressed(new MiddleToRightTwoCubeAuto
+				());
 	}
 }

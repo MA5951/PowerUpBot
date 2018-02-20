@@ -22,7 +22,7 @@ public class RaiseCaliber extends InstantCommand {
     // Called once when the command executes
     protected void initialize() {
     	if(Caliber.currentPosition == 0) {
-    		caliber.switchPosition();
+    		caliber.groundToSwitchPosition();
     		new RumbleJoystick(Constants.RUMBLE_TIMEOUT, Constants.SWITCH_POSITION_RUMBLE).start();
     	} else {
     		caliber.backPosition();

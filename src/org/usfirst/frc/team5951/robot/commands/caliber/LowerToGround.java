@@ -28,7 +28,7 @@ public class LowerToGround extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return Math.abs(this.caliber.getPosition() - Caliber.GROUND_POSITION) < 5;
+		return Math.abs(this.caliber.getPosition() - Caliber.GROUND_POSITION) < 20;
 	}
 
 	// Called once after isFinished returns true

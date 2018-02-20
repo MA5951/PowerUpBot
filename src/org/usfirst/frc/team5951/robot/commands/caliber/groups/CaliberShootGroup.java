@@ -26,7 +26,8 @@ public class CaliberShootGroup extends CommandGroup {
         addSequential(new PushCube());
         addSequential(new WaitCommand(0.3));
         addSequential(new LowerCaliber());
-        addSequential(new WaitCommand(0.7));
+        addSequential(new WaitCommand(0.3));
         addSequential(new LowerCaliber());
     }
 }
+

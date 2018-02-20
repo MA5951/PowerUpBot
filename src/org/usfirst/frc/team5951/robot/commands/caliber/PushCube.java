@@ -23,6 +23,7 @@ public class PushCube extends InstantCommand {
 	// In the Initialize method- runs the method caliberPushOpen of the caliber one
 	// time
 	protected void initialize() {
+		caliber.caliberRelease();
 		caliber.caliberPush();
 	}
 

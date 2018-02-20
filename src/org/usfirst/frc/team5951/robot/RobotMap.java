@@ -24,11 +24,12 @@ public class RobotMap {
 	
 	
 	// Caliber
-	public static final int LIFT_MOTOR_PORT = 3;
+	public static final int LIFT_MOTOR_MAIN_PORT = 7;
+	public static final int LIFT_MOTOR_SECONDARY_PORT = 4;
 
 	// Chassis
 	public static final int CHASSIS_RIGHT_LEADER = 2;
-	public static final int CHASSIS_RIGHT_FOLLOWER_1 = 4;
+	public static final int CHASSIS_RIGHT_FOLLOWER_1 = 3;
 	public static final int CHASSIS_LEFT_LEADER = 5;
 	public static final int CHASSIS_LEFT_FOLLOWER_1 = 6;
 
@@ -40,24 +41,25 @@ public class RobotMap {
 	public static final int INTAKE_LEFT_MOTOR = 1;
 	public static final int INTAKE_RIGHT_MOTOR = 8;
 
-	public static final int PCM_PORT = 0;
+	public static final int PCM_PRIMARY_PORT = 0;
+	public static final int PCM_SECONDARY_PORT = 1;
 	public static final int SQUISH_OPEN = 5;
-	public static final int SQUISH_CLOSE = 7;
+	public static final int SQUISH_CLOSE = 4;
 	public static final int PUSH_OPEN = 4;
 	public static final int PUSH_CLOSE = 6;
 
 	public static final int INTAKE_PISTON_LEFT_FORWORD = 2;
 	public static final int INTAKE_PISTON_LEFT_REVERSE = 1;
-	public static final int INTAKE_PISTON_RIGHT_FORWORD = 3;
-	public static final int INTAKE_PISTON_RIGHT_REVERSE = 0;
+	public static final int INTAKE_PISTON_RIGHT_FORWORD = 0;
+	public static final int INTAKE_PISTON_RIGHT_REVERSE = 3;
 
 	public static final int LEFT_IR = 5;
 	public static final int RIGHT_IR = 6;
 	
 	public static final int LEFT_CHASSIS_ENCODER_A = 0;
 	public static final int LEFT_CHASSIS_ENCODER_B = 1;
-	public static final int RIGHT_CHASSIS_ENCODER_A = 8;
-	public static final int RIGHT_CHASSIS_ENCODER_B = 9;
+	public static final int RIGHT_CHASSIS_ENCODER_A = 2;
+	public static final int RIGHT_CHASSIS_ENCODER_B = 3;
 
 	// LEDs
 	public static final int LED_RELAY = 0;

@@ -11,6 +11,7 @@ import org.usfirst.frc.team5951.robot.subsystems.Caliber;
 import org.usfirst.frc.team5951.robot.subsystems.Chassis;
 import org.usfirst.frc.team5951.robot.subsystems.Intake;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -34,6 +35,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
+		CameraServer.getInstance().startAutomaticCapture();
 	}
 
 	/**
@@ -43,7 +45,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
-
+		CALIBER.caliberRelease();
 	}
 
 	@Override
@@ -97,10 +99,13 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Left chassis encoder: ", Chassis.getInstance().getLeftDistance());
 		SmartDashboard.putNumber("Right chassis encoder: ", Chassis.getInstance().getRightDistance());
 		SmartDashboard.putNumber("Caliber position: ", CALIBER.getPosition());
+//		SmartDashboard.putBoolean("LEFT IR: ", CALIBER.leftIR());
+//		SmartDashboard.putBoolean("Right IR: ", CALIBER.rightIR());
+		SmartDashboard.putNumber("Percent output: ", CALIBER.getOutput());
 		
-		if(OI.OPERATOR_STICK.getBButton()) {
-			Chassis.getInstance().resetEncoders();
-		}
+		SmartDashboard.putNumber("Left intake current: ", INTAKE.getLeftCurrent());
+		SmartDashboard.putNumber("Right intake current: ", INTAKE.getRightCurrent());
+		SmartDashboard.putNumber("Left Amper: ", Chassis.getInstance().getAmper());
 	}
 
 	/**

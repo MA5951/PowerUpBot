@@ -16,7 +16,7 @@ public class LowerToGroundCubeGroup extends CommandGroup {
     	addSequential(new CaliberOverSwitch());
     	addSequential(new WaitCommand(0.3));
     	addSequential(new OpenIntakeGroup());
-    	addSequential(new WaitCommand(0.8));
+    	addSequential(new WaitCommand(0.5));
     	addSequential(new LowerToGround());
     }
 }

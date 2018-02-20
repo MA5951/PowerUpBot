@@ -10,7 +10,7 @@ public class CloseIntakeGroup extends CommandGroup {
 
     public CloseIntakeGroup() {
         addSequential(new CloseLeftIntake());
-        addSequential(new WaitCommand(0.5));
+        addSequential(new WaitCommand(0.4));
         addSequential(new CloseRightIntake());
         
 

@@ -30,9 +30,9 @@ public class Intake extends Subsystem {
 		leftMotor = new WPI_TalonSRX(RobotMap.INTAKE_LEFT_MOTOR);
 		leftMotor.setInverted(true);
 		rightMotor = new WPI_TalonSRX(RobotMap.INTAKE_RIGHT_MOTOR);
-		leftSolenoid = new DoubleSolenoid(RobotMap.PCM_PORT, RobotMap.INTAKE_PISTON_LEFT_REVERSE,
+		leftSolenoid = new DoubleSolenoid(RobotMap.PCM_PRIMARY_PORT, RobotMap.INTAKE_PISTON_LEFT_REVERSE,
 				RobotMap.INTAKE_PISTON_LEFT_FORWORD);
-		rightSolenoid = new DoubleSolenoid(RobotMap.PCM_PORT, RobotMap.INTAKE_PISTON_RIGHT_FORWORD,
+		rightSolenoid = new DoubleSolenoid(RobotMap.PCM_PRIMARY_PORT, RobotMap.INTAKE_PISTON_RIGHT_FORWORD,
 				RobotMap.INTAKE_PISTON_RIGHT_REVERSE);
 
 		System.out.println("Intake intake intake intake intake");
@@ -92,6 +92,14 @@ public class Intake extends Subsystem {
 	public boolean isCubeStuck() {
 		return this.leftMotor.getOutputCurrent() >= CUBE_STUCK_CURRENT ||
 				this.rightMotor.getOutputCurrent() >= CUBE_STUCK_CURRENT;
+	}
+	
+	public double getLeftCurrent() {
+		return this.leftMotor.getOutputCurrent();
+	}
+	
+	public double getRightCurrent() {
+		return this.rightMotor.getOutputCurrent();
 	}
 
 	@Override
