@@ -37,10 +37,10 @@ public class MiddleToRightTwoCubeAuto extends CommandGroup {
 		addSequential(new TurnToAngle(-45.0));
 		// Intake the cube
 		addParallel(new DriveStraight(1.1));
-		addSequential(new IntakeCube(), 3.0);
+		addSequential(new IntakeCube(), 2.0); // TODO test
 		addSequential(new RetractCube());
 		addSequential(new WaitCommand(0.4));
-		addSequential(new IntakeCube(), 3.0);
+		addSequential(new IntakeCube(), 2.0);
 		addSequential(new WaitCommand(0.4));
 		// Shoot another cube
 		addSequential(new OpenIntakeGroup());
@@ -50,6 +50,8 @@ public class MiddleToRightTwoCubeAuto extends CommandGroup {
 		addSequential(new DriveStraight(-0.8));
 		addSequential(new TurnToAngle(45.0));
 		addParallel(new DriveStraight(0.8), 3);
+		addSequential(new WaitCommand(1.2));
+		addSequential(new CaliberShootOnly());
 
 	}
 }
