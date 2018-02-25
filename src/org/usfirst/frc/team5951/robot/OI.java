@@ -7,10 +7,7 @@
 
 package org.usfirst.frc.team5951.robot;
 
-import org.usfirst.frc.team5951.robot.commands.auton.LeftSwitchRightAngle;
-import org.usfirst.frc.team5951.robot.commands.auton.MiddleToLeftAuton;
 import org.usfirst.frc.team5951.robot.commands.auton.MiddleToLeftTwoCubeAuto;
-import org.usfirst.frc.team5951.robot.commands.auton.MiddleToRightTwoCubeAuto;
 import org.usfirst.frc.team5951.robot.commands.caliber.TogglePush;
 import org.usfirst.frc.team5951.robot.commands.caliber.ToggleSquish;
 import org.usfirst.frc.team5951.robot.commands.caliber.groups.CaliberShootGroup;
@@ -75,7 +72,6 @@ public class OI {
 		RAISE_CALIBER.whenActive(new RaiseCaliberGroup());
 		LOWER_CALIBER.whenActive(new LowerCaliberGroup());
 
-		DRIVE_1.whenPressed(new MiddleToRightTwoCubeAuto
-				());
+		DRIVE_1.whenPressed(new MiddleToLeftTwoCubeAuto());
 	}
 }
