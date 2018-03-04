@@ -2,9 +2,10 @@ package org.usfirst.frc.team5951.robot.subsystems;
 
 import org.usfirst.frc.team5951.robot.RobotMap;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -13,7 +14,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Brakes extends Subsystem {
 
 	// Components
-	private VictorSP brakeMotor;
+	private WPI_TalonSRX brakeMotor;
 	private Encoder brakeEncoder;
 
 	// PID controller
@@ -25,23 +26,23 @@ public class Brakes extends Subsystem {
 	private boolean isLocked;
 	
 	// PID values
-	public static final double KP = 0.5;
+	public static final double KP = 0.03;
 	public static final double KI = 0;
 	public static final double KD = 0;
 	
-	public static final double LOCKED_POSITION = 50;
-	public static final double UNLOCKED_POSITION = 0;
+	public static final double LOCKED_POSITION = 300;
+	public static final double UNLOCKED_POSITION = 50;
 
 	private Brakes() {
-		this.brakeMotor = new VictorSP(RobotMap.LIFT_BRAKE_MOTOR);
-		this.brakeMotor.setInverted(false);
+		this.brakeMotor = new WPI_TalonSRX(RobotMap.BRAKE_MOTOR);
+		this.brakeMotor.setInverted(true);
 
 		this.brakeEncoder = new Encoder(RobotMap.CALIBER_BRAKE_ENCODER_A, RobotMap.CALIBER_BRAKE_ENCODER_B);
-		this.brakeEncoder.setReverseDirection(false);
-		
+		this.brakeEncoder.setReverseDirection(true);
+
 		this.pidController = new PIDController(KP, KI, KD, brakeEncoder, brakeMotor);
-		this.pidController.setAbsoluteTolerance(3);
-		this.pidController.setOutputRange(-0.3, 0.1);
+		this.pidController.setAbsoluteTolerance(30);
+		this.pidController.setOutputRange(-1, 1);
 		
 		this.isLocked = false;
 	}
@@ -62,6 +63,7 @@ public class Brakes extends Subsystem {
 	public void lock() {
 		this.pidController.setSetpoint(LOCKED_POSITION);
 		this.isLocked = true;
+		this.pidController.enable();
 	}
 	
 	/**
@@ -70,6 +72,7 @@ public class Brakes extends Subsystem {
 	public void unlock() {
 		this.pidController.setSetpoint(UNLOCKED_POSITION);
 		this.isLocked = false;
+		this.pidController.enable();
 	}
 	
 	/**
@@ -83,16 +86,54 @@ public class Brakes extends Subsystem {
 	 * @return - Brake motor position
 	 */
 	public double getBrakesPosition() {
-		return this.brakeEncoder.getRaw();
+		return this.brakeEncoder.getDistance();
 	}
 	
 	/**
 	 * @return PWM Output of the motor
 	 */
 	public double getOutput() {
-		return this.brakeMotor.getRaw();
+		return this.brakeMotor.getOutputCurrent();
 	}
-
+	
+	public boolean isInPlace() {
+		return this.pidController.onTarget();
+	}
+	
+	/**
+	 * Resets the encoder
+	 */
+	public void resetEncoder() {
+		this.pidController.disable();
+		this.brakeEncoder.reset();
+	}
+	
+	/**
+	 * Slowly unwinds the brake
+	 */
+	public void slowlyUnwind() {
+		this.pidController.disable();
+		this.brakeMotor.set(-0.2);
+	}
+	
+	public void stopBrakeMotor() {
+		this.pidController.disable();
+		this.brakeMotor.set(0);
+	}
+	
+	public void setPower(double power) {
+		this.pidController.disable();
+		this.brakeMotor.set(power);
+	}
+	
+	public double getSetpoint() {
+		return this.pidController.getSetpoint();
+	}
+	
+	public double getError() {
+		return this.pidController.getError();
+	}
+	
 	public void initDefaultCommand() {
 	}
 }

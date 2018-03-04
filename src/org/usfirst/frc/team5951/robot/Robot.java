@@ -7,11 +7,12 @@
 
 package org.usfirst.frc.team5951.robot;
 
+import org.usfirst.frc.team5951.robot.subsystems.Brakes;
 import org.usfirst.frc.team5951.robot.subsystems.Caliber;
 import org.usfirst.frc.team5951.robot.subsystems.Chassis;
 import org.usfirst.frc.team5951.robot.subsystems.Intake;
+import org.usfirst.frc.team5951.robot.subsystems.Shooter;
 
-import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -27,6 +28,7 @@ public class Robot extends TimedRobot {
 
 	public static final Caliber CALIBER = new Caliber();
 	public static final Intake INTAKE = new Intake();
+	public static final Shooter SHOOTER = new Shooter();
 	
 	public static final OI OI = new OI();
 	/**
@@ -35,7 +37,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-		CameraServer.getInstance().startAutomaticCapture();
+//		CameraServer.getInstance().startAutomaticCapture();
 	}
 
 	/**
@@ -45,7 +47,6 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
-		CALIBER.caliberRelease();
 	}
 
 	@Override
@@ -67,14 +68,6 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-		 * switch(autoSelected) { case "My Auto": autonomousCommand = new
-		 * MyAutoCommand(); break; case "Default Auto": default: autonomousCommand = new
-		 * ExampleCommand(); break; }
-		 */
-
-		// schedule the autonomous command (example)
 	}
 
 	/**
@@ -88,7 +81,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopInit() {
 	}
-
+	
 	/**
 	 * This function is called periodically during operator control.
 	 */
@@ -99,13 +92,16 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Left chassis encoder: ", Chassis.getInstance().getLeftDistance());
 		SmartDashboard.putNumber("Right chassis encoder: ", Chassis.getInstance().getRightDistance());
 		SmartDashboard.putNumber("Caliber position: ", CALIBER.getPosition());
-//		SmartDashboard.putBoolean("LEFT IR: ", CALIBER.leftIR());
-//		SmartDashboard.putBoolean("Right IR: ", CALIBER.rightIR());
-		SmartDashboard.putNumber("Percent output: ", CALIBER.getOutput());
+		SmartDashboard.putNumber("Caliber output: ", CALIBER.getMotorOutput());
+		SmartDashboard.putNumber("Caliber error: ", CALIBER.getError());
+		SmartDashboard.putNumber("Caliber rate: ", CALIBER.getCaliberRate());
+		SmartDashboard.putBoolean("LEFT IR: ", CALIBER.leftIR());
+		SmartDashboard.putBoolean("Right IR: ", CALIBER.rightIR());
 		
-		SmartDashboard.putNumber("Left intake current: ", INTAKE.getLeftCurrent());
-		SmartDashboard.putNumber("Right intake current: ", INTAKE.getRightCurrent());
-		SmartDashboard.putNumber("Left Amper: ", Chassis.getInstance().getAmper());
+		SmartDashboard.putNumber("Brake encoder value: ", Brakes.getInstance().getBrakesPosition());
+		SmartDashboard.putNumber("Brake output: ", Brakes.getInstance().getOutput());
+		
+		SmartDashboard.putNumber("Stopper encoder: ", CALIBER.getStopperPosition());
 	}
 
 	/**

@@ -1,16 +1,20 @@
 package org.usfirst.frc.team5951.robot.triggers;
 
-import org.usfirst.frc.team5951.robot.OI;
-
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.buttons.Trigger;
 
 /**
  *
  */
 public class POVDown extends Trigger {
+	
+	private GenericHID stick;
+	
+	public POVDown(GenericHID stick) {
+		this.stick = stick;
+	}
 
     public boolean get() {
-    	return OI.OPERATOR_STICK.getPOV() > 90 &&
-         	   OI.OPERATOR_STICK.getPOV() < 270;
+        return this.stick.getPOV() == 180;
     }
 }

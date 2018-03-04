@@ -3,62 +3,74 @@ package org.usfirst.frc.team5951.robot.subsystems;
 
 import org.usfirst.frc.team5951.robot.RobotMap;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
+
 public class Shooter extends Subsystem {
-	private TalonSRX highMotorA;
-	private TalonSRX highMotorB;
-	private TalonSRX lowMotorA;
-	private TalonSRX lowMotorB;
-	//TODO: add constants for forward speed
-	//TODO: change shot to shoot
+
+	private WPI_TalonSRX shooterMotorLeft;
+	private WPI_TalonSRX shooterMotorRight;
+
+	private DoubleSolenoid shooterFolders;
+
 	public Shooter() {
-		//TODO set one motor high and low as reverse
-		this.highMotorA= new TalonSRX(RobotMap.SHOOTER_HIGH_A_TALON);
-		this.highMotorB= new TalonSRX(RobotMap.SHOOTER_HIGH_B_TALON);
-		this.lowMotorA= new TalonSRX(RobotMap.SHOOTER_LOW_A_TALON);
-		this.lowMotorB= new TalonSRX(RobotMap.SHOOTER_LOW_B_TALON);
-		
+		// TODO set one motor high and low as reverse
+		this.shooterMotorLeft = new WPI_TalonSRX(RobotMap.SHOOTER_RIGHT_MOTOR);
+		this.shooterMotorRight = new WPI_TalonSRX(RobotMap.SHOOTER_LEFT_MOTOR);
+
+		this.shooterMotorRight.follow(shooterMotorLeft);
+		this.shooterMotorRight.setInverted(true);
+
+		this.shooterFolders = new DoubleSolenoid(RobotMap.PCM_PRIMARY_PORT, RobotMap.SHOOTER_PISTONS_FORWARD,
+				RobotMap.SHOOTER_PISTONS_REVERSE);
 	}
+
 	/**
-	 * this function shot the cube to the scale
-	 */
-	public void shotHigh() {
-		highMotorA.set(highMotorA.getControlMode(),1);
-		highMotorB.set(highMotorB.getControlMode(),1);
-		lowMotorA.set(lowMotorA.getControlMode(), 0);
-		lowMotorB.set(lowMotorB.getControlMode(), 0);
-	}
-	/**
-	 * this function shot the cube to the switch
-	 */
-	public void shotLow() {
-		highMotorA.set(highMotorA.getControlMode(),0);
-		highMotorB.set(highMotorB.getControlMode(),0);
-		lowMotorA.set(lowMotorA.getControlMode(), 1);
-		lowMotorB.set(lowMotorB.getControlMode(), 1);
-	}
-	/**
-	 * this function stop all the motors of the subsystem 
+	 * this function stop all the motors of the subsystem
 	 */
 	public void stop() {
-		highMotorA.set(highMotorA.getControlMode(),0);
-		highMotorB.set(highMotorB.getControlMode(),0);
-		lowMotorA.set(lowMotorA.getControlMode(), 0);
-		lowMotorB.set(lowMotorB.getControlMode(), 0);
+		shooterMotorLeft.set(ControlMode.PercentOutput, 0);
 	}
-	public void shot() {
 
-		highMotorA.set(highMotorA.getControlMode(),1);
-		highMotorB.set(highMotorB.getControlMode(),1);
-		lowMotorA.set(lowMotorA.getControlMode(), 1);
-		lowMotorB.set(lowMotorB.getControlMode(), 1);
+	/**
+	 * Rolls the shooter up to shooting speed
+	 */
+	public void rollUp() {
+		shooterMotorLeft.set(ControlMode.PercentOutput, 1);
 	}
+	
+	/**
+	 * Opens the shooter to shooting position
+	 */
+	public void openShooter() {
+		this.shooterFolders.set(Value.kForward);
+	}
+	
+	/**
+	 * Closes the shooter
+	 */
+	public void closeShooter() {
+		this.shooterFolders.set(Value.kReverse);
+	}
+
+	/**
+	 * Toggles the position of the shooter folders
+	 */
+	public void toggleShooterPistons() {
+		if(this.shooterFolders.get() == Value.kForward) {
+			this.shooterFolders.set(Value.kReverse);
+		} else {
+			this.shooterFolders.set(Value.kForward);
+		}
+	}
+	
 	protected void initDefaultCommand() {
-//		setDefaultCommand(new StopShot());
-		
+		// setDefaultCommand(new StopShot());
+
 	}
-	
-	
+
 }

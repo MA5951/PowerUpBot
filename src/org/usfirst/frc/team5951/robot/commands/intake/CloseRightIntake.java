@@ -10,7 +10,8 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
  */
 public class CloseRightIntake extends InstantCommand {
 
-	Intake intake;
+	private Intake intake;
+	
     public CloseRightIntake() {
         intake = Robot.INTAKE;
     }
