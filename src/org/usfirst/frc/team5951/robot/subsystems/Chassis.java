@@ -68,7 +68,7 @@ public class Chassis extends Subsystem {
 
 		this.rightEncoder = new Encoder(RobotMap.RIGHT_CHASSIS_ENCODER_A, RobotMap.RIGHT_CHASSIS_ENCODER_B);
 
-		this.leftEncoder.setReverseDirection(true);
+		this.leftEncoder.setReverseDirection(false);
 		this.rightEncoder.setReverseDirection(false);
 
 		this.leftEncoder.setDistancePerPulse(1.0 / Constants.LEFT_CHASSIS_ENCODER_PPM);

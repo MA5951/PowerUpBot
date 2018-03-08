@@ -25,6 +25,7 @@ public class Intake extends Subsystem {
 	private VictorSP rightMotor;
 	private DoubleSolenoid leftSolenoid;
 	private DoubleSolenoid rightSolenoid;
+	private boolean isOpen;
 
 	public Intake() {
 		// TODO: rename constants of ports into 1 and 2 (or left and right)
@@ -35,6 +36,7 @@ public class Intake extends Subsystem {
 				RobotMap.INTAKE_PISTON_LEFT_FORWORD);
 		rightSolenoid = new DoubleSolenoid(RobotMap.PCM_PRIMARY_PORT, RobotMap.INTAKE_PISTON_RIGHT_FORWORD,
 				RobotMap.INTAKE_PISTON_RIGHT_REVERSE);
+		isOpen = false;
 
 		System.out.println("Intake intake intake intake intake");
 	}
@@ -73,10 +75,12 @@ public class Intake extends Subsystem {
 	 */
 	public void closeIntakeLeft() {
 		leftSolenoid.set(Value.kForward);
+		isOpen = false;
 	}
 
 	public void closeIntakeRight() {
 		rightSolenoid.set(Value.kForward);
+		isOpen = false;
 	}
 
 	/**
@@ -84,10 +88,17 @@ public class Intake extends Subsystem {
 	 */
 	public void openIntakeLeft() {
 		leftSolenoid.set(Value.kReverse);
+		isOpen = true;
 	}
 
 	public void openIntakeRight() {
 		rightSolenoid.set(Value.kReverse);
+		isOpen = true;
+	}
+	
+	public boolean isIntakeOpen() {
+		return isOpen;
+		
 	}
 
 	@Override

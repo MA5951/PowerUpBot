@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.buttons.Trigger;
 /**
  *
  */
-public class ShootTrigger extends Trigger {
+public class LeftTriggerPressed extends Trigger {
 
     public boolean get() {
-        return OI.OPERATOR_STICK.getTriggerAxis(Hand.kRight) > 0.2;
+        return OI.OPERATOR_STICK.getTriggerAxis(Hand.kLeft) > 0.5;
     }
 }

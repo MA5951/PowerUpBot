@@ -1,5 +1,7 @@
 package org.usfirst.frc.team5951.robot.commands.brakes;
 
+import org.usfirst.frc.team5951.robot.Robot;
+import org.usfirst.frc.team5951.robot.commands.caliber.basic.StopCaliberMotor;
 import org.usfirst.frc.team5951.robot.subsystems.Brakes;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -29,7 +31,7 @@ public class LockBrakes extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
-		System.out.println("Stopped");
+		new StopCaliberMotor().start();
 	}
 
 	// Called when another command which requires one or more of the same

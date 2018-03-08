@@ -43,11 +43,11 @@ public class Caliber extends Subsystem {
 	// Create 2 digital inputs for IR sensors
 	private DigitalInput leftIR;
 	private DigitalInput rightIR;
-	
+
 	private Spark cubeStopperMotor;
-	
+
 	private Encoder cubeStopperEncoder;
-	
+
 	private PIDController cubeStopperController;
 
 	// Sets speed val.5es
@@ -56,33 +56,39 @@ public class Caliber extends Subsystem {
 	public static final double NO_SPEED = 0;
 
 	// Sets position values
-	public static final int GROUND_POSITION = 2530;
-	//3230
-	public static final int SWITCH_POSITION = 2000;
-	//2700
-	public static final int LITTLE_OVER_SWITCH_POSITION = 2000;
-	//2700
-	public static final int SCALE_POSITION = 1960;
-	//2640
+	public static final int GROUND_POSITION = 2510;
+	// 3230
+	public static final int SWITCH_POSITION = 1850;
+	// 2700
+	public static final int LITTLE_OVER_SWITCH_POSITION = 1850;
+	// 2700
+	public static final int SCALE_POSITION = 1750;
+	// 2640;;l
 	public static final int BACK_POSITION = 1600;
-	//2300
+	// 2300
 
 	// Set PID values
-	public static final double KP_SWITCH = 3.5;
-	public static final double KP_SCALE = 1.85;
-	public static final double KI_SWITCH = 0;
-	public static final double KD_SWITCH = 2.5;
-	public static final double KD_SCALE = 1;
-	
-	//Cube stopper PID Values
+	public static final double KP_FLOOR = -1.5;
+	public static final double KP_SWITCH = 3;
+	public static final double KP_SCALE = 1.7;
+	public static final double KP_BACKWARD = 0.5;
+	public static final double KI = 0;
+	public static final double KD_FLOOR = 100;
+	public static final double KD_SWITCH = 4.0;
+	public static final double KD_SCALE = 2.5;
+	public static final double KD_BACKWARD = 3;
+
+	// Cube stopper PID Values
 	public static final double KP_STOPPER = 0.1;
 	public static final double KD_STOPPER = 0.02;
-	
-	public static final double STOPPED_POSITION = 85;
+
+	public static final double STOPPED_POSITION = 88;
 	public static final double RELEASED_POSITION = 0;
 
-	public static final int ALLOWABLE_ERROR = 50;
-	
+	public static final int ALLOWABLE_ERROR = 70;
+	public static final int ALLOWABLE_ERROR_SCALE = 20;
+	public static final int MOVING_SPEED = 12;
+
 	private double currentSetpoint;
 
 	// Sets the TalonSRX, the IR sensors and the 2DoubleSolenoids and puts their
@@ -98,7 +104,7 @@ public class Caliber extends Subsystem {
 		mainLiftMotor.configPeakOutputForward(1, 0);
 		mainLiftMotor.configPeakOutputReverse(-1, 0);
 		mainLiftMotor.configAllowableClosedloopError(0, ALLOWABLE_ERROR, 0);
-		
+
 		mainLiftMotor.setNeutralMode(NeutralMode.Brake);
 		secondaryLiftMotor.setNeutralMode(NeutralMode.Brake);
 
@@ -109,18 +115,19 @@ public class Caliber extends Subsystem {
 
 		cubeStopperMotor = new Spark(RobotMap.CUBE_STOPPER_MOTOR);
 		cubeStopperMotor.setInverted(true);
-		
+
 		push = new DoubleSolenoid(RobotMap.PCM_PRIMARY_PORT, RobotMap.PUSH_PORT_FORWARD, RobotMap.PUSH_PORT_REVERSE);
 
 		leftIR = new DigitalInput(RobotMap.LEFT_IR);
 		rightIR = new DigitalInput(RobotMap.RIGHT_IR);
-		
+
 		cubeStopperEncoder = new Encoder(RobotMap.CUBE_STOPPER_ENCODER_A, RobotMap.CUBE_STOPPER_ENCODER_B);
-		
+		cubeStopperEncoder.setReverseDirection(false);
+
 		cubeStopperController = new PIDController(KP_STOPPER, 0, KD_STOPPER, cubeStopperEncoder, cubeStopperMotor);
-		
+
 		cubeStopperController.setOutputRange(-0.3, 0.75);
-		
+
 		currentSetpoint = GROUND_POSITION;
 	}
 
@@ -135,70 +142,86 @@ public class Caliber extends Subsystem {
 	}
 
 	public boolean isInPlace() {
-		return Math.abs(currentSetpoint - getPosition()) < ALLOWABLE_ERROR && 
-				mainLiftMotor.getSelectedSensorVelocity(0) < 20;
+		System.out.println(Math.abs(currentSetpoint - getPosition()) + ", "
+				+ Math.abs(mainLiftMotor.getSelectedSensorVelocity(0)));
+		return Math.abs(currentSetpoint - getPosition()) < ALLOWABLE_ERROR
+				&& Math.abs(mainLiftMotor.getSelectedSensorVelocity(0)) < MOVING_SPEED;
 	}
-	
+	public boolean isInPlaceScale() {
+		System.out.println(Math.abs(currentSetpoint - getPosition()) + ", "
+				+ Math.abs(mainLiftMotor.getSelectedSensorVelocity(0)));
+		return Math.abs(currentSetpoint - getPosition()) < ALLOWABLE_ERROR_SCALE
+				&& Math.abs(mainLiftMotor.getSelectedSensorVelocity(0)) < MOVING_SPEED;
+	}
+
 	public double getError() {
 		return mainLiftMotor.getClosedLoopError(0);
 	}
-	
+
 	public double getCaliberRate() {
 		return this.mainLiftMotor.getSelectedSensorVelocity(0);
 	}
-	
-	public double getMotorOutput() {
+
+	public double getLeftMotorOutput() {
 		return this.mainLiftMotor.getMotorOutputPercent();
+	}
+
+	public double getRightMotorOutput() {
+		return this.secondaryLiftMotor.getMotorOutputPercent();
 	}
 
 	/**
 	 * Gets the caliber to the ground intake position
 	 */
 	public void groundPosition() {
-		mainLiftMotor.config_kP(0, KP_SWITCH, 0);
-		mainLiftMotor.config_kI(0, KI_SWITCH, 0);
-		mainLiftMotor.config_kD(0, KD_SWITCH, 0);
-		mainLiftMotor.set(ControlMode.Position, GROUND_POSITION);
+		this.currentSetpoint = GROUND_POSITION;
+		mainLiftMotor.set(ControlMode.PercentOutput, 0);
 	}
 
 	/**
 	 * Gets the caliber to the switch shoot position
 	 */
 	public void switchPosition() {
+		this.currentSetpoint = SWITCH_POSITION;
 		mainLiftMotor.config_kP(0, KP_SWITCH, 0);
-		mainLiftMotor.config_kI(0, KI_SWITCH, 0);
+		mainLiftMotor.config_kI(0, KI, 0);
 		mainLiftMotor.config_kD(0, KD_SWITCH, 0);
 		mainLiftMotor.set(ControlMode.Position, SWITCH_POSITION);
 	}
 
 	public void littleOverSwitchPosition() {
+		this.currentSetpoint = LITTLE_OVER_SWITCH_POSITION;
 		mainLiftMotor.config_kP(0, KP_SWITCH, 0);
 		mainLiftMotor.config_kD(0, KD_SWITCH, 0);
 		mainLiftMotor.set(ControlMode.Position, LITTLE_OVER_SWITCH_POSITION);
 	}
-
+	
 	public void scalePosition() {
-		mainLiftMotor.config_kP(0, KP_SWITCH, 0);
-		mainLiftMotor.config_kD(0, KD_SWITCH, 0);
+		this.currentSetpoint = SCALE_POSITION;
+		mainLiftMotor.config_kP(0, KP_SCALE, 0);
+		mainLiftMotor.config_kD(0, KD_SCALE, 0);
 		mainLiftMotor.set(ControlMode.Position, SCALE_POSITION);
 	}
-	
+
 	/**
 	 * Gets the caliber to the back shooting position
 	 */
 	public void backPosition() {
+		this.currentSetpoint = BACK_POSITION;
 		mainLiftMotor.config_kP(0, KP_SCALE, 0);
 		mainLiftMotor.config_kD(0, KD_SCALE, 0);
 		mainLiftMotor.set(ControlMode.Position, BACK_POSITION);
 	}
-	
+
 	/**
 	 * Manually sets the position of the caliber
-	 * @param position - position to be set
+	 * 
+	 * @param position
+	 *            - position to be set
 	 */
 	public void setPosition(double position) {
 		mainLiftMotor.config_kP(0, KP_SWITCH, 0);
-		mainLiftMotor.config_kD(0, KD_SWITCH, 0);
+		mainLiftMotor.config_kD(0, 0, 0);
 		mainLiftMotor.set(ControlMode.Position, position);
 	}
 
@@ -209,7 +232,7 @@ public class Caliber extends Subsystem {
 		cubeStopperController.enable();
 		cubeStopperController.setSetpoint(STOPPED_POSITION);
 	}
-	
+
 	/**
 	 * Releases the cube
 	 */
@@ -217,7 +240,7 @@ public class Caliber extends Subsystem {
 		cubeStopperController.enable();
 		cubeStopperController.setSetpoint(RELEASED_POSITION);
 	}
-	
+
 	/**
 	 * Sets the stopper back slowly, used to reset the encoder
 	 */
@@ -225,14 +248,14 @@ public class Caliber extends Subsystem {
 		cubeStopperController.disable();
 		cubeStopperMotor.set(-0.2);
 	}
-	
+
 	/**
 	 * Resets the stopper encoder
 	 */
 	public void resetStopperEncoder() {
 		cubeStopperEncoder.reset();
 	}
-	
+
 	/**
 	 * Stops the caliber, gives 0 power to the motors
 	 */
@@ -244,7 +267,7 @@ public class Caliber extends Subsystem {
 	public double getStopperPosition() {
 		return this.cubeStopperEncoder.getDistance();
 	}
-	
+
 	/**
 	 * Toggles the pushing piston's mode
 	 */
@@ -258,6 +281,7 @@ public class Caliber extends Subsystem {
 
 	/**
 	 * Returns absolute position of the lift encoder
+	 * 
 	 * @return - Lift's absolute position
 	 */
 	public double getPosition() {
@@ -268,20 +292,20 @@ public class Caliber extends Subsystem {
 	public boolean leftIR() {
 		return !leftIR.get();
 	}
-	
+
 	// Returns true if the left IR value or the right IR value is true
 	// Returns the opposite because the sensor outputs true if there is no object.
 	public boolean isCubeIn() {
 		return !leftIR.get() || !rightIR.get();
 	}
-	
+
 	// Returns the right IR value
 	public boolean rightIR() {
 		return !rightIR.get();
 	}
-	
+
 	@Override
 	protected void initDefaultCommand() {
 	}
-	
+
 }

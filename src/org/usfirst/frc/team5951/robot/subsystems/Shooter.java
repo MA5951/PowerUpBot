@@ -56,6 +56,10 @@ public class Shooter extends Subsystem {
 	public void closeShooter() {
 		this.shooterFolders.set(Value.kReverse);
 	}
+	
+	public double getShooterOutput() {
+		return this.shooterMotorRight.getMotorOutputPercent();
+	}
 
 	/**
 	 * Toggles the position of the shooter folders

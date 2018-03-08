@@ -19,7 +19,6 @@ public class LeftScaleAuton extends CommandGroup {
         addParallel(new TurnToAngle(20));
         addSequential(new RollUp());
         addParallel(new RollUp(), 4.0);
-        addSequential(new  ReleaseAndShoot());
-        
+        addSequential(new ReleaseAndShoot());
     }
 }

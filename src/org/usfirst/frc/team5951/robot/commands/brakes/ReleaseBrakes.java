@@ -12,13 +12,13 @@ public class ReleaseBrakes extends Command {
 
 	public ReleaseBrakes() {
     	requires(Brakes.getInstance());
-    	requires(Robot.CALIBER);
     }
 
     // Called once when the command executes
     protected void initialize() {
-    	Robot.CALIBER.setPosition(Robot.CALIBER.getPosition());
     	Brakes.getInstance().unlock();
+//    	Robot.CALIBER.setPosition(Robot.CALIBER.getPosition());
+    	System.out.println(this.toString() + "Started");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -32,6 +32,8 @@ public class ReleaseBrakes extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	System.out.println("Ended");
+    	System.out.println(this.toString() + "Finished");
     }
 
     // Called when another command which requires one or more of the same

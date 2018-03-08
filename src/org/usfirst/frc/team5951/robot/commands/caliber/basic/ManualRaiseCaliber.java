@@ -1,6 +1,8 @@
 package org.usfirst.frc.team5951.robot.commands.caliber.basic;
 
 import org.usfirst.frc.team5951.robot.Robot;
+import org.usfirst.frc.team5951.robot.commands.brakes.LockBrakes;
+import org.usfirst.frc.team5951.robot.commands.brakes.ReleaseBrakes;
 import org.usfirst.frc.team5951.robot.subsystems.Caliber;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -8,36 +10,34 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class BackwardPosition extends Command {
+public class ManualRaiseCaliber extends Command {
 
-	private Caliber caliber;
+	Caliber caliber;
+	double caliberPosition;
 
-	private boolean isStartedMoving;
-
-	public BackwardPosition() {
-		this.caliber = Robot.CALIBER;
-		requires(this.caliber);
+	public ManualRaiseCaliber()
+	{
+		caliber = Robot.CALIBER;
+		requires(caliber);
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		this.caliber.backPosition();
-		this.isStartedMoving = false;
+		new ReleaseBrakes().start();
+		caliberPosition = caliber.getPosition();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if (Math.abs(this.caliber.getCaliberRate()) > Caliber.MOVING_SPEED) {
-    		this.isStartedMoving = true;
-    	}
-		
-		System.out.println("In place? " + this.caliber.isInPlace());
-		System.out.println("Started moving? " + this.isStartedMoving);
+		caliber.setPosition(caliberPosition);
+		caliberPosition -= 10;
+		System.out.println(caliberPosition);
+		System.out.println(caliber.getPosition());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return this.caliber.isInPlace() && this.isStartedMoving;
+		return false;
 	}
 
 	// Called once after isFinished returns true
@@ -47,5 +47,6 @@ public class BackwardPosition extends Command {
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
+		new LockBrakes().start();;
 	}
 }

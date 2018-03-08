@@ -24,7 +24,7 @@ public class RobotMap {
 
 	// Caliber
 	public static final int LIFT_MOTOR_MAIN_PORT = 7;
-	public static final int LIFT_MOTOR_SECONDARY_PORT = 4;
+	public static final int LIFT_MOTOR_SECONDARY_PORT = 10;
 
 	// Chassis
 	public static final int CHASSIS_RIGHT_LEADER = 2;
@@ -33,7 +33,7 @@ public class RobotMap {
 	public static final int CHASSIS_LEFT_FOLLOWER_1 = 6;
 
 	public static final int SHOOTER_RIGHT_MOTOR = 9;
-	public static final int SHOOTER_LEFT_MOTOR = 10;
+	public static final int SHOOTER_LEFT_MOTOR = 4;
 
 	public static final int INTAKE_LEFT_MOTOR = 8;
 	public static final int INTAKE_RIGHT_MOTOR = 0;

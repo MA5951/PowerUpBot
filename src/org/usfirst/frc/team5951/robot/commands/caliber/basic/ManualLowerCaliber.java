@@ -1,6 +1,8 @@
 package org.usfirst.frc.team5951.robot.commands.caliber.basic;
 
 import org.usfirst.frc.team5951.robot.Robot;
+import org.usfirst.frc.team5951.robot.commands.brakes.LockBrakes;
+import org.usfirst.frc.team5951.robot.commands.brakes.ReleaseBrakes;
 import org.usfirst.frc.team5951.robot.subsystems.Caliber;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -8,42 +10,40 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ScalePosition extends Command {
+public class ManualLowerCaliber extends Command {
+	
+	Caliber caliber;
+	double caliberPosition;
 
-	private Caliber caliber;
-	
-	private boolean isStartedMoving;
-	
-    public ScalePosition() {
-    	this.caliber = Robot.CALIBER;
-    	requires(this.caliber);
+    public ManualLowerCaliber() {
+       caliber = Robot.CALIBER;
+         requires(caliber);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	this.caliber.scalePosition();
-    	this.isStartedMoving = false;
+    	new ReleaseBrakes().start();
+    	caliberPosition = caliber.getPosition();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Math.abs(this.caliber.getCaliberRate()) > Caliber.MOVING_SPEED) {
-    		this.isStartedMoving = true;
-    	}
+    	caliber.setPosition(caliberPosition);
+    	caliberPosition += 10;
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return this.caliber.isInPlaceScale() && this.isStartedMoving;
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("Stopping");
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	new LockBrakes().start();;
     }
 }
