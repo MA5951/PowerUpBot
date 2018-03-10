@@ -8,27 +8,26 @@
 package org.usfirst.frc.team5951.robot;
 
 import org.usfirst.frc.team5951.robot.commands.brakes.ResetBrakeEncoder;
+import org.usfirst.frc.team5951.robot.commands.brakes.SoftLockBrakes;
 import org.usfirst.frc.team5951.robot.commands.caliber.basic.ManualLowerCaliber;
 import org.usfirst.frc.team5951.robot.commands.caliber.basic.ManualRaiseCaliber;
 import org.usfirst.frc.team5951.robot.commands.caliber.basic.ResetStopperEncoder;
 import org.usfirst.frc.team5951.robot.commands.caliber.basic.ToggleBlocker;
 import org.usfirst.frc.team5951.robot.commands.caliber.basic.ToggleBrakes;
 import org.usfirst.frc.team5951.robot.commands.caliber.basic.TogglePush;
-import org.usfirst.frc.team5951.robot.commands.caliber.groups.BackwardPositionGroup;
 import org.usfirst.frc.team5951.robot.commands.caliber.groups.GroundPositionGroup;
-import org.usfirst.frc.team5951.robot.commands.caliber.groups.ScalePositionGroup;
-import org.usfirst.frc.team5951.robot.commands.caliber.groups.SwitchPositionGroup;
+import org.usfirst.frc.team5951.robot.commands.caliber.groups.UpPositionGroup;
 import org.usfirst.frc.team5951.robot.commands.intake.IntakeCommand;
 import org.usfirst.frc.team5951.robot.commands.intake.OuttakeCommand;
 import org.usfirst.frc.team5951.robot.commands.intake.ToggleIntakePosition;
 import org.usfirst.frc.team5951.robot.commands.leds.FlashLEDsCube;
 import org.usfirst.frc.team5951.robot.commands.leds.LEDsOff;
-import org.usfirst.frc.team5951.robot.commands.shooter.RollUp;
+import org.usfirst.frc.team5951.robot.commands.shooter.RollUpScale;
+import org.usfirst.frc.team5951.robot.commands.shooter.RollUpSwitch;
 import org.usfirst.frc.team5951.robot.triggers.CubeInRobot;
 import org.usfirst.frc.team5951.robot.triggers.LeftTriggerPressed;
 import org.usfirst.frc.team5951.robot.triggers.POVDown;
 import org.usfirst.frc.team5951.robot.triggers.POVLeft;
-import org.usfirst.frc.team5951.robot.triggers.POVRight;
 import org.usfirst.frc.team5951.robot.triggers.POVUp;
 import org.usfirst.frc.team5951.robot.triggers.RightTriggerPressed;
 import org.usfirst.frc.team5951.robot.util.JoystickUtil;
@@ -49,51 +48,51 @@ public class OI {
 	public static final CubeInRobot CUBE_IN_ROBOT_TRIGGER = new CubeInRobot();
 
 	public static final JoystickButton TOGGLE_PUSH = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.Y);
-	public static final JoystickButton PREPARE_TO_SHOOT = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.A);
+	public static final JoystickButton SHOOT_SCALE = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.A);
 	public static final JoystickButton TOGGLE_CUBE_BLOCKER = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.B);
 	public static final JoystickButton TOGGLE_INTAKE_PISTONS = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.X);
 
+	public static final JoystickButton SHOOT_SWITCH = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.STICK_RIGHT);
+
 	public static final JoystickButton RESET_BRAKE = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.START);
 	public static final JoystickButton TOGGLE_BRAKE = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.BACK);
-	
+
 	public static final JoystickButton RESET_BLOCKER = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.STICK_LEFT);
 
 	public static final JoystickButton INTAKE = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.L1);
 	public static final JoystickButton OUTTAKE = new JoystickButton(OPERATOR_STICK, JoystickUtil.XBOX.R1);
-	
-	
+
 	public static final RightTriggerPressed LIFT_MORE = new RightTriggerPressed();
 	public static final LeftTriggerPressed LIFT_LESS = new LeftTriggerPressed();
-	
+
 	public static final POVDown GROUND_POSITION = new POVDown(OPERATOR_STICK);
-	public static final POVLeft SWITCH_POSITION = new POVLeft(OPERATOR_STICK);
-	public static final POVUp SCALE_POSITION = new POVUp(OPERATOR_STICK);
-	public static final POVRight BACKWARD_POSITION = new POVRight(OPERATOR_STICK);
+	public static final POVUp SWITCH_POSITION = new POVUp(OPERATOR_STICK);
+	public static final POVLeft SOFT_BRAKES = new POVLeft(OPERATOR_STICK);
 
 	public OI() {
 		CUBE_IN_ROBOT_TRIGGER.whenActive(new FlashLEDsCube());
 		CUBE_IN_ROBOT_TRIGGER.whenInactive(new LEDsOff());
 
 		TOGGLE_PUSH.whenPressed(new TogglePush());
-		PREPARE_TO_SHOOT.whileHeld(new RollUp());
+		SHOOT_SCALE.whileHeld(new RollUpScale());
 		TOGGLE_CUBE_BLOCKER.toggleWhenPressed(new ToggleBlocker());
 		TOGGLE_INTAKE_PISTONS.toggleWhenPressed(new ToggleIntakePosition());
 
 		INTAKE.whileHeld(new IntakeCommand());
 		OUTTAKE.whileHeld(new OuttakeCommand());
 
-		
 		GROUND_POSITION.whenActive(new GroundPositionGroup());
-		SWITCH_POSITION.whenActive(new SwitchPositionGroup());
-		SCALE_POSITION.whenActive(new ScalePositionGroup());
-		BACKWARD_POSITION.whenActive(new BackwardPositionGroup());
+		SWITCH_POSITION.whenActive(new UpPositionGroup());
+		SOFT_BRAKES.whenActive(new SoftLockBrakes());
 
-		RESET_BRAKE.whenPressed(new ResetBrakeEncoder(2));
+		RESET_BRAKE.whenPressed(new ResetBrakeEncoder(1));
 		TOGGLE_BRAKE.toggleWhenPressed(new ToggleBrakes());
-		
+
 		RESET_BLOCKER.whenPressed(new ResetStopperEncoder(2.25));
-		
+
 		LIFT_MORE.whileActive(new ManualRaiseCaliber());
 		LIFT_LESS.whileActive(new ManualLowerCaliber());
+		
+		SHOOT_SWITCH.whileHeld(new RollUpSwitch());
 	}
 }

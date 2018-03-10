@@ -61,7 +61,7 @@ public class Chassis extends Subsystem {
 
 		this.leadRightMotor.setInverted(false);
 		this.rightFollower1.setInverted(false);
-		this.leadLeftMotor.setInverted(false);
+		this.leadLeftMotor.setInverted(true);
 		this.leftFollower1.setInverted(true);
 
 		this.leftEncoder = new Encoder(RobotMap.LEFT_CHASSIS_ENCODER_A, RobotMap.LEFT_CHASSIS_ENCODER_B);

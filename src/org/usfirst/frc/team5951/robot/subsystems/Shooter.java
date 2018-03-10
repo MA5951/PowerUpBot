@@ -37,10 +37,17 @@ public class Shooter extends Subsystem {
 	}
 
 	/**
-	 * Rolls the shooter up to shooting speed
+	 * Rolls the shooter up to shooting speed for the scale
 	 */
-	public void rollUp() {
+	public void rollUpScale() {
 		shooterMotorLeft.set(ControlMode.PercentOutput, 1);
+	}
+	
+	/**
+	 * Rolls the shooter up to shooting speed for the switch
+	 */
+	public void rollUpSwitch() {
+		shooterMotorLeft.set(ControlMode.PercentOutput, 0.4);
 	}
 	
 	/**

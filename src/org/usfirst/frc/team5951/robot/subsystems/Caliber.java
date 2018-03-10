@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5951.robot.subsystems;
 
 import org.usfirst.frc.team5951.robot.RobotMap;
+import org.usfirst.frc.team5951.robot.commands.caliber.groups.ReleaseAndShoot;
 
 /**
  * Caliber subsystem-
@@ -56,20 +57,12 @@ public class Caliber extends Subsystem {
 	public static final double NO_SPEED = 0;
 
 	// Sets position values
-	public static final int GROUND_POSITION = 2510;
-	// 3230
-	public static final int SWITCH_POSITION = 1850;
-	// 2700
-	public static final int LITTLE_OVER_SWITCH_POSITION = 1850;
-	// 2700
-	public static final int SCALE_POSITION = 1750;
-	// 2640;;l
-	public static final int BACK_POSITION = 1600;
-	// 2300
+	public static final int GROUND_POSITION = 2902;
+	public static final int MIDDLE_POSITION = 2451;
+	public static final int SWITCH_POSITION = 2050;
 
 	// Set PID values
-	public static final double KP_FLOOR = -1.5;
-	public static final double KP_SWITCH = 3;
+	public static final double KP_SWITCH = 1;
 	public static final double KP_SCALE = 1.7;
 	public static final double KP_BACKWARD = 0.5;
 	public static final double KI = 0;
@@ -82,10 +75,10 @@ public class Caliber extends Subsystem {
 	public static final double KP_STOPPER = 0.1;
 	public static final double KD_STOPPER = 0.02;
 
-	public static final double STOPPED_POSITION = 88;
-	public static final double RELEASED_POSITION = 0;
+	public static final double STOPPED_POSITION = 96.5;
+	public static final double RELEASED_POSITION = 10;
 
-	public static final int ALLOWABLE_ERROR = 70;
+	public static final int ALLOWABLE_ERROR = 100;
 	public static final int ALLOWABLE_ERROR_SCALE = 20;
 	public static final int MOVING_SPEED = 12;
 
@@ -122,7 +115,7 @@ public class Caliber extends Subsystem {
 		rightIR = new DigitalInput(RobotMap.RIGHT_IR);
 
 		cubeStopperEncoder = new Encoder(RobotMap.CUBE_STOPPER_ENCODER_A, RobotMap.CUBE_STOPPER_ENCODER_B);
-		cubeStopperEncoder.setReverseDirection(false);
+		cubeStopperEncoder.setReverseDirection(true);
 
 		cubeStopperController = new PIDController(KP_STOPPER, 0, KD_STOPPER, cubeStopperEncoder, cubeStopperMotor);
 
@@ -175,7 +168,7 @@ public class Caliber extends Subsystem {
 	 */
 	public void groundPosition() {
 		this.currentSetpoint = GROUND_POSITION;
-		mainLiftMotor.set(ControlMode.PercentOutput, 0);
+		mainLiftMotor.set(ControlMode.PercentOutput, 0.1);
 	}
 
 	/**
@@ -187,30 +180,6 @@ public class Caliber extends Subsystem {
 		mainLiftMotor.config_kI(0, KI, 0);
 		mainLiftMotor.config_kD(0, KD_SWITCH, 0);
 		mainLiftMotor.set(ControlMode.Position, SWITCH_POSITION);
-	}
-
-	public void littleOverSwitchPosition() {
-		this.currentSetpoint = LITTLE_OVER_SWITCH_POSITION;
-		mainLiftMotor.config_kP(0, KP_SWITCH, 0);
-		mainLiftMotor.config_kD(0, KD_SWITCH, 0);
-		mainLiftMotor.set(ControlMode.Position, LITTLE_OVER_SWITCH_POSITION);
-	}
-	
-	public void scalePosition() {
-		this.currentSetpoint = SCALE_POSITION;
-		mainLiftMotor.config_kP(0, KP_SCALE, 0);
-		mainLiftMotor.config_kD(0, KD_SCALE, 0);
-		mainLiftMotor.set(ControlMode.Position, SCALE_POSITION);
-	}
-
-	/**
-	 * Gets the caliber to the back shooting position
-	 */
-	public void backPosition() {
-		this.currentSetpoint = BACK_POSITION;
-		mainLiftMotor.config_kP(0, KP_SCALE, 0);
-		mainLiftMotor.config_kD(0, KD_SCALE, 0);
-		mainLiftMotor.set(ControlMode.Position, BACK_POSITION);
 	}
 
 	/**
@@ -246,7 +215,7 @@ public class Caliber extends Subsystem {
 	 */
 	public void slowlyReleaseCube() {
 		cubeStopperController.disable();
-		cubeStopperMotor.set(-0.2);
+		cubeStopperMotor.set(-0.3);
 	}
 
 	/**
@@ -275,7 +244,7 @@ public class Caliber extends Subsystem {
 		if (push.get() == Value.kForward) {
 			caliberRetract();
 		} else {
-			caliberPush();
+			new ReleaseAndShoot().start();
 		}
 	}
 

@@ -37,7 +37,7 @@ public class Robot extends TimedRobot {
 	public static final Compressor COMP = new Compressor();
 	public static final SendableChooser<String> CHOOSER_POSITION = new SendableChooser<String>();
 	public static final SendableChooser<String> CHOOSER_TARGET = new SendableChooser<String>();
-
+	
 	private CommandGroup autoCommand;
 
 	public static final OI OI = new OI();
@@ -67,7 +67,7 @@ public class Robot extends TimedRobot {
 
 		SmartDashboard.putData("Position chooser: ", CHOOSER_POSITION);
 		SmartDashboard.putData("Target choose: ", CHOOSER_TARGET);
-
+		
 		timesIterated = 0;
 	}
 
@@ -184,6 +184,7 @@ public class Robot extends TimedRobot {
 
 		SmartDashboard.putNumber("Stopper encoder: ", CALIBER.getStopperPosition());
 		SmartDashboard.putBoolean("Intake Open: ", INTAKE.isIntakeOpen());
+		
 	}
 
 	/**

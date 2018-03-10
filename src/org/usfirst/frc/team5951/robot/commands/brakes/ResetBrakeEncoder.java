@@ -32,6 +32,7 @@ public class ResetBrakeEncoder extends TimedCommand {
     protected void end() {
     	this.brakes.resetEncoder();
     	this.brakes.stopBrakeMotor();
+    	this.brakes.unlock();
     }
 
     // Called when another command which requires one or more of the same

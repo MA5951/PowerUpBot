@@ -21,19 +21,15 @@ public class GroundPosition extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	this.caliber.groundPosition();
-    	this.isStartedMoving = false;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Math.abs(this.caliber.getCaliberRate()) > Caliber.MOVING_SPEED) {
-    		this.isStartedMoving = true;
-    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return this.caliber.isInPlace() && this.isStartedMoving;
+    	return this.caliber.isInPlace();
     }
 
     // Called once after isFinished returns true

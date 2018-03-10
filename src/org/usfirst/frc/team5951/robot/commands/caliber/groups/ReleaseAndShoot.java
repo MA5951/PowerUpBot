@@ -13,7 +13,7 @@ public class ReleaseAndShoot extends CommandGroup {
 
     public ReleaseAndShoot() {
     	addSequential(new ReleaseCube());
-    	addSequential(new WaitCommand(0.5));
+    	addSequential(new WaitCommand(0.2));
     	addSequential(new PushCube());
     }
 }

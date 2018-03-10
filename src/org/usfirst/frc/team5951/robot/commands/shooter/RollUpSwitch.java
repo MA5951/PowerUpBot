@@ -5,14 +5,11 @@ import org.usfirst.frc.team5951.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
-public class RollUp extends Command {
+public class RollUpSwitch extends Command {
 
 	private Shooter shooter;
 	
-    public RollUp() {
+    public RollUpSwitch() {
     	this.shooter = Robot.SHOOTER;
     	requires(this.shooter);
     }
@@ -24,7 +21,7 @@ public class RollUp extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	this.shooter.rollUp();
+    	this.shooter.rollUpSwitch();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -44,3 +41,4 @@ public class RollUp extends Command {
     	end();
     }
 }
+

@@ -12,9 +12,9 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 /**
  *
  */
-public class SwitchPositionGroup extends CommandGroup {
+public class UpPositionGroup extends CommandGroup {
 
-	public SwitchPositionGroup() {
+	public UpPositionGroup() {
 		addSequential(new ReleaseBrakes());
 		addSequential(new SwitchPosition());
 		addSequential(new LockBrakes());

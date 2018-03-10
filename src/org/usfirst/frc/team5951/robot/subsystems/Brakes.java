@@ -30,12 +30,15 @@ public class Brakes extends Subsystem {
 	public static final double KI = 0;
 	public static final double KD = 0;
 	
-	public static final double LOCKED_POSITION = 300;
-	public static final double UNLOCKED_POSITION = 50;
+	public static final double LOCKED_POSITION = 0;
+	public static final double SOFT_BRAKE_POSITION = -75;
+	public static final double UNLOCKED_POSITION = -245;
 
 	private Brakes() {
 		this.brakeMotor = new WPI_TalonSRX(RobotMap.BRAKE_MOTOR);
 		this.brakeMotor.setInverted(true);
+		this.brakeMotor.configPeakOutputForward(1, 0);
+		this.brakeMotor.configPeakOutputReverse(-1, 0);
 
 		this.brakeEncoder = new Encoder(RobotMap.CALIBER_BRAKE_ENCODER_A, RobotMap.CALIBER_BRAKE_ENCODER_B);
 		this.brakeEncoder.setReverseDirection(true);
@@ -62,6 +65,15 @@ public class Brakes extends Subsystem {
 	 */
 	public void lock() {
 		this.pidController.setSetpoint(LOCKED_POSITION);
+		this.isLocked = true;
+		this.pidController.enable();
+	}
+	
+	/**
+	 * PID Locks the brakes 
+	 */
+	public void softLock() {
+		this.pidController.setSetpoint(SOFT_BRAKE_POSITION);
 		this.isLocked = true;
 		this.pidController.enable();
 	}
@@ -113,7 +125,7 @@ public class Brakes extends Subsystem {
 	 */
 	public void slowlyUnwind() {
 		this.pidController.disable();
-		this.brakeMotor.set(-0.2);
+		this.brakeMotor.set(1);
 	}
 	
 	public void stopBrakeMotor() {

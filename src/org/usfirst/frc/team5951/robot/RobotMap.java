@@ -45,30 +45,30 @@ public class RobotMap {
 	public static final int PCM_PRIMARY_PORT = 1;
 	public static final int PCM_SECONDARY_PORT = 0;
 	
-	public static final int PUSH_PORT_FORWARD = 6;
-	public static final int PUSH_PORT_REVERSE = 7;
+	public static final int PUSH_PORT_FORWARD = 4;
+	public static final int PUSH_PORT_REVERSE = 6;
 
-	public static final int INTAKE_PISTON_LEFT_FORWORD =4;
+	public static final int INTAKE_PISTON_LEFT_FORWORD =1;
 	public static final int INTAKE_PISTON_LEFT_REVERSE = 5;
 	public static final int INTAKE_PISTON_RIGHT_FORWORD = 0;
-	public static final int INTAKE_PISTON_RIGHT_REVERSE = 1;
+	public static final int INTAKE_PISTON_RIGHT_REVERSE = 7;
 	
 	public static final int SHOOTER_PISTONS_FORWARD = 2;
 	public static final int SHOOTER_PISTONS_REVERSE = 3;
 
-	public static final int LEFT_IR = 8;
-	public static final int RIGHT_IR = 9;
+	public static final int LEFT_IR = 4;
+	public static final int RIGHT_IR = 5;
 	
-	public static final int LEFT_CHASSIS_ENCODER_A = 6;
-	public static final int LEFT_CHASSIS_ENCODER_B = 7;
+	public static final int LEFT_CHASSIS_ENCODER_A = 0;
+	public static final int LEFT_CHASSIS_ENCODER_B = 1;
 	public static final int RIGHT_CHASSIS_ENCODER_A = 2;
 	public static final int RIGHT_CHASSIS_ENCODER_B = 3;
 	
-	public static final int CALIBER_BRAKE_ENCODER_A = 4;
-	public static final int CALIBER_BRAKE_ENCODER_B = 5;
+	public static final int CALIBER_BRAKE_ENCODER_A = 6;
+	public static final int CALIBER_BRAKE_ENCODER_B = 7;
 	
-	public static final int CUBE_STOPPER_ENCODER_A = 0;
-	public static final int CUBE_STOPPER_ENCODER_B= 1;
+	public static final int CUBE_STOPPER_ENCODER_A = 8;
+	public static final int CUBE_STOPPER_ENCODER_B= 9;
 
 	// LEDs
 	public static final int LED_RELAY = 0;

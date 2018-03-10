@@ -1,6 +1,6 @@
 package org.usfirst.frc.team5951.robot.commands.caliber.groups;
 
-import org.usfirst.frc.team5951.robot.commands.brakes.ReleaseBrakes;
+import org.usfirst.frc.team5951.robot.commands.brakes.SoftLockBrakes;
 import org.usfirst.frc.team5951.robot.commands.caliber.basic.GroundPosition;
 import org.usfirst.frc.team5951.robot.commands.intake.OpenIntakeDelay;
 
@@ -14,7 +14,7 @@ public class GroundPositionGroup extends CommandGroup {
 
     public GroundPositionGroup() {
     	addSequential(new OpenIntakeDelay());
-        addSequential(new ReleaseBrakes());
+        addSequential(new SoftLockBrakes());
         addSequential(new WaitCommand(0.2));
         addSequential(new GroundPosition());
     }
